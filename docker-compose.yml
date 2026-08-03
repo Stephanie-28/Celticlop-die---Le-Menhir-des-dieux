@@ -1,0 +1,17 @@
+services:
+  php:
+    build:
+      context: ./docker/php
+    volumes:
+      - ./app:/var/www/html
+    working_dir: /var/www/html
+    ports:
+      - "8000:80"
+  database:
+    image: mysql:8.4
+    restart: always
+    environment:
+      MYSQL_DATABASE: le_menhir_des_dieux
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
