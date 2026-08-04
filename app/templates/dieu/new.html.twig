@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Dieu{% endblock %}
+
+{% block body %}
+    <h1>Create new Dieu</h1>
+
+    {{ include('dieu/_form.html.twig') }}
+
+    <a href="{{ path('app_dieu_index') }}">back to list</a>
+{% endblock %}

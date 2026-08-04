@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Dieu{% endblock %}
+
+{% block body %}
+    <h1>Edit Dieu</h1>
+
+    {{ include('dieu/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_dieu_index') }}">back to list</a>
+
+    {{ include('dieu/_delete_form.html.twig') }}
+{% endblock %}

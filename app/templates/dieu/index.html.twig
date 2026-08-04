@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dieu index{% endblock %}
+
+{% block body %}
+    <h1>Dieu index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Quote</th>
+                <th>Img</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dieu in dieux %}
+            <tr>
+                <td>{{ dieu.id }}</td>
+                <td>{{ dieu.name }}</td>
+                <td>{{ dieu.title }}</td>
+                <td>{{ dieu.description }}</td>
+                <td>{{ dieu.quote }}</td>
+                <td>{{ dieu.img }}</td>
+                <td>
+                    <a href="{{ path('app_dieu_show', {'id': dieu.id}) }}">show</a>
+                    <a href="{{ path('app_dieu_edit', {'id': dieu.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_dieu_new') }}">Create new</a>
+{% endblock %}
