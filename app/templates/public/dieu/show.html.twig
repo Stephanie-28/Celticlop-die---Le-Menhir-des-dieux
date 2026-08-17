@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ dieu.name }} — Le Menhir des Dieux{% endblock %}
+
+{% block stylesheets %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Metamorphous&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --font-mythic: "Metamorphous", serif;
+            --font-editorial: "Lora", serif;
+            --color-celestial-50: #f3f8fc;
+            --color-celestial-100: #e7f1f8;
+            --color-celestial-600: #4f7890;
+            --color-celestial-800: #34576d;
+            --color-mythic-gold: #d3aa32;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    {% include '_partials/_header.html.twig' %}
+
+    {% if dieu.name|lower == 'dagda' %}
+        {% include 'public/dieu/_dagda_show.html.twig' with {dieu: dieu, dagdaContext: dagdaContext} only %}
+    {% elseif usesUnifiedLayout %}
+        {% include 'public/dieu/_generic_show.html.twig' with {dieu: dieu} only %}
+    {% else %}
+    <main class="min-h-screen bg-[#fbfcfd] px-4 pb-28 font-editorial text-celestial-800">
+        <article class="mx-auto max-w-3xl overflow-hidden bg-white shadow-[0_8px_24px_rgba(52,87,109,0.1)] sm:mt-8 sm:rounded-3xl">
+            {% if dieu.img %}
+                {% set isDagda = dieu.name|lower == 'dagda' %}
+                {% set isAtepomarus = dieu.name|lower == 'atepomarus' %}
+                {% set isMorrigan = dieu.name|lower == 'morrigan' %}
+
+                <div class="relative overflow-hidden bg-celestial-50 {{ isDagda ? 'w-full' : 'mx-auto aspect-[2/3] w-full max-w-[560px]' }}">
+                    <img
+                        src="{{ asset('uploads/dieux/' ~ dieu.img) }}"
+                        alt="{{ dieu.name }}"
+                        class="{{ isDagda ? 'h-auto w-full' : 'h-full w-full' }} object-contain object-center"
+                    >
+
+                    {% if dieu.quote is not empty %}
+                        <div class="absolute z-10 flex w-fit items-center justify-center rounded-[50%] border-2 border-mythic-gold/55 bg-white/85 px-5 py-5 shadow-[0_3px_10px_rgba(52,87,109,0.08)] backdrop-blur-[1px] sm:px-6 sm:py-6 {{ isAtepomarus ? 'bottom-[5%] left-[3%] max-w-[58%]' : (isMorrigan ? 'bottom-[5%] left-[3%] max-w-[65%]' : (isDagda ? 'right-[3%] bottom-[5%] max-w-[62%]' : 'right-[3%] bottom-[5%] max-w-[60%]')) }}">
+                            <p class="relative text-center font-editorial text-[14px] leading-relaxed italic text-celestial-800 sm:text-[15px]">
+                                « {{ dieu.quote }} »
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <div class="px-6 py-8 sm:px-10 sm:py-10">
+                <h1 class="font-mythic text-3xl text-celestial-800 sm:text-4xl">{{ dieu.name }}</h1>
+                <p class="mt-2 text-sm text-mythic-gold sm:text-base">{{ dieu.title }}</p>
+                <div class="mt-7 whitespace-pre-line text-[15px] leading-7 text-slate-600">{{ dieu.description }}</div>
+
+                {% if dieu.symboles is not empty %}
+                    <section class="mt-12" aria-labelledby="sacred-symbols-title">
+                        <h2 id="sacred-symbols-title" class="font-mythic text-2xl text-celestial-800">Les symboles sacrés</h2>
+
+                        <div class="mt-6 grid gap-6 sm:grid-cols-2">
+                            {% for symbole in dieu.symboles %}
+                                <article class="overflow-hidden rounded-2xl border border-celestial-100 bg-white shadow-[0_8px_22px_rgba(52,87,109,0.08)]">
+                                    {% if symbole.img %}
+                                        <a href="{{ path('app_public_symbole_show', {id: symbole.id}) }}" class="block" aria-label="Découvrir {{ symbole.name }}">
+                                            <img
+                                                src="{{ asset('uploads/symboles/' ~ symbole.img) }}"
+                                                alt="{{ symbole.name }}"
+                                                class="aspect-[3/2] w-full object-cover object-center transition duration-300 hover:scale-[1.02]"
+                                            >
+                                        </a>
+                                    {% endif %}
+
+                                    <div class="p-5">
+                                        <h3 class="font-mythic text-lg text-celestial-800">
+                                            <a href="{{ path('app_public_symbole_show', {id: symbole.id}) }}" class="transition hover:text-mythic-gold">{{ symbole.name }}</a>
+                                        </h3>
+                                        <p class="mt-3 text-sm leading-6 text-slate-600">{{ symbole.description }}</p>
+                                    </div>
+                                </article>
+                            {% endfor %}
+                        </div>
+                    </section>
+                {% endif %}
+
+                <div class="mt-10 flex justify-center">
+                    <a href="{{ path('app_public_pantheon_all') }}" class="inline-flex items-center gap-2 rounded-full border border-mythic-gold/35 px-5 py-2.5 text-sm text-mythic-gold transition hover:border-celestial-600 hover:text-celestial-800">
+                        <span aria-hidden="true">←</span>
+                        Retour aux divinités
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+    {% endif %}
+
+    {% include '_partials/_bottom_nav.html.twig' %}
+{% endblock %}
