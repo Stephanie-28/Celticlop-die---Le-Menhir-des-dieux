@@ -3,10 +3,10 @@
         {% include 'public/dieu/_partials/_hero.html.twig' with {dieu: dieu} only %}
 
         <div class="space-y-5 px-3 py-5 sm:px-0 sm:py-7">
-            {% if dieu.description is not empty %}
+            {% if not app.user and dieu.description is not empty %}
                 <section class="rounded-3xl bg-white px-5 py-7 shadow-[0_8px_24px_rgba(52,87,109,0.08)] sm:px-8" aria-labelledby="presentation-title">
                     <h2 id="presentation-title" class="font-mythic text-lg uppercase tracking-wide text-mythic-gold sm:text-xl">Présentation</h2>
-                    <div class="mt-5 whitespace-pre-line text-[14px] leading-7 text-slate-600 sm:text-[15px]">{{ dieu.description }}</div>
+                    <div class="mt-5 whitespace-pre-line text-[14px] leading-7 text-slate-600 sm:text-[15px]">{{ dieu.description|split("\n\n")|first }}</div>
                 </section>
             {% endif %}
 
@@ -15,6 +15,10 @@
             {% endif %}
 
             {% if app.user %}
+                {% if dieu.description is not empty %}
+                    {% include 'public/dieu/_partials/_chronicle.html.twig' with {description: dieu.description} only %}
+                {% endif %}
+
                 {% if dieu.symboles is not empty %}
                     {% include 'public/dieu/_partials/_associated_symbols.html.twig' with {symboles: dieu.symboles} only %}
                 {% endif %}
@@ -24,11 +28,18 @@
                 {% endif %}
             {% endif %}
 
-            <nav class="flex items-center px-2 py-4" aria-label="Navigation de l’encyclopédie">
+            <nav class="flex items-center justify-between gap-4 px-2 py-4" aria-label="Navigation entre les divinités">
                 <a href="{{ path('app_public_pantheon_all') }}" class="inline-flex min-h-11 items-center gap-2 rounded-full text-xs uppercase tracking-wider text-mythic-gold transition hover:text-celestial-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-celestial-800">
                     <span aria-hidden="true">←</span>
-                    Retour aux divinités
+                    Retour
                 </a>
+
+                {% if app.user and unifiedContext.nextDieu %}
+                    <a href="{{ path('app_public_dieu_show', {id: unifiedContext.nextDieu.id}) }}" class="inline-flex min-h-11 items-center gap-2 rounded-full bg-mythic-gold px-5 py-2.5 text-xs uppercase tracking-wider text-white shadow-sm transition hover:bg-celestial-600 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-celestial-800">
+                        Suivant
+                        <span aria-hidden="true">→</span>
+                    </a>
+                {% endif %}
             </nav>
         </div>
     </article>
