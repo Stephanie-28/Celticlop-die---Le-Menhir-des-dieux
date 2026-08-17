@@ -1,0 +1,27 @@
+<article class="overflow-hidden rounded-2xl bg-white shadow-[0_8px_24px_rgba(52,87,109,0.1)]">
+    {% if dieu.img %}
+        <a href="{{ path('app_public_dieu_show', {id: dieu.id}) }}" class="block aspect-[2/3] overflow-hidden bg-celestial-50" aria-label="Découvrir {{ dieu.name }}">
+            <img
+                src="{% include '_partials/_deity_portrait_src.html.twig' with {dieu: dieu} only %}"
+                alt="{{ dieu.name }}"
+                class="h-full w-full object-contain object-center transition duration-300 hover:scale-[1.02]"
+            >
+        </a>
+    {% else %}
+        <div class="flex aspect-[2/3] items-center justify-center bg-celestial-50 text-sm text-celestial-600">
+            Image indisponible
+        </div>
+    {% endif %}
+
+    <div class="p-5">
+        <h2 class="font-mythic text-xl text-celestial-800">
+            <a href="{{ path('app_public_dieu_show', {id: dieu.id}) }}" class="transition hover:text-mythic-gold">{{ dieu.name }}</a>
+        </h2>
+        <p class="mt-1 text-sm text-mythic-gold">{{ dieu.title }}</p>
+        <p class="mt-3 line-clamp-4 text-sm leading-6 text-slate-600">{{ dieu.description }}</p>
+        <a href="{{ path('app_public_dieu_show', {id: dieu.id}) }}" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-celestial-600 transition hover:text-mythic-gold">
+            Lire la légende
+            <span aria-hidden="true">→</span>
+        </a>
+    </div>
+</article>

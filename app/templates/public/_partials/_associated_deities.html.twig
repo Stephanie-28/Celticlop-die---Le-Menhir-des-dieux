@@ -1,0 +1,26 @@
+<section class="py-3" aria-labelledby="{{ headingId }}">
+    <h2 id="{{ headingId }}" class="font-mythic text-xl uppercase text-celestial-800">Divinités associées</h2>
+
+    <div class="-mx-3 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {% for dieu in dieux %}
+            <a
+                href="{{ path('app_public_dieu_show', {id: dieu.id}) }}"
+                class="group w-[72%] max-w-[250px] shrink-0 snap-start overflow-hidden rounded-2xl bg-white shadow-[0_8px_24px_rgba(52,87,109,0.08)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(52,87,109,0.12)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-celestial-800 sm:w-[230px]"
+            >
+                {% if dieu.img %}
+                    <img
+                        src="{% include '_partials/_deity_portrait_src.html.twig' with {dieu: dieu} only %}"
+                        alt="Portrait de {{ dieu.name }}"
+                        class="aspect-[4/3] w-full object-cover object-top"
+                    >
+                {% endif %}
+                <div class="p-4">
+                    <h3 class="font-mythic text-sm uppercase text-celestial-800 transition group-hover:text-mythic-gold">{{ dieu.name }}</h3>
+                    {% if dieu.title %}
+                        <p class="mt-2 text-xs italic leading-5 text-slate-600">{{ dieu.title }}</p>
+                    {% endif %}
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</section>

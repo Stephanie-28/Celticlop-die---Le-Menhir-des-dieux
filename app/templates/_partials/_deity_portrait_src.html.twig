@@ -1,0 +1,4 @@
+{{- dieu.name|lower == 'dagda'
+    ? asset('images/dieux/dagda-portrait.png')
+    : asset('uploads/dieux/' ~ dieu.img)
+-}}
