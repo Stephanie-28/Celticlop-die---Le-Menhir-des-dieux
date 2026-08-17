@@ -20,6 +20,29 @@ final class PublicDieuController extends AbstractController
             'Rhiannon',
             'Arawn',
         ], true);
+        $unifiedContext = null;
+
+        if ($usesUnifiedLayout) {
+            $pantheon = $dieu->getPantheons()->first();
+            $nextDieu = null;
+
+            if ($pantheon !== false) {
+                $nextDieu = $dieuRepository->createQueryBuilder('nextDieu')
+                    ->innerJoin('nextDieu.pantheons', 'pantheon')
+                    ->andWhere('pantheon.id = :pantheonId')
+                    ->andWhere('nextDieu.id > :currentId')
+                    ->setParameter('pantheonId', $pantheon->getId())
+                    ->setParameter('currentId', $dieu->getId())
+                    ->orderBy('nextDieu.id', 'ASC')
+                    ->setMaxResults(1)
+                    ->getQuery()
+                    ->getOneOrNullResult();
+            }
+
+            $unifiedContext = [
+                'nextDieu' => $nextDieu,
+            ];
+        }
 
         if (mb_strtolower($dieu->getName()) === 'dagda') {
             $associatedDeities = [];
@@ -110,6 +133,7 @@ final class PublicDieuController extends AbstractController
         return $this->render('public/dieu/show.html.twig', [
             'dieu' => $dieu,
             'dagdaContext' => $dagdaContext,
+            'unifiedContext' => $unifiedContext,
             'usesUnifiedLayout' => $usesUnifiedLayout,
         ]);
     }
