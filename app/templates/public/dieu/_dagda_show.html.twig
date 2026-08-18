@@ -1,0 +1,168 @@
+{% include 'public/dieu/_partials/_encyclopedia_start.html.twig' with {
+    dieu: dieu,
+    badge: 'Divinité suprême',
+    displayName: 'Le Dagda',
+    titleId: 'dagda-title'
+} only %}
+
+            {% if app.user %}
+            <section class="rounded-3xl bg-white px-5 py-7 shadow-[0_8px_24px_rgba(52,87,109,0.08)] sm:px-8" aria-labelledby="chroniques-title">
+                <h2 id="chroniques-title" class="flex items-center gap-2 font-mythic text-lg uppercase tracking-wide text-mythic-gold sm:text-xl">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="size-5 shrink-0" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 5.5C7.5 4.8 9.7 5.2 12 6.7V19C9.7 17.5 7.5 17.1 5 17.8V5.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                        <path d="M19 5.5C16.5 4.8 14.3 5.2 12 6.7V19C14.3 17.5 16.5 17.1 19 17.8V5.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                    </svg>
+                    Chroniques sacrées
+                </h2>
+                <div class="mt-5 space-y-5 text-[14px] leading-7 text-slate-600 sm:text-[15px]">
+                    <p>Figure centrale des Tuatha Dé Danann, le Dagda est présenté comme leur chef et leur dieu-père. Son nom, compris comme « le dieu bon » ou « le grand dieu », ne désigne pas seulement sa bienveillance : il exprime l’étendue de ses pouvoirs. Dieu du savoir, maître de la magie druidique, il réunit aussi les fonctions de la guerre, de la musique, de la fertilité et de l’abondance.</p>
+
+                    <p>Les récits lui donnent une stature de géant et un appétit insatiable. Sa tunique trop courte, qui laisse voir son ventre imposant, contribue à une apparence tour à tour comique et redoutable. Cette puissance sans apprêt convient à une divinité qui est à la fois guerrier, druide et père nourricier.</p>
+
+                    <p>Trois possessions manifestent cette nature multiple. Le chaudron d’abondance, le Coire Ansic, nourrit tous les convives sans jamais se vider. La grande massue, le Lorg Mór, donne la mort par une extrémité tandis que l’autre rend la vie ou guérit, selon la formulation des documents. Enfin, Uaithne, la harpe du temps, commande aux saisons et agit sur les émotions.</p>
+
+                    <blockquote class="my-7 border-l-2 border-mythic-gold pl-5 italic text-celestial-800 sm:my-8 sm:pl-6">
+                        Guerrier, druide et père nourricier, le Dagda rassemble la force qui combat, la magie qui ordonne et l’abondance qui fait vivre.
+                    </blockquote>
+
+                    <p>Dans la Bataille de Mag Tuired, il tient une place centrale dans la guerre qui oppose les Tuatha Dé Danann aux Fomoires. Le récit le met en présence de la Morrigan : leur union rituelle au temps de Samain est liée à la victoire accordée aux Tuatha et, dans un autre passage du document, à la fertilité de l’année à venir.</p>
+
+                    <p>Un autre épisode joue de son immense appétit. Les Fomoires lui préparent un repas gigantesque afin de le tourner en ridicule ; le Dagda engloutit pourtant des quantités prodigieuses de bouillie et séduit, au cours de ce récit, la fille de l’ennemi. La scène conserve ainsi la double tonalité attachée au dieu, burlesque dans l’épreuve et redoutable dans son accomplissement.</p>
+
+                    <p>Le Dagda apparaît enfin comme le père de plusieurs divinités, parmi lesquelles Brigit, Aengus Óg et Mider. Il aide Aengus dans sa quête de la femme entrevue en rêve, tandis qu’un autre récit lui fait obtenir pour son fils le domaine de Brug na Bóinne en retenant le cours du temps. Son chaudron, compté parmi les quatre trésors apportés des villes mythiques du Nord, résume sa place au sein du peuple divin : celle d’un garant de la prospérité, capable de nourrir autant que de protéger.</p>
+                </div>
+            </section>
+
+            {% if dagdaContext.cochon %}
+                <a
+                    href="{{ path('app_public_animal_show', {id: dagdaContext.cochon.id}) }}"
+                    class="group block overflow-hidden rounded-3xl bg-white shadow-[0_8px_24px_rgba(52,87,109,0.08)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(52,87,109,0.12)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-celestial-800"
+                    aria-label="Découvrir le Cochon associé au Dagda"
+                >
+                    {% if dagdaContext.cochon.img %}
+                        <img
+                            src="{{ asset('uploads/animaux/' ~ dagdaContext.cochon.img) }}"
+                            alt="Cochon associé au Dagda"
+                            class="aspect-[16/9] w-full object-cover object-center"
+                        >
+                    {% endif %}
+                    <div class="px-6 py-7 sm:px-8 sm:py-8">
+                        <p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-mythic-gold">Symbole d’abondance</p>
+                        <h2 class="mt-2 font-mythic text-xl uppercase text-celestial-800 sm:text-2xl">Le Cochon</h2>
+                        <p class="mt-3 text-sm leading-6 text-slate-600">{{ dagdaContext.cochon.description }}</p>
+                    </div>
+                </a>
+            {% endif %}
+
+            {% if dagdaContext.harpe %}
+                <a
+                    href="{{ path('app_public_symbole_show', {id: dagdaContext.harpe.id}) }}"
+                    class="block rounded-3xl bg-white px-6 py-8 text-center shadow-[0_8px_24px_rgba(52,87,109,0.08)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(52,87,109,0.12)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-celestial-800"
+                    aria-labelledby="harpe-title"
+                >
+                    <svg aria-hidden="true" viewBox="0 0 48 48" fill="none" class="mx-auto size-10 text-mythic-gold" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 39C23 34 29 24 29 8C35 12 39 18 39 25C39 35 31 41 21 41H14V39Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M17 38L17 14M22 35L22 12M27 29L27 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M14 14C20 15 25 13 29 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <h2 id="harpe-title" class="mt-3 font-mythic text-lg uppercase text-celestial-800">La harpe vivante</h2>
+                    <p class="mx-auto mt-3 max-w-md text-sm leading-6 text-slate-600">Uaithne, la harpe du temps de Dagda, règle les saisons et agit sur les émotions.</p>
+                </a>
+            {% endif %}
+
+            <section class="rounded-3xl bg-white px-5 py-7 shadow-[0_8px_24px_rgba(52,87,109,0.08)] sm:px-8" aria-labelledby="attributes-title">
+                <h2 id="attributes-title" class="text-[10px] font-semibold uppercase tracking-[0.18em] text-celestial-600">Les attributs divins</h2>
+
+                <div class="mt-5 space-y-5">
+                    {% if dagdaContext.chaudron %}
+                        <a href="{{ path('app_public_symbole_show', {id: dagdaContext.chaudron.id}) }}" class="group grid cursor-pointer grid-cols-[2.5rem_1fr] gap-3 rounded-2xl border border-transparent p-2 transition duration-200 hover:-translate-y-0.5 hover:border-mythic-gold/25 hover:bg-celestial-50 hover:shadow-[0_6px_16px_rgba(52,87,109,0.08)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-celestial-800" aria-label="Voir le symbole Chaudron d’abondance">
+                            <span class="flex size-10 items-center justify-center rounded-full bg-celestial-50 text-celestial-600">
+                                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="size-5" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 9H18L17 18H7L6 9Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                                    <path d="M5 7H19M8 5H16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                                </svg>
+                            </span>
+                            <span>
+                                <strong class="block font-mythic text-xs uppercase text-celestial-800 transition group-hover:text-mythic-gold">Le chaudron d’Undry</strong>
+                                <span class="mt-1 block text-xs leading-5 text-slate-600">Le Coire Ansic nourrit sans fin tous les convives et ne se vide jamais.</span>
+                            </span>
+                        </a>
+                    {% endif %}
+
+                    {% if dagdaContext.lorgMor %}
+                        <a href="{{ path('app_public_symbole_show', {id: dagdaContext.lorgMor.id}) }}" class="group grid cursor-pointer grid-cols-[2.5rem_1fr] gap-3 rounded-2xl border border-transparent p-2 transition duration-200 hover:-translate-y-0.5 hover:border-mythic-gold/25 hover:bg-celestial-50 hover:shadow-[0_6px_16px_rgba(52,87,109,0.08)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-celestial-800" aria-label="Voir le symbole Lorg Mór">
+                            <span class="flex size-10 items-center justify-center rounded-full bg-celestial-50 text-celestial-600">
+                                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="size-5" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 4L20 10L17 13L14 10L7 17L4 14L11 7L8 4H14Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <span>
+                                <strong class="block font-mythic text-xs uppercase text-celestial-800 transition group-hover:text-mythic-gold">Le Lorg Mór</strong>
+                                <span class="mt-1 block text-xs leading-5 text-slate-600">La grande massue donne la mort d’un côté et rend la vie ou guérit de l’autre.</span>
+                            </span>
+                        </a>
+                    {% endif %}
+
+                    {% if dagdaContext.chene %}
+                        <a href="{{ path('app_public_symbole_show', {id: dagdaContext.chene.id}) }}" class="group grid cursor-pointer grid-cols-[2.5rem_1fr] gap-3 rounded-2xl border border-transparent p-2 transition duration-200 hover:-translate-y-0.5 hover:border-mythic-gold/25 hover:bg-celestial-50 hover:shadow-[0_6px_16px_rgba(52,87,109,0.08)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-celestial-800" aria-label="Voir le symbole Chêne">
+                            <span class="flex size-10 items-center justify-center rounded-full bg-[#fff9e8] text-mythic-gold">
+                                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="size-5" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 20V9M12 9C9 9 7 7 7 4C10 4 12 6 12 9ZM12 9C15 9 17 7 17 4C14 4 12 6 12 9ZM12 14C9.5 14 8 12.5 8 10C10.5 10 12 11.5 12 14ZM12 14C14.5 14 16 12.5 16 10C13.5 10 12 11.5 12 14Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <span>
+                                <strong class="block font-mythic text-xs uppercase text-celestial-800 transition group-hover:text-mythic-gold">Le chêne sacré</strong>
+                                <span class="mt-1 block text-xs leading-5 text-slate-600">Le chêne figure parmi les symboles associés à Dagda.</span>
+                            </span>
+                        </a>
+                    {% endif %}
+                </div>
+            </section>
+
+            {% if dagdaContext.genealogy is not empty %}
+                <section class="rounded-3xl bg-white px-5 py-7 shadow-[0_8px_24px_rgba(52,87,109,0.08)] sm:px-8" aria-labelledby="genealogy-title">
+                    <h2 id="genealogy-title" class="text-[10px] font-semibold uppercase tracking-[0.18em] text-celestial-600">Généalogie</h2>
+                    <dl class="mt-5 space-y-4 text-sm">
+                        {% for association in dagdaContext.genealogy %}
+                            <div class="grid grid-cols-[minmax(0,1fr)_auto] gap-3 border-b border-celestial-100 pb-3 last:border-0 last:pb-0">
+                                <dt class="min-w-0 text-slate-500">
+                                    <span class="block">{{ association.relation }}</span>
+                                    {% if association.detail %}
+                                        <span class="mt-1 block text-[11px] leading-4 text-slate-400">{{ association.detail }}</span>
+                                    {% endif %}
+                                </dt>
+                                <dd class="whitespace-nowrap text-right font-mythic text-xs text-celestial-800">
+                                    <a href="{{ path('app_public_dieu_show', {id: association.dieu.id}) }}" class="rounded-sm transition hover:text-mythic-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-celestial-800">{{ association.dieu.name }}</a>
+                                </dd>
+                            </div>
+                        {% endfor %}
+                    </dl>
+                </section>
+            {% endif %}
+
+            {% if dagdaContext.associatedDeities is not empty %}
+                <section class="py-3" aria-labelledby="associated-title">
+                    <h2 id="associated-title" class="font-mythic text-xl uppercase text-celestial-800">Divinités associées</h2>
+                    <p class="mt-1 text-xs text-slate-500">Le Panthéon des Tuatha Dé Danann</p>
+
+                    <div class="-mx-3 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                        {% for association in dagdaContext.associatedDeities %}
+                            <a href="{{ path('app_public_dieu_show', {id: association.dieu.id}) }}" class="w-[72%] max-w-[250px] shrink-0 snap-start overflow-hidden rounded-2xl bg-white shadow-[0_8px_24px_rgba(52,87,109,0.08)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-celestial-800 sm:w-[230px]">
+                                {% if association.dieu.img %}
+                                    <img src="{{ asset('uploads/dieux/' ~ association.dieu.img) }}" alt="{{ association.dieu.name }}" class="aspect-[4/3] w-full object-cover object-top">
+                                {% endif %}
+                                <div class="p-4">
+                                    <h3 class="font-mythic text-sm uppercase text-celestial-800">{{ association.dieu.name }}</h3>
+                                    <p class="mt-2 text-xs italic leading-5 text-slate-600">{{ association.relation }}</p>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
+            {% endif %}
+
+{% include 'public/dieu/_partials/_encyclopedia_end.html.twig' with {
+    nextDieu: dagdaContext.nextDieu,
+    returnRoute: 'app_public_pantheon_irlandais'
+} only %}

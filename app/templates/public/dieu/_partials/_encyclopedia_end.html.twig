@@ -1,0 +1,16 @@
+            <nav class="flex items-center justify-between px-2 py-4" aria-label="Navigation entre les divinités">
+                <a href="{{ path(returnRoute) }}" class="inline-flex items-center gap-2 rounded-full text-xs uppercase tracking-wider text-mythic-gold transition hover:text-celestial-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-celestial-800">
+                    <span aria-hidden="true">←</span>
+                    Retour
+                </a>
+
+                {% if app.user and nextDieu %}
+                    <a href="{{ path('app_public_dieu_show', {id: nextDieu.id}) }}" class="inline-flex items-center gap-2 rounded-full bg-mythic-gold px-5 py-2.5 text-xs uppercase tracking-wider text-white shadow-sm transition hover:bg-celestial-600 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-celestial-800">
+                        Suivant
+                        <span aria-hidden="true">→</span>
+                    </a>
+                {% endif %}
+            </nav>
+        </div>
+    </article>
+</main>
