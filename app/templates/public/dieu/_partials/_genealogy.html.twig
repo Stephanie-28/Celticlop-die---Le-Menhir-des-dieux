@@ -1,0 +1,23 @@
+<section class="rounded-3xl bg-white px-5 py-7 shadow-[0_8px_24px_rgba(52,87,109,0.08)] sm:px-8" aria-labelledby="generic-genealogy-title">
+    <h2 id="generic-genealogy-title" class="text-[10px] font-semibold uppercase tracking-[0.18em] text-celestial-600">Généalogie</h2>
+
+    <dl class="mt-5 space-y-4 text-sm">
+        {% for association in genealogy %}
+            <div class="grid grid-cols-[minmax(0,1fr)_auto] gap-3 border-b border-celestial-100 pb-3 last:border-0 last:pb-0">
+                <dt class="min-w-0 text-slate-500">
+                    <span class="block">{{ association.relation }}</span>
+                    {% if association.detail %}
+                        <span class="mt-1 block text-[11px] leading-4 text-slate-400">{{ association.detail }}</span>
+                    {% endif %}
+                </dt>
+                <dd class="whitespace-nowrap text-right font-mythic text-xs text-celestial-800">
+                    {% if association.dieu %}
+                        <a href="{{ path('app_public_dieu_show', {id: association.dieu.id}) }}" class="rounded-sm transition hover:text-mythic-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-celestial-800">{{ association.name }}</a>
+                    {% else %}
+                        {{ association.name }}
+                    {% endif %}
+                </dd>
+            </div>
+        {% endfor %}
+    </dl>
+</section>

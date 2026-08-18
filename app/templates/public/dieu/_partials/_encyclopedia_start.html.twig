@@ -1,0 +1,18 @@
+<main class="min-h-screen overflow-x-hidden bg-[#f7fafc] pb-28 font-editorial text-celestial-800">
+    <article class="mx-auto max-w-3xl">
+        {% include 'public/dieu/_partials/_hero.html.twig' with {
+            dieu: dieu,
+            badge: badge|default(null),
+            displayName: displayName|default(dieu.name),
+            titleId: titleId|default('deity-title')
+        } only %}
+
+        <div class="space-y-5 px-3 py-5 sm:px-0 sm:py-7">
+            {% if not app.user and dieu.description is not empty %}
+                <section class="rounded-3xl bg-white px-5 py-7 shadow-[0_8px_24px_rgba(52,87,109,0.08)] sm:px-8" aria-labelledby="presentation-title">
+                    <h2 id="presentation-title" class="font-mythic text-lg uppercase tracking-wide text-mythic-gold sm:text-xl">Présentation</h2>
+                    <div class="mt-5 whitespace-pre-line text-[14px] leading-7 text-slate-600 sm:text-[15px]">{{ publicDescription|default(dieu.description)|split("\n\n")|first }}</div>
+                </section>
+
+                {% include 'public/dieu/_partials/_login_teaser.html.twig' only %}
+            {% endif %}

@@ -1,0 +1,19 @@
+<section class="rounded-3xl bg-white px-5 py-7 shadow-[0_8px_24px_rgba(52,87,109,0.08)] sm:px-8" aria-labelledby="editorial-attributes-title">
+    <h2 id="editorial-attributes-title" class="text-[10px] font-semibold uppercase tracking-[0.18em] text-celestial-600">Les attributs divins</h2>
+
+    <div class="mt-5 space-y-5">
+        {% for attribute in attributes %}
+            <article class="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-3 rounded-2xl p-2">
+                <span class="flex size-10 items-center justify-center rounded-full bg-[#fff9e8] text-mythic-gold">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="size-5" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3L14.4 8.1L20 9L16 13L17 19L12 16.2L7 19L8 13L4 9L9.6 8.1L12 3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span>
+                    <strong class="block font-mythic text-xs uppercase text-celestial-800">{{ attribute.name }}</strong>
+                    <span class="mt-1 block text-xs leading-5 text-slate-600">{{ attribute.description }}</span>
+                </span>
+            </article>
+        {% endfor %}
+    </div>
+</section>

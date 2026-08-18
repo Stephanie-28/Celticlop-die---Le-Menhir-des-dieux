@@ -8,9 +8,16 @@
     </h2>
 
     <div class="mt-5 space-y-5 text-[14px] leading-7 text-slate-600 sm:text-[15px]">
-        {% for paragraph in description|split("\n\n") %}
+        {% set chronicleParagraphs = paragraphs is not empty ? paragraphs : description|split("\n\n") %}
+        {% set highlightAfter = chronicleParagraphs|length >= 3 ? 3 : chronicleParagraphs|length %}
+        {% for paragraph in chronicleParagraphs %}
             {% if paragraph|trim is not empty %}
                 <p>{{ paragraph|trim }}</p>
+            {% endif %}
+            {% if highlight and loop.index == highlightAfter %}
+                <blockquote class="my-7 border-l-2 border-mythic-gold pl-5 italic text-celestial-800 sm:my-8 sm:pl-6">
+                    {{ highlight }}
+                </blockquote>
             {% endif %}
         {% endfor %}
     </div>
