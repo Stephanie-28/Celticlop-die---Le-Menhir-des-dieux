@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quiz — Découvre ton dieu protecteur{% endblock %}
+
+{% block stylesheets %}
+    {% include 'quiz/_styles.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    {% include '_partials/_header.html.twig' %}
+
+    <main class="min-h-screen bg-celestial-50 px-4 pb-28 pt-8 font-editorial text-celestial-800 sm:pt-12">
+        <section class="mx-auto max-w-3xl overflow-hidden rounded-3xl bg-white shadow-[0_14px_38px_rgba(52,87,109,0.12)]" aria-labelledby="quiz-title">
+            <div class="border-b border-mythic-gold/20 bg-[radial-gradient(circle_at_top,#fff8e6,white_68%)] px-6 py-12 text-center sm:px-12 sm:py-16">
+                <p class="text-xs uppercase tracking-[0.24em] text-mythic-gold">Le chemin des affinités</p>
+                <h1 id="quiz-title" class="mt-4 font-mythic text-3xl leading-tight sm:text-5xl">Quel est ton dieu protecteur&nbsp;?</h1>
+                <p class="mx-auto mt-6 max-w-xl text-base leading-7 text-slate-600">
+                    Quatorze choix guideront ton voyage vers l'une des vingt et une divinités celtiques.
+                    Il n'existe ni bonne ni mauvaise réponse&nbsp;: suis simplement ton intuition.
+                </p>
+            </div>
+
+            <div class="px-6 py-9 sm:px-12">
+                <ul class="grid gap-4 text-sm text-slate-600 sm:grid-cols-3" aria-label="Fonctionnement du quiz">
+                    <li class="rounded-2xl bg-celestial-50 p-4"><strong class="block text-celestial-800">14 questions</strong>Une progression claire, étape par étape.</li>
+                    <li class="rounded-2xl bg-celestial-50 p-4"><strong class="block text-celestial-800">Choix secrets</strong>Aucun score n'est visible pendant le parcours.</li>
+                    <li class="rounded-2xl bg-celestial-50 p-4"><strong class="block text-celestial-800">Quiz rejouable</strong>Chaque nouvelle tentative est remélangée.</li>
+                </ul>
+
+                <form action="{{ path('app_quiz_start') }}" method="post" class="mt-9 text-center">
+                    <input type="hidden" name="_token" value="{{ csrf_token('quiz-start') }}">
+                    <button class="inline-flex min-h-12 items-center justify-center rounded-full bg-mythic-gold px-7 py-3 font-semibold text-white shadow-[0_7px_20px_rgba(211,170,50,0.28)] transition hover:bg-[#bd9424] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-celestial-800">
+                        {{ hasAttempt ? 'Commencer une nouvelle tentative' : 'Commencer le voyage' }}
+                    </button>
+                </form>
+
+                {% if hasAttempt %}
+                    <p class="mt-4 text-center text-xs text-slate-500">Une nouvelle tentative remplacera le parcours en cours, sans supprimer tes favoris.</p>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+
+    {% include '_partials/_bottom_nav.html.twig' %}
+{% endblock %}
