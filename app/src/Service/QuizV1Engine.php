@@ -149,7 +149,6 @@ final class QuizV1Engine
     {
         $questions = $this->questions();
         $questionOrder = array_keys($questions);
-        shuffle($questionOrder);
 
         $answerOrder = [];
         foreach ($questions as $questionId => $question) {

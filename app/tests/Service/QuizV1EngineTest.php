@@ -23,10 +23,30 @@ foreach ($questions as $questionId => $question) {
 
 $assert(count($engine->deityNames()) === 21, 'Le Quiz doit proposer exactement 21 divinités distinctes.');
 
-$attempts = [];
+$expectedQuestionOrder = [
+    'elements',
+    'paysage',
+    'carrefour',
+    'passage-oublie',
+    'obstacle',
+    'responsabilite',
+    'aider',
+    'porte-mysterieuse',
+    'liens',
+    'conflit',
+    'transmission',
+    'changement',
+    'qualite',
+    'appel',
+];
+
+$answerOrders = [];
 for ($iteration = 0; $iteration < 5; ++$iteration) {
     $attempt = $engine->newAttempt();
     $assert(count(array_unique($attempt['questionOrder'])) === 14, 'Une tentative ne doit contenir aucune question dupliquée.');
+    $assert($attempt['questionOrder'] === $expectedQuestionOrder, "L'ordre narratif des 14 questions doit rester identique à chaque tentative.");
+    $assert($engine->publicQuestion($attempt, 0)['id'] === 'elements', 'La première question doit toujours être ÉLÉMENTS.');
+    $assert($engine->publicQuestion($attempt, 13)['id'] === 'appel', 'La dernière question doit toujours être APPEL.');
     foreach ($attempt['answerOrder'] as $answerOrder) {
         $assert(count($answerOrder) === 4 && count(array_unique($answerOrder)) === 4, 'Les quatre réponses doivent rester uniques.');
     }
@@ -37,9 +57,14 @@ for ($iteration = 0; $iteration < 5; ++$iteration) {
         $assert(!str_contains(serialize($publicQuestion), 'scores'), 'Le barème ne doit jamais être exposé dans la question publique.');
     }
     $assert(serialize($attempt) === $snapshot, "Consulter une tentative ne doit pas modifier l'ordre établi.");
-    $attempts[] = $snapshot;
+    $attempt['answers']['elements'] = 'feu';
+    $engine->publicQuestion($attempt, 1);
+    $engine->publicQuestion($attempt, 0);
+    $assert($attempt['answers']['elements'] === 'feu', 'Revenir à une question précédente doit conserver la réponse sélectionnée.');
+    $answerOrders[] = serialize($attempt['answerOrder']);
 }
-$assert(count(array_unique($attempts)) > 1, 'Une nouvelle tentative doit produire un nouveau mélange.');
+$assert(count(array_unique($answerOrders)) > 1, 'Une nouvelle tentative doit produire un nouveau mélange des réponses.');
+$assert($engine->newAttempt()['answers'] === [], 'Une nouvelle tentative doit remettre les réponses à zéro.');
 
 $selectedAnswers = [];
 foreach ($questions as $questionId => $question) {
