@@ -40,7 +40,9 @@
                     <div class="mt-4 grid flex-1 auto-rows-fr gap-3 sm:mt-5">
                         {% for answer in question.answers %}
                             <label class="group relative flex min-h-[76px] cursor-pointer items-center gap-4 rounded-xl border border-white bg-white px-4 py-3 shadow-[0_5px_16px_rgba(52,87,109,0.05)] transition hover:border-mythic-gold/60 hover:bg-[#fffdf8] focus-within:border-mythic-gold focus-within:outline-3 focus-within:outline-offset-2 focus-within:outline-celestial-800 has-[:checked]:border-mythic-gold has-[:checked]:bg-[#fffdf8]">
-                                <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-celestial-50 text-sm text-celestial-600 transition group-has-[:checked]:bg-[#fff4cf] group-has-[:checked]:text-mythic-gold" aria-hidden="true">✦</span>
+                                <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-celestial-50 text-celestial-600 transition group-has-[:checked]:bg-[#fff4cf] group-has-[:checked]:text-mythic-gold" aria-hidden="true">
+                                    {% include 'quiz/_answer_icon.html.twig' with {answerId: answer.id} only %}
+                                </span>
                                 <input class="peer sr-only" type="radio" name="answer" value="{{ answer.id }}" {{ selectedAnswer == answer.id ? 'checked' : '' }} required>
                                 <span class="text-[15px] leading-5 text-slate-700 peer-checked:text-celestial-800">{{ answer.label }}</span>
                             </label>
