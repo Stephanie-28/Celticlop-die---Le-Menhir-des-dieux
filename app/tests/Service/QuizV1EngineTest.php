@@ -51,6 +51,28 @@ $secondResult = $engine->calculate($selectedAnswers);
 $assert($firstResult === $secondResult, 'Une même sélection doit toujours produire le même résultat.');
 $assert(in_array($firstResult['winner'], $engine->deityNames(), true), 'Le résultat doit être une des 21 divinités autorisées.');
 
+$tieBrokenByThree = [
+    'elements' => 'air', 'paysage' => 'foret', 'carrefour' => 'reflexion',
+    'passage-oublie' => 'decouvrir', 'obstacle' => 'affronter', 'responsabilite' => 'equilibre',
+    'aider' => 'reconfort', 'porte-mysterieuse' => 'avenir', 'liens' => 'communaute',
+    'conflit' => 'origine', 'transmission' => 'accueillir', 'changement' => 'direction',
+    'qualite' => 'sagesse', 'appel' => 'calme',
+];
+$threeResult = $engine->calculate($tieBrokenByThree);
+$assert($threeResult['winner'] === 'Arianrhod', "Le nombre de +3 doit départager l'égalité de score total.");
+$gwyddionIndex = array_search('Gwydion', array_column($threeResult['ranking'], 'name'), true);
+$nantosueltaIndex = array_search('Nantosuelta', array_column($threeResult['ranking'], 'name'), true);
+$assert(is_int($gwyddionIndex) && is_int($nantosueltaIndex) && $gwyddionIndex < $nantosueltaIndex, 'Une égalité parfaite doit être départagée alphabétiquement.');
+
+$tieBrokenByTwo = [
+    'elements' => 'feu', 'paysage' => 'clairiere', 'carrefour' => 'curiosite',
+    'passage-oublie' => 'explorer', 'obstacle' => 'observer', 'responsabilite' => 'equilibre',
+    'aider' => 'nouveau-regard', 'porte-mysterieuse' => 'inconnu', 'liens' => 'amour',
+    'conflit' => 'ecouter', 'transmission' => 'utile', 'changement' => 'direction',
+    'qualite' => 'independance', 'appel' => 'calme',
+];
+$assert($engine->calculate($tieBrokenByTwo)['winner'] === 'Manawydan', "Le nombre de +2 doit départager l'égalité après les +3.");
+
 for ($index = 1, $count = count($firstResult['ranking']); $index < $count; ++$index) {
     $previous = $firstResult['ranking'][$index - 1];
     $current = $firstResult['ranking'][$index];
