@@ -12,6 +12,11 @@ foreach (array_keys($engine->questions()) as $questionId) {
     if ($presentation->questionHint($questionId) === '') {
         throw new RuntimeException(sprintf('La question %s ne possède pas de texte secondaire.', $questionId));
     }
+
+    $image = $presentation->questionImage($questionId);
+    if ($image === null || !is_file(dirname(__DIR__, 2).'/public/'.$image['path']) || $image['alt'] === '') {
+        throw new RuntimeException(sprintf('La question %s ne possède pas d’illustration locale accessible.', $questionId));
+    }
 }
 
 foreach ($engine->deityNames() as $deityName) {
