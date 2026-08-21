@@ -24,6 +24,25 @@
                 {% endif %}
                 <p class="mx-auto mt-6 max-w-xl text-left leading-7 text-slate-600">{{ dieu.description|striptags|slice(0, 420) }}{{ dieu.description|length > 420 ? '…' : '' }}</p>
 
+                {% if characteristics is not empty %}
+                    <section class="mt-7" aria-labelledby="characteristics-title">
+                        <h2 id="characteristics-title" class="text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-mythic-gold">Caractéristiques</h2>
+                        <div class="mt-5 grid gap-3">
+                            {% for characteristic in characteristics %}
+                                <article class="rounded-xl bg-celestial-50/55 px-5 py-4 shadow-[0_4px_14px_rgba(52,87,109,0.05)]">
+                                    <div class="flex items-center justify-center gap-2 text-center text-xs font-semibold text-celestial-800">
+                                        <span class="text-mythic-gold" aria-hidden="true">✦</span>
+                                        {{ characteristic }}
+                                    </div>
+                                    <div class="mt-3 h-0.5 overflow-hidden rounded-full bg-white" aria-hidden="true">
+                                        <div class="h-full w-3/4 rounded-full bg-mythic-gold"></div>
+                                    </div>
+                                </article>
+                            {% endfor %}
+                        </div>
+                    </section>
+                {% endif %}
+
                 {% for message in app.flashes('quiz_success') %}
                     <p role="status" class="mx-auto mt-6 max-w-lg rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">{{ message }}</p>
                 {% endfor %}
@@ -47,24 +66,6 @@
                 </form>
             </div>
 
-            {% if characteristics is not empty %}
-                <section class="border-t border-celestial-100 bg-celestial-50/55 px-6 py-8 sm:px-9" aria-labelledby="characteristics-title">
-                    <h2 id="characteristics-title" class="text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-mythic-gold">Caractéristiques</h2>
-                    <div class="mt-5 grid gap-3">
-                        {% for characteristic in characteristics %}
-                            <article class="rounded-xl bg-white px-5 py-4 shadow-[0_4px_14px_rgba(52,87,109,0.05)]">
-                                <div class="flex items-center justify-center gap-2 text-center text-xs font-semibold text-celestial-800">
-                                    <span class="text-mythic-gold" aria-hidden="true">✦</span>
-                                    {{ characteristic }}
-                                </div>
-                                <div class="mt-3 h-0.5 overflow-hidden rounded-full bg-slate-100" aria-hidden="true">
-                                    <div class="h-full w-3/4 rounded-full bg-mythic-gold"></div>
-                                </div>
-                            </article>
-                        {% endfor %}
-                    </div>
-                </section>
-            {% endif %}
         </article>
     </main>
 
