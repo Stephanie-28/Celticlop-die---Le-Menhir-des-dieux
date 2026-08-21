@@ -1,143 +1,60 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Mon Profil d’Initié — Le Menhir des Dieux{% endblock %}
 
 {% block stylesheets %}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Metamorphous&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style type="text/tailwindcss">
-        @theme {
-            --font-mythic: "Metamorphous", serif;
-            --font-editorial: "Lora", serif;
-            --color-mythic-gold: #d3aa32;
-            --color-forest-900: #173d34;
-            --color-parchment: #f8f3e7;
-        }
-    </style>
+    <style type="text/tailwindcss">@theme { --font-mythic: "Metamorphous", serif; --font-editorial: "Lora", serif; --color-mythic-gold: #d3aa32; --color-forest-900: #173d34; --color-parchment: #f8f3e7; }</style>
 {% endblock %}
 
 {% block body %}
     {% include '_partials/_header.html.twig' %}
-    <main class="min-h-screen bg-[#edf3ef] px-4 pb-28 pt-8 font-editorial text-forest-900 sm:pt-12">
-        {% for message in app.flashes('profile_success') %}
-            <div class="mx-auto mb-5 max-w-5xl rounded-2xl border border-[#b7d4bd] bg-[#edf8ef] px-5 py-4 text-sm text-[#285c38] shadow-sm" role="status">{{ message }}</div>
-        {% endfor %}
-        <article class="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/80 bg-parchment shadow-[0_18px_55px_rgba(23,61,52,0.12)]">
-            <header class="relative overflow-hidden bg-forest-900 px-6 py-10 text-white sm:px-12 sm:py-14">
-                <div class="absolute -right-16 -top-20 size-64 rounded-full border border-mythic-gold/20"></div>
-                <p class="text-xs uppercase tracking-[0.28em] text-mythic-gold">Profil de l’Initié</p>
-                <div class="relative mt-7 flex flex-col gap-6 sm:flex-row sm:items-center">
-                    <div class="flex size-28 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-mythic-gold bg-[#e7dfca] shadow-xl">
-                        {% if profileUser.avatar %}
-                            <img src="{{ asset('uploads/avatars/' ~ profileUser.avatar) }}" alt="Avatar de {{ profileUser.pseudo }}" class="h-full w-full object-cover">
-                        {% else %}
-                            <span class="font-mythic text-4xl text-forest-900" aria-label="Avatar par défaut">{{ profileUser.pseudo|first|upper }}</span>
-                        {% endif %}
-                    </div>
-                    <div class="min-w-0">
-                        <h1 class="break-words font-mythic text-3xl sm:text-5xl">{{ profileUser.pseudo }}</h1>
-                        {% if profileUser.firstName or profileUser.lastName %}
-                            <p class="mt-2 text-sm text-white/75">{{ profileUser.firstName }} {{ profileUser.lastName }}</p>
-                        {% endif %}
-                        <p class="mt-4 max-w-xl text-base italic text-[#f0d990]">{{ profileUser.motto ?: 'Une devise personnelle pourra bientôt guider tes pas.' }}</p>
-                    </div>
+    <main class="min-h-screen bg-[#f4f7f5] px-4 pb-28 pt-9 font-editorial text-forest-900 sm:pt-12">
+        {% for message in app.flashes('profile_success') %}<div class="mx-auto mb-5 max-w-4xl rounded-2xl border border-[#b7d4bd] bg-[#edf8ef] px-5 py-4 text-sm text-[#285c38] shadow-sm" role="status">{{ message }}</div>{% endfor %}
+
+        <div class="mx-auto max-w-4xl space-y-7">
+            <section class="rounded-[2rem] border border-mythic-gold/25 bg-white px-6 py-9 text-center shadow-[0_14px_45px_rgba(23,61,52,0.08)] sm:px-10" aria-labelledby="profile-title">
+                <div class="mx-auto flex size-32 items-center justify-center overflow-hidden rounded-full border-[3px] border-mythic-gold bg-[#e7dfca] shadow-lg sm:size-36">
+                    {% if profileUser.avatar %}<img src="{{ asset('uploads/avatars/' ~ profileUser.avatar) }}" alt="Avatar de {{ profileUser.pseudo }}" class="size-full object-cover">{% else %}<span class="font-mythic text-5xl" aria-label="Avatar par défaut">{{ profileUser.pseudo|first|upper }}</span>{% endif %}
                 </div>
-            </header>
+                <p class="mt-6 text-[11px] uppercase tracking-[0.26em] text-mythic-gold">Profil de l’Initié</p>
+                <h1 id="profile-title" class="mt-2 break-words font-mythic text-3xl sm:text-5xl">{{ profileUser.pseudo }}</h1>
+                <p class="mt-3 text-sm font-semibold uppercase tracking-[0.14em] text-[#56736b]">Rang et niveau révélés dans le Chemin de l’Initiation</p>
+                <p class="mx-auto mt-4 max-w-2xl text-base italic leading-7 text-[#4d6670]">{{ profileUser.motto ?: 'Une devise personnelle pourra guider tes pas.' }}</p>
+                <button id="open-sanctuary" type="button" class="mt-7 rounded-full bg-mythic-gold px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#bd9424] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-forest-900">Le Sanctuaire des paramètres</button>
+            </section>
 
-            <div class="grid gap-7 p-6 sm:p-10 lg:grid-cols-[1.2fr_0.8fr]">
-                <section class="rounded-3xl bg-white/75 p-6 shadow-sm" aria-labelledby="identity-title">
-                    <p class="text-[11px] uppercase tracking-[0.24em] text-mythic-gold">Mon identité</p>
-                    <h2 id="identity-title" class="mt-2 font-mythic text-2xl">Les traces du voyage</h2>
-                    <dl class="mt-6 grid gap-5 text-sm sm:grid-cols-2">
-                        <div><dt class="text-slate-500">Nom d’Initié</dt><dd class="mt-1 font-semibold">{{ profileUser.pseudo }}</dd></div>
-                        <div><dt class="text-slate-500">E-mail</dt><dd class="mt-1 break-all font-semibold">{{ profileUser.email }}</dd></div>
-                        <div><dt class="text-slate-500">Titre initiatique</dt><dd class="mt-1 text-slate-500">Révélé dans le futur Chemin de l’Initiation</dd></div>
-                        <div><dt class="text-slate-500">Niveau</dt><dd class="mt-1 text-slate-500">Progression bientôt disponible</dd></div>
-                    </dl>
-                    <button id="open-sanctuary" type="button" class="mt-7 rounded-full bg-mythic-gold px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#bd9424] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-forest-900">Le Sanctuaire des paramètres</button>
-                </section>
+            <section class="rounded-[2rem] bg-white px-6 py-8 shadow-[0_14px_45px_rgba(23,61,52,0.07)] sm:px-9" aria-labelledby="favorites-title">
+                <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p class="text-[11px] uppercase tracking-[0.24em] text-mythic-gold">Trésors conservés</p><h2 id="favorites-title" class="mt-2 font-mythic text-2xl sm:text-3xl">Mes Favoris</h2></div><span class="text-xs italic text-slate-500">Aperçu bientôt disponible</span></div>
+                <div class="mt-6 flex gap-2 overflow-x-auto pb-2" aria-label="Catégories de favoris à venir">{% for category in ['Dieux', 'Mythes', 'Symboles', 'Animaux', 'Musiques'] %}<span class="shrink-0 rounded-full border border-mythic-gold/25 bg-[#fffaf0] px-4 py-2 text-xs text-[#5b6f69]">{{ category }}</span>{% endfor %}</div>
+                <div class="mt-5 grid gap-4 sm:grid-cols-3" aria-hidden="true">{% for item in 1..3 %}<div class="h-24 rounded-2xl border border-dashed border-[#c8d5d0] bg-[#f7faf8]"></div>{% endfor %}</div>
+            </section>
 
-                <aside class="rounded-3xl border border-mythic-gold/25 bg-[#fffaf0] p-6" aria-labelledby="next-steps-title">
-                    <p class="text-[11px] uppercase tracking-[0.24em] text-mythic-gold">À venir</p>
-                    <h2 id="next-steps-title" class="mt-2 font-mythic text-xl">Les prochains chemins</h2>
-                    <p class="mt-4 text-sm leading-6 text-slate-600">Le Chemin de l’Initiation et l’aperçu de tes favoris seront ouverts dans leurs User Stories dédiées.</p>
-                </aside>
-            </div>
-        </article>
+            <section class="rounded-[2rem] bg-white px-6 py-8 shadow-[0_14px_45px_rgba(23,61,52,0.07)] sm:px-9" aria-labelledby="path-title">
+                <p class="text-[11px] uppercase tracking-[0.24em] text-mythic-gold">Progression initiatique</p><h2 id="path-title" class="mt-2 font-mythic text-2xl sm:text-3xl">Chemin de l’Initiation</h2>
+                <p class="mt-4 max-w-2xl text-sm leading-6 text-slate-600">Tes rangs et ta progression prendront place ici lors de l’ouverture du Chemin de l’Initiation.</p>
+                <div class="mt-7 flex items-center gap-3" aria-hidden="true"><span class="size-4 rounded-full border-2 border-mythic-gold bg-[#fff8e5]"></span><span class="h-px flex-1 bg-gradient-to-r from-mythic-gold/50 to-slate-200"></span><span class="size-4 rounded-full border-2 border-slate-300 bg-white"></span><span class="h-px flex-1 bg-slate-200"></span><span class="size-4 rounded-full border-2 border-slate-300 bg-white"></span></div>
+            </section>
+        </div>
 
         <dialog id="profile-sanctuary" class="m-auto max-h-[92vh] w-[calc(100%-2rem)] max-w-2xl overflow-y-auto rounded-[2rem] border-0 bg-parchment p-0 text-forest-900 shadow-[0_24px_80px_rgba(10,35,29,0.35)] backdrop:bg-[#0b2c25]/70 backdrop:backdrop-blur-sm">
             <div class="relative p-6 sm:p-9">
                 <button id="close-sanctuary" type="button" class="absolute right-4 top-4 flex size-10 items-center justify-center rounded-full border border-forest-900/15 bg-white text-xl focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold" aria-label="Fermer le Sanctuaire">×</button>
-                <p class="pr-12 text-[11px] uppercase tracking-[0.24em] text-mythic-gold">Le Sanctuaire des paramètres</p>
-                <h2 class="mt-2 pr-12 font-mythic text-2xl sm:text-3xl">Façonne ton identité</h2>
-
+                <p class="pr-12 text-[11px] uppercase tracking-[0.24em] text-mythic-gold">Le Sanctuaire des paramètres</p><h2 class="mt-2 pr-12 font-mythic text-2xl sm:text-3xl">Façonne ton identité</h2>
                 {{ form_start(profileForm, {attr: {class: 'mt-8 space-y-8'}}) }}
-                    <section aria-labelledby="sanctuary-identity-title">
-                        <h3 id="sanctuary-identity-title" class="font-mythic text-lg">Mon identité</h3>
-                        <div class="mt-4 grid gap-5 sm:grid-cols-2">
-                            {% for field in [profileForm.pseudo, profileForm.firstName, profileForm.lastName] %}
-                                <div>
-                                    {{ form_label(field, null, {label_attr: {class: 'block text-sm font-semibold'}}) }}
-                                    {{ form_widget(field, {attr: {class: 'mt-2 w-full rounded-xl border border-forest-900/20 bg-white px-4 py-3 outline-none focus:border-mythic-gold focus:ring-2 focus:ring-mythic-gold/20'}}) }}
-                                    <div class="mt-1 text-xs text-red-700">{{ form_errors(field) }}</div>
-                                </div>
-                            {% endfor %}
-                            <div class="sm:col-span-2">
-                                {{ form_label(profileForm.motto, null, {label_attr: {class: 'block text-sm font-semibold'}}) }}
-                                {{ form_widget(profileForm.motto, {attr: {class: 'mt-2 w-full resize-none rounded-xl border border-forest-900/20 bg-white px-4 py-3 outline-none focus:border-mythic-gold focus:ring-2 focus:ring-mythic-gold/20'}}) }}
-                                <p class="mt-1 text-xs text-slate-500">100 caractères maximum.</p>
-                                <div class="mt-1 text-xs text-red-700">{{ form_errors(profileForm.motto) }}</div>
-                            </div>
-                            <div class="sm:col-span-2">
-                                {{ form_label(profileForm.avatarFile, null, {label_attr: {class: 'block text-sm font-semibold'}}) }}
-                                {{ form_widget(profileForm.avatarFile, {attr: {class: 'mt-2 block w-full rounded-xl border border-dashed border-forest-900/25 bg-white px-4 py-4 text-sm'}}) }}
-                                <p class="mt-1 text-xs text-slate-500">JPEG, PNG ou WebP — 2 Mo maximum.</p>
-                                <div class="mt-1 text-xs text-red-700">{{ form_errors(profileForm.avatarFile) }}</div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="border-t border-forest-900/10 pt-7" aria-labelledby="sanctuary-account-title">
-                        <h3 id="sanctuary-account-title" class="font-mythic text-lg">Mon compte</h3>
-                        <div class="mt-4">
-                            {{ form_label(profileForm.email, null, {label_attr: {class: 'block text-sm font-semibold'}}) }}
-                            {{ form_widget(profileForm.email, {attr: {class: 'mt-2 w-full rounded-xl border border-forest-900/20 bg-white px-4 py-3 outline-none focus:border-mythic-gold focus:ring-2 focus:ring-mythic-gold/20'}}) }}
-                            <div class="mt-1 text-xs text-red-700">{{ form_errors(profileForm.email) }}</div>
-                        </div>
-                    </section>
-
-                    <section class="rounded-2xl border border-mythic-gold/20 bg-[#fffaf0] p-5" aria-labelledby="sanctuary-security-title">
-                        <h3 id="sanctuary-security-title" class="font-mythic text-base">Sécurité du Sanctuaire</h3>
-                        <p class="mt-2 text-sm text-slate-600">La modification du mot de passe sera ouverte dans l’US35.</p>
-                    </section>
-
-                    <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-                        <button data-close-sanctuary type="button" class="rounded-full border border-forest-900/20 px-6 py-3 text-sm font-semibold">Annuler</button>
-                        <button type="submit" class="rounded-full bg-mythic-gold px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-[#bd9424]">Confier mes changements</button>
-                    </div>
+                    <section aria-labelledby="sanctuary-identity-title"><h3 id="sanctuary-identity-title" class="font-mythic text-lg">Mon identité</h3><div class="mt-4 grid gap-5 sm:grid-cols-2">
+                        {% for field in [profileForm.pseudo, profileForm.firstName, profileForm.lastName] %}<div>{{ form_label(field, null, {label_attr: {class: 'block text-sm font-semibold'}}) }}{{ form_widget(field, {attr: {class: 'mt-2 w-full rounded-xl border border-forest-900/20 bg-white px-4 py-3 outline-none focus:border-mythic-gold focus:ring-2 focus:ring-mythic-gold/20'}}) }}<div class="mt-1 text-xs text-red-700">{{ form_errors(field) }}</div></div>{% endfor %}
+                        <div class="sm:col-span-2">{{ form_label(profileForm.motto, null, {label_attr: {class: 'block text-sm font-semibold'}}) }}{{ form_widget(profileForm.motto, {attr: {class: 'mt-2 w-full resize-none rounded-xl border border-forest-900/20 bg-white px-4 py-3 outline-none'}}) }}<p class="mt-1 text-xs text-slate-500">100 caractères maximum.</p><div class="text-xs text-red-700">{{ form_errors(profileForm.motto) }}</div></div>
+                        <div class="sm:col-span-2">{{ form_label(profileForm.avatarFile, null, {label_attr: {class: 'block text-sm font-semibold'}}) }}{{ form_widget(profileForm.avatarFile, {attr: {class: 'mt-2 block w-full rounded-xl border border-dashed border-forest-900/25 bg-white px-4 py-4 text-sm'}}) }}<p class="mt-1 text-xs text-slate-500">JPEG, PNG ou WebP — 2 Mo maximum.</p><div class="text-xs text-red-700">{{ form_errors(profileForm.avatarFile) }}</div></div>
+                    </div></section>
+                    <section class="border-t border-forest-900/10 pt-7" aria-labelledby="sanctuary-account-title"><h3 id="sanctuary-account-title" class="font-mythic text-lg">Mon compte</h3><div class="mt-4">{{ form_label(profileForm.email, null, {label_attr: {class: 'block text-sm font-semibold'}}) }}{{ form_widget(profileForm.email, {attr: {class: 'mt-2 w-full rounded-xl border border-forest-900/20 bg-white px-4 py-3 outline-none'}}) }}<div class="text-xs text-red-700">{{ form_errors(profileForm.email) }}</div></div></section>
+                    <section class="rounded-2xl border border-mythic-gold/20 bg-[#fffaf0] p-5" aria-labelledby="sanctuary-security-title"><h3 id="sanctuary-security-title" class="font-mythic text-base">Sécurité du Sanctuaire</h3><p class="mt-2 text-sm text-slate-600">La modification du mot de passe sera ouverte dans l’US35.</p></section>
+                    <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end"><button data-close-sanctuary type="button" class="rounded-full border border-forest-900/20 px-6 py-3 text-sm font-semibold">Annuler</button><button type="submit" class="rounded-full bg-mythic-gold px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-[#bd9424]">Confier mes changements</button></div>
                 {{ form_end(profileForm) }}
             </div>
         </dialog>
     </main>
     {% include '_partials/_bottom_nav.html.twig' %}
-
-    <script>
-        (() => {
-            const dialog = document.getElementById('profile-sanctuary');
-            const opener = document.getElementById('open-sanctuary');
-            const closeButtons = dialog?.querySelectorAll('#close-sanctuary, [data-close-sanctuary]') ?? [];
-
-            opener?.addEventListener('click', () => dialog?.showModal());
-            closeButtons.forEach((button) => button.addEventListener('click', () => dialog?.close()));
-            dialog?.addEventListener('click', (event) => {
-                if (event.target === dialog) dialog.close();
-            });
-
-            {% if openSanctuary %}
-                dialog?.showModal();
-            {% endif %}
-        })();
-    </script>
+    <script>(() => { const dialog = document.getElementById('profile-sanctuary'); const opener = document.getElementById('open-sanctuary'); const closeButtons = dialog?.querySelectorAll('#close-sanctuary, [data-close-sanctuary]') ?? []; opener?.addEventListener('click', () => dialog?.showModal()); closeButtons.forEach((button) => button.addEventListener('click', () => dialog?.close())); dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); }); {% if openSanctuary %}dialog?.showModal();{% endif %} })();</script>
 {% endblock %}
