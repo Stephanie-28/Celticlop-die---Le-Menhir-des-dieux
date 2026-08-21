@@ -1,16 +1,68 @@
 {% set currentRoute = app.request.attributes.get('_route')|default('') %}
 {% set navigationItems = [
-    { label: 'Accueil', url: path('app_home'), active: currentRoute == 'app_home' },
-    { label: 'Quiz', url: '/quiz', active: currentRoute starts with 'app_quiz_' },
-    { label: 'Encyclopédie', url: path('app_public_pantheon_all'), active: currentRoute starts with 'app_public_' }
+    { key: 'home', label: 'Accueil', url: path('app_home'), active: currentRoute == 'app_home', available: true },
+    { key: 'quiz', label: 'Quiz', url: path('app_quiz_index'), active: currentRoute starts with 'app_quiz_', available: true },
+    { key: 'myths', label: 'Mythes', url: '#', active: currentRoute starts with 'app_public_mythe_', available: false },
+    { key: 'relics', label: 'Reliques', url: '#', active: currentRoute starts with 'app_public_relique_', available: false },
+    { key: 'encyclopedia', label: 'Encyclopédie', url: path('app_public_pantheon_all'), active: currentRoute starts with 'app_public_pantheon_' or currentRoute starts with 'app_public_dieu_', available: true },
+    { key: 'music', label: 'Music', url: '#', active: currentRoute starts with 'app_public_music_', available: false }
 ] %}
 
-<nav class="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 font-editorial shadow-[0_-4px_16px_rgba(52,87,109,0.1)] backdrop-blur-sm" aria-label="Navigation publique principale">
-    <div class="mx-auto grid h-[72px] max-w-md grid-cols-3 pb-[env(safe-area-inset-bottom)]">
+<nav
+    class="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 font-editorial shadow-[0_-4px_16px_rgba(52,87,109,0.1)] backdrop-blur-sm"
+    aria-label="Navigation publique principale"
+>
+    <div class="mx-auto grid h-[72px] max-w-lg grid-cols-6 px-1 pb-[env(safe-area-inset-bottom)]">
         {% for item in navigationItems %}
-            <a href="{{ item.url }}" class="flex flex-col items-center justify-center gap-1 text-[10px] uppercase tracking-wide {{ item.active ? 'text-mythic-gold' : 'text-celestial-600' }}"{% if item.active %} aria-current="page"{% endif %}>
-                <span class="inline-flex size-8 items-center justify-center rounded-full {{ item.active ? 'border border-mythic-gold/35 bg-[#fffaf0]' : '' }}" aria-hidden="true">✦</span>
-                {{ item.label }}
+            <a
+                href="{{ item.url }}"
+                class="relative flex min-w-0 flex-col items-center justify-center gap-1 rounded-md px-0.5 focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-celestial-800 {{ item.active ? 'text-mythic-gold' : (item.key == 'music' ? 'text-slate-700' : 'text-celestial-600') }}"
+                {% if item.active %}aria-current="page"{% endif %}
+                {% if not item.available %}aria-disabled="true"{% endif %}
+                aria-label="{{ item.label }}{{ not item.available ? ' — page publique à venir' : '' }}"
+            >
+                <span class="relative flex size-9 items-center justify-center rounded-full transition-colors {{ item.active ? 'border border-mythic-gold/35 bg-[#fffaf0] shadow-[0_3px_12px_rgba(211,170,50,0.22)]' : '' }}">
+                    {% if item.active %}
+                        <svg aria-hidden="true" viewBox="0 0 28 28" fill="none" class="size-6 text-mythic-gold" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13 4C13.65 8.55 16.45 11.35 21 12C16.45 12.65 13.65 15.45 13 20C12.35 15.45 9.55 12.65 5 12C9.55 11.35 12.35 8.55 13 4Z" fill="currentColor"/>
+                            <path d="M22 3C22.25 4.75 23.25 5.75 25 6C23.25 6.25 22.25 7.25 22 9C21.75 7.25 20.75 6.25 19 6C20.75 5.75 21.75 4.75 22 3Z" fill="currentColor" opacity="0.85"/>
+                            <path d="M21.5 18C21.85 20.45 23.05 21.65 25.5 22C23.05 22.35 21.85 23.55 21.5 26C21.15 23.55 19.95 22.35 17.5 22C19.95 21.65 21.15 20.45 21.5 18Z" fill="currentColor" opacity="0.75"/>
+                        </svg>
+                    {% elseif item.key == 'home' %}
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="size-[19px]" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.5 10.5L12 4L19.5 10.5V19H14.5V14H9.5V19H4.5V10.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                        </svg>
+                    {% elseif item.key == 'quiz' %}
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="size-[19px]" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="5" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.3"/>
+                            <path d="M9 9.25C9.25 7.85 10.25 7.25 11.5 7.25C13 7.25 14 8.1 14 9.3C14 10.2 13.55 10.7 12.5 11.35C11.75 11.8 11.5 12.3 11.5 13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                            <circle cx="11.5" cy="16" r="0.75" fill="currentColor"/>
+                        </svg>
+                    {% elseif item.key == 'myths' %}
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="size-[19px]" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.75 5.5C7.25 4.8 9.6 5.1 12 6.7V19C9.6 17.4 7.25 17.1 4.75 17.8V5.5Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                            <path d="M19.25 5.5C16.75 4.8 14.4 5.1 12 6.7V19C14.4 17.4 16.75 17.1 19.25 17.8V5.5Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+                        </svg>
+                    {% elseif item.key == 'relics' %}
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="size-[19px]" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 3.75L17.5 7V13.5L12 20.25L6.5 13.5V7L12 3.75Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                            <path d="M8 8.25L12 10.5L16 8.25M12 10.5V17.5" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                        </svg>
+                    {% elseif item.key == 'encyclopedia' %}
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="size-[19px]" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.25"/>
+                            <path d="M4.5 12H19.5M12 4C14 6.2 15 8.85 15 12C15 15.15 14 17.8 12 20C10 17.8 9 15.15 9 12C9 8.85 10 6.2 12 4Z" stroke="currentColor" stroke-width="1.15"/>
+                        </svg>
+                    {% else %}
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="size-[19px]" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.5 17.25V6.75L18 5V15.5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+                            <ellipse cx="7" cy="17.5" rx="2.5" ry="2" stroke="currentColor" stroke-width="1.35"/>
+                            <ellipse cx="15.5" cy="15.75" rx="2.5" ry="2" stroke="currentColor" stroke-width="1.35"/>
+                        </svg>
+                    {% endif %}
+
+                </span>
+                <span class="max-w-full truncate text-[8px] uppercase leading-none tracking-[0.02em] min-[390px]:text-[9px]">{{ item.label }}</span>
             </a>
         {% endfor %}
     </div>
