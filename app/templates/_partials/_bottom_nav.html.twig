@@ -1,0 +1,17 @@
+{% set currentRoute = app.request.attributes.get('_route')|default('') %}
+{% set navigationItems = [
+    { label: 'Accueil', url: '/', active: currentRoute == 'app_home' },
+    { label: 'Quiz', url: '/quiz', active: currentRoute starts with 'app_quiz_' },
+    { label: 'Encyclopédie', url: '/pantheon', active: currentRoute starts with 'app_public_' }
+] %}
+
+<nav class="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 font-editorial shadow-[0_-4px_16px_rgba(52,87,109,0.1)] backdrop-blur-sm" aria-label="Navigation publique principale">
+    <div class="mx-auto grid h-[72px] max-w-md grid-cols-3 pb-[env(safe-area-inset-bottom)]">
+        {% for item in navigationItems %}
+            <a href="{{ item.url }}" class="flex flex-col items-center justify-center gap-1 text-[10px] uppercase tracking-wide {{ item.active ? 'text-mythic-gold' : 'text-celestial-600' }}"{% if item.active %} aria-current="page"{% endif %}>
+                <span class="inline-flex size-8 items-center justify-center rounded-full {{ item.active ? 'border border-mythic-gold/35 bg-[#fffaf0]' : '' }}" aria-hidden="true">✦</span>
+                {{ item.label }}
+            </a>
+        {% endfor %}
+    </div>
+</nav>
