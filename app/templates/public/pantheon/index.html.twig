@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ pageTitle }} — Le Menhir des Dieux{% endblock %}
+
+{% block stylesheets %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Metamorphous&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --font-mythic: "Metamorphous", serif;
+            --font-editorial: "Lora", serif;
+            --color-celestial-50: #f3f8fc;
+            --color-celestial-100: #e7f1f8;
+            --color-celestial-600: #4f7890;
+            --color-celestial-800: #34576d;
+            --color-mythic-gold: #d3aa32;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    {% include '_partials/_header.html.twig' %}
+    <main class="min-h-screen bg-[#fbfcfd] px-4 pb-28 pt-8 font-editorial text-celestial-800">
+        <div class="mx-auto max-w-6xl">
+            <h1 class="text-center font-mythic text-3xl sm:text-4xl">{{ pageTitle }}</h1>
+            {% set filters = [
+                {key: 'all', label: 'Toutes', route: 'app_public_pantheon_all'},
+                {key: 'gaulois', label: 'Gaulois', route: 'app_public_pantheon_gaulois'},
+                {key: 'gallois', label: 'Gallois', route: 'app_public_pantheon_gallois'},
+                {key: 'irlandais', label: 'Irlandais', route: 'app_public_pantheon_irlandais'}
+            ] %}
+            <nav class="mt-8 flex flex-wrap justify-center gap-2" aria-label="Choisir un panthéon">
+                {% for filter in filters %}
+                    <a href="{{ path(filter.route) }}" class="rounded-full border px-4 py-2 text-xs sm:text-sm {{ activePantheon == filter.key ? 'border-celestial-600 bg-celestial-600 text-white' : 'border-celestial-100 bg-white' }}"{% if activePantheon == filter.key %} aria-current="page"{% endif %}>{{ filter.label }}</a>
+                {% endfor %}
+            </nav>
+            <div class="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {% for dieu in dieux %}
+                    {% include '_partials/_public_deity_card.html.twig' with {dieu: dieu} only %}
+                {% else %}
+                    <p class="col-span-full py-12 text-center">Aucune divinité associée.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+    {% include '_partials/_bottom_nav.html.twig' %}
+{% endblock %}
