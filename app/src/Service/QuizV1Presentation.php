@@ -24,20 +24,20 @@ final class QuizV1Presentation
 
     /** @var array<string, array{path: string, alt: string}> */
     private const QUESTION_IMAGES = [
-        'elements' => ['path' => 'uploads/symboles/roue-solaire.png', 'alt' => 'Roue solaire évoquant les forces naturelles'],
-        'paysage' => ['path' => 'images/placeholders/pantheon-irlandais.png', 'alt' => 'Paysage celtique ouvert sur un chemin'],
-        'carrefour' => ['path' => 'uploads/symboles/roue-dargent.png', 'alt' => 'Roue d’argent évoquant le choix et les directions'],
-        'passage-oublie' => ['path' => 'uploads/symboles/baguette-magique.png', 'alt' => 'Baguette ouvrant symboliquement un passage oublié'],
-        'obstacle' => ['path' => 'uploads/symboles/bouclier.png', 'alt' => 'Bouclier dressé face à une épreuve'],
-        'responsabilite' => ['path' => 'uploads/symboles/epee-de-nuada.png', 'alt' => 'Épée de Nuada associée à la justice et à la responsabilité'],
-        'aider' => ['path' => 'uploads/symboles/corne-dabondance.png', 'alt' => 'Corne d’abondance symbolisant l’aide offerte'],
-        'porte-mysterieuse' => ['path' => 'uploads/symboles/chaudron-dinspiration.png', 'alt' => 'Chaudron d’inspiration au seuil du mystère'],
-        'liens' => ['path' => 'uploads/animaux/cheval.png', 'alt' => 'Cheval évoquant la fidélité des liens'],
-        'conflit' => ['path' => 'uploads/symboles/hache-desus.png', 'alt' => 'Hache symbolisant la tension d’un conflit'],
-        'transmission' => ['path' => 'uploads/symboles/ogham.png', 'alt' => 'Ogham gravé représentant la transmission'],
-        'changement' => ['path' => 'uploads/animaux/papillon.png', 'alt' => 'Papillon associé à la transformation'],
-        'qualite' => ['path' => 'uploads/symboles/lance-de-lugh.png', 'alt' => 'Lance de Lugh évoquant les qualités affirmées'],
-        'appel' => ['path' => 'uploads/symboles/manteau-de-brume.png', 'alt' => 'Manteau de brume ouvrant vers l’appel de l’inconnu'],
+        'elements' => ['path' => 'images/quiz/elements.png', 'alt' => 'Les quatre éléments réunis dans un sanctuaire celtique'],
+        'paysage' => ['path' => 'images/quiz/paysage.png', 'alt' => 'Chemins traversant une forêt, une montagne et une côte celtiques'],
+        'carrefour' => ['path' => 'images/quiz/carrefour.png', 'alt' => 'Carrefour de chemins marqué par des pierres celtiques'],
+        'passage-oublie' => ['path' => 'images/quiz/passage-oublie.png', 'alt' => 'Passage ancien révélé au cœur de ruines celtiques'],
+        'obstacle' => ['path' => 'images/quiz/obstacle.png', 'alt' => 'Bouclier et obstacle de pierre sur un chemin ancien'],
+        'responsabilite' => ['path' => 'images/quiz/responsabilite.png', 'alt' => 'Épée sacrée et balance celtiques symbolisant la responsabilité'],
+        'aider' => ['path' => 'images/quiz/aider.png', 'alt' => 'Offrandes et objets de soin déposés dans un sanctuaire celtique'],
+        'porte-mysterieuse' => ['path' => 'images/quiz/porte-mysterieuse.png', 'alt' => 'Porte mystérieuse gravée de motifs celtiques'],
+        'liens' => ['path' => 'images/quiz/liens.png', 'alt' => 'Anneaux et entrelacs celtiques symbolisant les liens'],
+        'conflit' => ['path' => 'images/quiz/conflit.png', 'alt' => 'Armes celtiques opposées dans une atmosphère de conflit'],
+        'transmission' => ['path' => 'images/quiz/transmission.png', 'alt' => 'Pierres oghamiques et manuscrit symbolisant la transmission'],
+        'changement' => ['path' => 'images/quiz/changement.png', 'alt' => 'Paysage celtique passant de l’ombre à la lumière'],
+        'qualite' => ['path' => 'images/quiz/qualite.png', 'alt' => 'Épée, livre et couronne végétale représentant les qualités intérieures'],
+        'appel' => ['path' => 'images/quiz/appel.png', 'alt' => 'Chemin lumineux conduisant vers un horizon celtique inconnu'],
     ];
 
     /** @var array<string, list<string>> */
