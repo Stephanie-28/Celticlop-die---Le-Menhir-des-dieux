@@ -64,6 +64,7 @@ final class QuizController extends AbstractController
         return $this->render('quiz/question.html.twig', [
             'question' => $question,
             'questionHint' => $presentation->questionHint($question['id']),
+            'questionImage' => $presentation->questionImage($question['id']),
             'position' => $position,
             'total' => QuizV1Engine::QUESTION_COUNT,
             'selectedAnswer' => $attempt['answers'][$question['id']] ?? null,

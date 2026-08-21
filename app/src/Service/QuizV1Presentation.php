@@ -22,6 +22,24 @@ final class QuizV1Presentation
         'appel' => 'Au terme du voyage, reconnais ce qui te ferait avancer vers l’inconnu.',
     ];
 
+    /** @var array<string, array{path: string, alt: string}> */
+    private const QUESTION_IMAGES = [
+        'elements' => ['path' => 'uploads/symboles/roue-solaire.png', 'alt' => 'Roue solaire évoquant les forces naturelles'],
+        'paysage' => ['path' => 'images/placeholders/pantheon-irlandais.png', 'alt' => 'Paysage celtique ouvert sur un chemin'],
+        'carrefour' => ['path' => 'uploads/symboles/roue-dargent.png', 'alt' => 'Roue d’argent évoquant le choix et les directions'],
+        'passage-oublie' => ['path' => 'uploads/symboles/baguette-magique.png', 'alt' => 'Baguette ouvrant symboliquement un passage oublié'],
+        'obstacle' => ['path' => 'uploads/symboles/bouclier.png', 'alt' => 'Bouclier dressé face à une épreuve'],
+        'responsabilite' => ['path' => 'uploads/symboles/epee-de-nuada.png', 'alt' => 'Épée de Nuada associée à la justice et à la responsabilité'],
+        'aider' => ['path' => 'uploads/symboles/corne-dabondance.png', 'alt' => 'Corne d’abondance symbolisant l’aide offerte'],
+        'porte-mysterieuse' => ['path' => 'uploads/symboles/chaudron-dinspiration.png', 'alt' => 'Chaudron d’inspiration au seuil du mystère'],
+        'liens' => ['path' => 'uploads/animaux/cheval.png', 'alt' => 'Cheval évoquant la fidélité des liens'],
+        'conflit' => ['path' => 'uploads/symboles/hache-desus.png', 'alt' => 'Hache symbolisant la tension d’un conflit'],
+        'transmission' => ['path' => 'uploads/symboles/ogham.png', 'alt' => 'Ogham gravé représentant la transmission'],
+        'changement' => ['path' => 'uploads/animaux/papillon.png', 'alt' => 'Papillon associé à la transformation'],
+        'qualite' => ['path' => 'uploads/symboles/lance-de-lugh.png', 'alt' => 'Lance de Lugh évoquant les qualités affirmées'],
+        'appel' => ['path' => 'uploads/symboles/manteau-de-brume.png', 'alt' => 'Manteau de brume ouvrant vers l’appel de l’inconnu'],
+    ];
+
     /** @var array<string, list<string>> */
     private const DEITY_TRAITS = [
         'Dagda' => ['Sagesse', 'Abondance', 'Protection'],
@@ -50,6 +68,12 @@ final class QuizV1Presentation
     public function questionHint(string $questionId): string
     {
         return self::QUESTION_HINTS[$questionId] ?? '';
+    }
+
+    /** @return array{path: string, alt: string}|null */
+    public function questionImage(string $questionId): ?array
+    {
+        return self::QUESTION_IMAGES[$questionId] ?? null;
     }
 
     /** @return list<string> */
