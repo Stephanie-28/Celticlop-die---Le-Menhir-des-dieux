@@ -1,0 +1,141 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil — Le Menhir des Dieux{% endblock %}
+
+{% block stylesheets %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Metamorphous&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --font-mythic: "Metamorphous", serif;
+            --font-editorial: "Lora", serif;
+            --color-celestial-50: #f3f8fc;
+            --color-celestial-100: #e7f1f8;
+            --color-celestial-600: #4f7890;
+            --color-celestial-800: #34576d;
+            --color-mythic-gold: #d3aa32;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    {% include '_partials/_header.html.twig' %}
+
+    <main class="min-h-screen bg-celestial-50 px-4 pt-8 pb-28 font-editorial text-celestial-800">
+        <div class="mx-auto flex max-w-6xl flex-col gap-12">
+            <section aria-labelledby="home-introduction-title" class="flex flex-col items-center px-3 pt-5 text-center sm:pt-8">
+                <img
+                    src="{{ asset('images/logo-menhir.jpeg') }}"
+                    alt="Logo du Menhir des Dieux"
+                    class="h-auto w-52 max-w-full object-contain sm:w-64"
+                >
+                <h1 id="home-introduction-title" class="mt-7 font-mythic text-2xl leading-tight text-mythic-gold sm:text-4xl">
+                    Le Menhir des Dieux
+                </h1>
+                <p class="mt-5 max-w-xl text-sm leading-7 text-celestial-800 sm:text-base">
+                    « Venez découvrir les dieux, les héros et les légendes du monde celtique. »
+                </p>
+                <div aria-hidden="true" class="mt-9 flex items-center justify-center gap-3 text-mythic-gold">
+                    <span class="h-px w-14 bg-mythic-gold/45"></span>
+                    <span class="text-sm">◇</span>
+                    <span class="h-px w-14 bg-mythic-gold/45"></span>
+                </div>
+            </section>
+
+            {% set dailyMyth = {
+                image: 'images/placeholders/mythe-du-jour.png',
+                title: 'Le Réveil de Danu',
+                description: 'Dans le silence primordial du monde, Danu, la mère divine, déversa sa sagesse dans les fleuves sacrés de l’Irlande, donnant ainsi naissance aux Tuatha Dé Danann.',
+                url: '#'
+            } %}
+
+            {% include '_partials/_daily_myth_card.html.twig' with {
+                image: dailyMyth.image,
+                title: dailyMyth.title,
+                description: dailyMyth.description,
+                url: dailyMyth.url
+            } only %}
+
+            <section aria-labelledby="pantheons-title">
+                <div class="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                    <h2 id="pantheons-title" class="font-mythic text-2xl text-celestial-800 sm:text-3xl">Les trois panthéons</h2>
+                    <p class="text-sm italic text-mythic-gold">Contenus temporaires de démonstration</p>
+                </div>
+
+                <div class="grid gap-7 md:grid-cols-3">
+                    {% set pantheons = [
+                        {
+                            image: 'images/placeholders/pantheon-irlandais.png',
+                            alt: 'Affiche temporaire du Panthéon irlandais',
+                            title: 'Panthéon irlandais',
+                            subtitle: 'Les Dieux des Tuatha Dé Danann',
+                            description: 'De la sagesse de Brigid à la lance de Lugh, découvrez la magie de l’île d’Émeraude.',
+                            buttonText: 'Explorer le panthéon',
+                            buttonUrl: path('app_public_pantheon_irlandais')
+                        },
+                        {
+                            image: 'images/placeholders/pantheon-gaulois.png',
+                            alt: 'Affiche temporaire du Panthéon gaulois',
+                            title: 'Panthéon gaulois',
+                            subtitle: 'Les Dieux de la Gaule Celtique',
+                            description: 'En l’honneur d’Epona et de Taranis, suivez les vastes routes de la Gaule antique.',
+                            buttonText: 'Explorer le panthéon',
+                            buttonUrl: path('app_public_pantheon_gaulois')
+                        },
+                        {
+                            image: 'images/placeholders/pantheon-gallois.png',
+                            alt: 'Affiche temporaire du Panthéon gallois',
+                            title: 'Panthéon gallois',
+                            subtitle: 'Les Dieux du Pays de Galles',
+                            description: 'Entrez dans l’Autre Monde à travers la prose des Quatre Branches et du Livre Blanc.',
+                            buttonText: 'Explorer le panthéon',
+                            buttonUrl: path('app_public_pantheon_gallois')
+                        }
+                    ] %}
+
+                    {% for pantheon in pantheons %}
+                        {% include '_partials/_pantheon_card.html.twig' with {
+                            image: pantheon.image,
+                            alt: pantheon.alt,
+                            title: pantheon.title,
+                            subtitle: pantheon.subtitle,
+                            description: pantheon.description,
+                            buttonText: pantheon.buttonText,
+                            buttonUrl: pantheon.buttonUrl
+                        } only %}
+                    {% endfor %}
+                </div>
+            </section>
+
+            {% set druidicWisdom = {
+                quote: 'Ceux qui ne voient pas l’autre monde en ce monde-ci ne le verront jamais.',
+                attribution: 'Sagesse druidique'
+            } %}
+
+            {% include '_partials/_druidic_wisdom_card.html.twig' with {
+                quote: druidicWisdom.quote,
+                attribution: druidicWisdom.attribution
+            } only %}
+
+            {% set druidArchives = {
+                description: 'Accédez au savoir numérisé du monde antique. Des écritures oghamiques à la géométrie sacrée, nos archives offrent un aperçu à la fois érudit et accessible de la vie celtique.',
+                objectsButtonText: 'Parcourir les objets',
+                objectsUrl: '#',
+                sacredSitesButtonText: 'Voir les sites sacrés',
+                sacredSitesUrl: '#'
+            } %}
+
+            {% include '_partials/_druid_archives_card.html.twig' with {
+                description: druidArchives.description,
+                objectsButtonText: druidArchives.objectsButtonText,
+                objectsUrl: druidArchives.objectsUrl,
+                sacredSitesButtonText: druidArchives.sacredSitesButtonText,
+                sacredSitesUrl: druidArchives.sacredSitesUrl
+            } only %}
+        </div>
+    </main>
+
+    {% include '_partials/_bottom_nav.html.twig' %}
+{% endblock %}

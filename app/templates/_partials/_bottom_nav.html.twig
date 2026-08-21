@@ -1,8 +1,8 @@
 {% set currentRoute = app.request.attributes.get('_route')|default('') %}
 {% set navigationItems = [
-    { label: 'Accueil', url: '/', active: currentRoute == 'app_home' },
+    { label: 'Accueil', url: path('app_home'), active: currentRoute == 'app_home' },
     { label: 'Quiz', url: '/quiz', active: currentRoute starts with 'app_quiz_' },
-    { label: 'Encyclopédie', url: '/pantheon', active: currentRoute starts with 'app_public_' }
+    { label: 'Encyclopédie', url: path('app_public_pantheon_all'), active: currentRoute starts with 'app_public_' }
 ] %}
 
 <nav class="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 font-editorial shadow-[0_-4px_16px_rgba(52,87,109,0.1)] backdrop-blur-sm" aria-label="Navigation publique principale">

@@ -1,0 +1,24 @@
+<section aria-labelledby="archives-title" class="relative overflow-hidden rounded-[26px] bg-white px-7 py-12 text-center shadow-[0_8px_24px_rgba(52,87,109,0.1)] sm:px-12 sm:py-14">
+    <span aria-hidden="true" class="absolute -right-12 -top-12 size-28 rounded-full bg-celestial-50"></span>
+
+    <div class="relative">
+        <svg aria-hidden="true" viewBox="0 0 48 40" fill="none" class="mx-auto h-10 w-12 text-mythic-gold" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 7C20.9 13 24 16.1 30 17C24 17.9 20.9 21 20 27C19.1 21 16 17.9 10 17C16 16.1 19.1 13 20 7Z" fill="currentColor"/>
+            <path d="M35 3C35.4 6.2 36.8 7.6 40 8C36.8 8.4 35.4 9.8 35 13C34.6 9.8 33.2 8.4 30 8C33.2 7.6 34.6 6.2 35 3Z" fill="currentColor" opacity="0.8"/>
+            <path d="M35 24C35.5 27.8 37.2 29.5 41 30C37.2 30.5 35.5 32.2 35 36C34.5 32.2 32.8 30.5 29 30C32.8 29.5 34.5 27.8 35 24Z" fill="currentColor" opacity="0.9"/>
+        </svg>
+        <h2 id="archives-title" class="mt-2 font-mythic text-2xl text-celestial-800 sm:text-3xl">Archives du Druide</h2>
+        <p class="mx-auto mt-5 max-w-xl text-sm leading-7 text-slate-600 sm:text-base">
+            {{ description }}
+        </p>
+
+        <div class="mx-auto mt-7 flex max-w-sm flex-col gap-3">
+            <a href="{{ objectsUrl }}" class="rounded-xl border border-celestial-600/55 bg-white px-5 py-3 text-sm font-semibold text-celestial-800 transition-colors hover:bg-celestial-50">
+                {{ objectsButtonText }}
+            </a>
+            <a href="{{ sacredSitesUrl }}" class="rounded-xl bg-mythic-gold px-5 py-3 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                {{ sacredSitesButtonText }}
+            </a>
+        </div>
+    </div>
+</section>

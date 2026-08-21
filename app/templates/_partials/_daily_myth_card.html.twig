@@ -1,0 +1,25 @@
+<section aria-labelledby="daily-myth-title" class="overflow-hidden rounded-[26px] bg-white shadow-[0_10px_30px_rgba(52,87,109,0.12)]">
+    <img
+        src="{{ asset(image) }}"
+        alt="Illustration temporaire de {{ title }}"
+        class="h-64 w-full rounded-t-[26px] object-cover sm:h-80 lg:h-[420px]"
+    >
+    <div class="px-6 py-7 sm:px-9 sm:py-9">
+        <p class="font-mythic text-[10px] uppercase tracking-[0.2em] text-mythic-gold">
+            <span aria-hidden="true" class="mr-1">★</span>
+            LE MYTHE DU JOUR
+        </p>
+        <h2 id="daily-myth-title" class="mt-4 font-mythic text-2xl leading-tight text-celestial-800 sm:text-3xl">
+            {{ title }}
+        </h2>
+        <p class="mt-4 line-clamp-4 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
+            {{ description }}
+        </p>
+        <a href="{{ url }}" class="mt-6 inline-flex items-center gap-3 rounded-xl bg-celestial-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:bg-celestial-800 hover:shadow-md">
+            Lire l’intégralité du mythe
+            <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" class="size-4" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 10H16M11.5 5.5L16 10L11.5 14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
+    </div>
+</section>

@@ -1,0 +1,15 @@
+<section aria-labelledby="wisdom-title" class="flex min-h-[360px] flex-col items-center justify-center rounded-[28px] bg-celestial-100 px-7 py-14 text-center sm:min-h-[400px] sm:px-12 sm:py-16">
+    <h2 id="wisdom-title" class="sr-only">Sagesse druidique</h2>
+    <img
+        src="{{ asset('images/ui/quote-mark.svg') }}"
+        alt=""
+        aria-hidden="true"
+        class="h-[42px] w-16"
+    >
+    <blockquote class="mx-auto mt-7 max-w-xl font-editorial text-[26px] leading-[1.5] text-celestial-600 sm:text-[28px] sm:leading-[1.55]">
+        “{{ quote }}”
+    </blockquote>
+    <p class="mt-9 text-[14px] uppercase tracking-[0.18em] text-celestial-800/65">
+        — {{ attribution }} —
+    </p>
+</section>
