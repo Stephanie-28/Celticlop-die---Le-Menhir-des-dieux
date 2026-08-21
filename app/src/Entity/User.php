@@ -53,6 +53,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $lastPresentedInitiationLevel = null;
+
     /**
      * @var Collection<int, Favorite>
      */
@@ -214,6 +217,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getLastPresentedInitiationLevel(): ?int
+    {
+        return $this->lastPresentedInitiationLevel;
+    }
+
+    public function setLastPresentedInitiationLevel(?int $lastPresentedInitiationLevel): static
+    {
+        $this->lastPresentedInitiationLevel = $lastPresentedInitiationLevel;
 
         return $this;
     }

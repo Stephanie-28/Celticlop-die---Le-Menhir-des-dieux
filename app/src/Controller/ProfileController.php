@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfileType;
+use App\Repository\FavoriteRepository;
 use App\Service\AvatarUploader;
+use App\Service\InitiationPath;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -22,11 +24,32 @@ final class ProfileController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         AvatarUploader $avatarUploader,
+        FavoriteRepository $favoriteRepository,
+        InitiationPath $initiationPath,
     ): Response
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
             throw $this->createAccessDeniedException();
+        }
+
+        $currentRank = $initiationPath->forFavoriteCount($favoriteRepository->countForUser($user));
+        $ceremony = null;
+
+        if ($request->isMethod('GET')) {
+            $lastPresentedLevel = $user->getLastPresentedInitiationLevel();
+
+            if ($lastPresentedLevel === null) {
+                $user->setLastPresentedInitiationLevel($currentRank['level']);
+                $entityManager->flush();
+            } elseif ($lastPresentedLevel !== $currentRank['level']) {
+                $ceremony = [
+                    'direction' => $currentRank['level'] > $lastPresentedLevel ? 'up' : 'down',
+                    'rank' => $currentRank,
+                ];
+                $user->setLastPresentedInitiationLevel($currentRank['level']);
+                $entityManager->flush();
+            }
         }
 
         $form = $this->createForm(ProfileType::class, $user);
@@ -53,6 +76,9 @@ final class ProfileController extends AbstractController
             'profileUser' => $user,
             'profileForm' => $form,
             'openSanctuary' => $form->isSubmitted() && !$form->isValid(),
+            'initiationRanks' => $initiationPath->all(),
+            'currentInitiationRank' => $currentRank,
+            'initiationCeremony' => $ceremony,
         ]);
     }
 }
