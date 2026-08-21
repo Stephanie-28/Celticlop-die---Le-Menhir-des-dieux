@@ -8,6 +8,7 @@ use App\Enum\FavoriteEntityType;
 use App\Repository\DieuRepository;
 use App\Repository\FavoriteRepository;
 use App\Service\QuizV1Engine;
+use App\Service\QuizV1Presentation;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -45,7 +46,7 @@ final class QuizController extends AbstractController
     }
 
     #[Route('/question/{position}', name: 'question', requirements: ['position' => '\\d+'], methods: ['GET'])]
-    public function question(Request $request, QuizV1Engine $engine, int $position): Response
+    public function question(Request $request, QuizV1Engine $engine, QuizV1Presentation $presentation, int $position): Response
     {
         $attempt = $this->attempt($request);
         if ($attempt === null) {
@@ -62,6 +63,7 @@ final class QuizController extends AbstractController
 
         return $this->render('quiz/question.html.twig', [
             'question' => $question,
+            'questionHint' => $presentation->questionHint($question['id']),
             'position' => $position,
             'total' => QuizV1Engine::QUESTION_COUNT,
             'selectedAnswer' => $attempt['answers'][$question['id']] ?? null,
@@ -114,6 +116,7 @@ final class QuizController extends AbstractController
     public function result(
         Request $request,
         QuizV1Engine $engine,
+        QuizV1Presentation $presentation,
         DieuRepository $dieuRepository,
         FavoriteRepository $favoriteRepository,
     ): Response {
@@ -141,6 +144,7 @@ final class QuizController extends AbstractController
 
         return $this->render('quiz/result.html.twig', [
             'dieu' => $dieu,
+            'characteristics' => $presentation->deityTraits((string) $dieu->getName()),
             'isFavorite' => $isFavorite,
             'attemptNonce' => $attempt['nonce'],
         ]);
