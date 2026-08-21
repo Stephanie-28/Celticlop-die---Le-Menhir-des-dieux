@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil d’Initié — Le Menhir des Dieux{% endblock %}
+
+{% block stylesheets %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Metamorphous&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --font-mythic: "Metamorphous", serif;
+            --font-editorial: "Lora", serif;
+            --color-mythic-gold: #d3aa32;
+            --color-forest-900: #173d34;
+            --color-parchment: #f8f3e7;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    {% include '_partials/_header.html.twig' %}
+    <main class="min-h-screen bg-[#edf3ef] px-4 pb-28 pt-8 font-editorial text-forest-900 sm:pt-12">
+        <article class="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/80 bg-parchment shadow-[0_18px_55px_rgba(23,61,52,0.12)]">
+            <header class="relative overflow-hidden bg-forest-900 px-6 py-10 text-white sm:px-12 sm:py-14">
+                <div class="absolute -right-16 -top-20 size-64 rounded-full border border-mythic-gold/20"></div>
+                <p class="text-xs uppercase tracking-[0.28em] text-mythic-gold">Profil de l’Initié</p>
+                <div class="relative mt-7 flex flex-col gap-6 sm:flex-row sm:items-center">
+                    <div class="flex size-28 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-mythic-gold bg-[#e7dfca] shadow-xl">
+                        {% if profileUser.avatar %}
+                            <img src="{{ asset('uploads/avatars/' ~ profileUser.avatar) }}" alt="Avatar de {{ profileUser.pseudo }}" class="h-full w-full object-cover">
+                        {% else %}
+                            <span class="font-mythic text-4xl text-forest-900" aria-label="Avatar par défaut">{{ profileUser.pseudo|first|upper }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="min-w-0">
+                        <h1 class="break-words font-mythic text-3xl sm:text-5xl">{{ profileUser.pseudo }}</h1>
+                        {% if profileUser.firstName or profileUser.lastName %}
+                            <p class="mt-2 text-sm text-white/75">{{ profileUser.firstName }} {{ profileUser.lastName }}</p>
+                        {% endif %}
+                        <p class="mt-4 max-w-xl text-base italic text-[#f0d990]">{{ profileUser.motto ?: 'Une devise personnelle pourra bientôt guider tes pas.' }}</p>
+                    </div>
+                </div>
+            </header>
+
+            <div class="grid gap-7 p-6 sm:p-10 lg:grid-cols-[1.2fr_0.8fr]">
+                <section class="rounded-3xl bg-white/75 p-6 shadow-sm" aria-labelledby="identity-title">
+                    <p class="text-[11px] uppercase tracking-[0.24em] text-mythic-gold">Mon identité</p>
+                    <h2 id="identity-title" class="mt-2 font-mythic text-2xl">Les traces du voyage</h2>
+                    <dl class="mt-6 grid gap-5 text-sm sm:grid-cols-2">
+                        <div><dt class="text-slate-500">Nom d’Initié</dt><dd class="mt-1 font-semibold">{{ profileUser.pseudo }}</dd></div>
+                        <div><dt class="text-slate-500">E-mail</dt><dd class="mt-1 break-all font-semibold">{{ profileUser.email }}</dd></div>
+                        <div><dt class="text-slate-500">Titre initiatique</dt><dd class="mt-1 text-slate-500">Révélé dans le futur Chemin de l’Initiation</dd></div>
+                        <div><dt class="text-slate-500">Niveau</dt><dd class="mt-1 text-slate-500">Progression bientôt disponible</dd></div>
+                    </dl>
+                    <button type="button" disabled class="mt-7 rounded-full bg-mythic-gold/45 px-6 py-3 text-sm font-semibold text-white">Le Sanctuaire des paramètres</button>
+                </section>
+
+                <aside class="rounded-3xl border border-mythic-gold/25 bg-[#fffaf0] p-6" aria-labelledby="next-steps-title">
+                    <p class="text-[11px] uppercase tracking-[0.24em] text-mythic-gold">À venir</p>
+                    <h2 id="next-steps-title" class="mt-2 font-mythic text-xl">Les prochains chemins</h2>
+                    <p class="mt-4 text-sm leading-6 text-slate-600">Le Chemin de l’Initiation et l’aperçu de tes favoris seront ouverts dans leurs User Stories dédiées.</p>
+                </aside>
+            </div>
+        </article>
+    </main>
+    {% include '_partials/_bottom_nav.html.twig' %}
+{% endblock %}
