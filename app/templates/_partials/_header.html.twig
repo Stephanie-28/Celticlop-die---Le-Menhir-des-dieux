@@ -7,7 +7,7 @@
 
         <div class="ml-auto flex items-center text-xs text-celestial-800">
             {% if app.user %}
-                <span class="max-w-32 truncate font-semibold">{{ app.user.pseudo }}</span>
+                <a href="{{ path('app_profile') }}" class="max-w-32 truncate rounded-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold">{{ app.user.pseudo }}</a>
                 <span aria-hidden="true" class="mx-2 text-slate-300">/</span>
                 <a href="/deconnexion" class="text-mythic-gold">Déconnexion</a>
             {% else %}
