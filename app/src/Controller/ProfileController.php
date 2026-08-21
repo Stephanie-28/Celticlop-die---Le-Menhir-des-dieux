@@ -44,7 +44,7 @@ final class ProfileController extends AbstractController
                 $entityManager->flush();
             } elseif ($lastPresentedLevel !== $currentRank['level']) {
                 $ceremony = [
-                    'direction' => $currentRank['level'] > $lastPresentedLevel ? 'up' : 'down',
+                    'direction' => $initiationPath->changeDirection($lastPresentedLevel, $currentRank['level']),
                     'rank' => $currentRank,
                 ];
                 $user->setLastPresentedInitiationLevel($currentRank['level']);

@@ -43,4 +43,13 @@ final class InitiationPath
 
         return self::RANKS[0];
     }
+
+    public function changeDirection(int $lastPresentedLevel, int $currentLevel): ?string
+    {
+        return match (true) {
+            $currentLevel > $lastPresentedLevel => 'up',
+            $currentLevel < $lastPresentedLevel => 'down',
+            default => null,
+        };
+    }
 }
