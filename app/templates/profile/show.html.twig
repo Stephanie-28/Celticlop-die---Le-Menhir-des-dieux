@@ -22,7 +22,10 @@
                 <h1 id="profile-title" class="mt-2 break-words font-mythic text-3xl sm:text-5xl">{{ profileUser.pseudo }}</h1>
                 <p class="mt-3 text-sm font-semibold uppercase tracking-[0.14em] text-[#56736b]">Rang et niveau révélés dans le Chemin de l’Initiation</p>
                 <p class="mx-auto mt-4 max-w-2xl text-base italic leading-7 text-[#4d6670]">{{ profileUser.motto ?: 'Une devise personnelle pourra guider tes pas.' }}</p>
-                <button id="open-sanctuary" type="button" class="mt-7 rounded-full bg-mythic-gold px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#bd9424] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-forest-900">Le Sanctuaire des paramètres</button>
+                <div class="mt-7 flex flex-col items-center gap-3">
+                    <button id="open-sanctuary" type="button" class="rounded-full bg-mythic-gold px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#bd9424] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-forest-900">Le Sanctuaire des paramètres</button>
+                    <a href="{{ path('app_logout') }}" class="rounded-full px-5 py-2 text-sm text-[#5b6f69] underline decoration-mythic-gold/45 underline-offset-4 transition hover:text-forest-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-900">Se déconnecter</a>
+                </div>
             </section>
 
             <section class="rounded-[2rem] bg-white px-6 py-8 shadow-[0_14px_45px_rgba(23,61,52,0.07)] sm:px-9" aria-labelledby="favorites-title">

@@ -5,13 +5,18 @@
             <span class="truncate font-mythic text-[13px] text-celestial-800 sm:text-base">Le Menhir des Dieux</span>
         </a>
 
-        <div class="ml-auto flex items-center text-xs text-celestial-800">
+        <div class="ml-auto flex shrink-0 items-center gap-2 text-xs text-celestial-800 sm:gap-3">
             {% if app.user %}
-                <a href="{{ path('app_profile') }}" class="max-w-32 truncate rounded-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold">{{ app.user.pseudo }}</a>
-                <span aria-hidden="true" class="mx-2 text-slate-300">/</span>
-                <a href="/deconnexion" class="text-mythic-gold">Déconnexion</a>
+                <a href="{{ path('app_profile') }}" class="flex size-9 items-center justify-center overflow-hidden rounded-full border-2 border-mythic-gold bg-[#e7dfca] shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-celestial-800" aria-label="Voir le profil de {{ app.user.pseudo }}">
+                    {% if app.user.avatar %}
+                        <img src="{{ asset('uploads/avatars/' ~ app.user.avatar) }}" alt="Avatar de {{ app.user.pseudo }}" class="size-full object-cover">
+                    {% else %}
+                        <span class="font-mythic text-sm text-[#173d34]" aria-hidden="true">{{ app.user.pseudo|first|upper }}</span>
+                    {% endif %}
+                </a>
             {% else %}
-                <a href="/connexion" class="text-mythic-gold">Connexion</a>
+                <a href="{{ path('app_login') }}" class="rounded-full px-2 py-2 text-celestial-800 transition hover:text-mythic-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-celestial-800 sm:px-3">Se connecter</a>
+                <a href="{{ path('app_register') }}" class="rounded-full border border-mythic-gold/60 px-3 py-2 font-semibold text-mythic-gold transition hover:bg-[#fffaf0] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-celestial-800 sm:px-4">S’inscrire</a>
             {% endif %}
         </div>
     </div>
