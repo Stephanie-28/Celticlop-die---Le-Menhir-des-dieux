@@ -48,6 +48,8 @@
                         class="block h-auto w-full object-contain object-center"
                     >
 
+                    {% include 'public/dieu/_partials/_sacred_level.html.twig' with {dieu: dieu, overlay: true} only %}
+
                     {% if dieu.quote is not empty %}
                         <div class="absolute z-10 flex w-fit items-center justify-center rounded-[50%] border-2 border-mythic-gold/55 bg-white/85 px-5 py-5 shadow-[0_3px_10px_rgba(52,87,109,0.08)] backdrop-blur-[1px] sm:px-6 sm:py-6 {{ isAtepomarus ? 'bottom-[5%] left-[3%] max-w-[58%]' : (isMorrigan ? 'bottom-[5%] left-[3%] max-w-[65%]' : (isDagda ? 'right-[3%] bottom-[5%] max-w-[62%]' : 'right-[3%] bottom-[5%] max-w-[60%]')) }}">
                             <p class="relative text-center font-editorial text-[14px] leading-relaxed italic text-celestial-800 sm:text-[15px]">
@@ -61,7 +63,9 @@
             <div class="px-6 py-8 sm:px-10 sm:py-10">
                 <h1 class="font-mythic text-3xl text-celestial-800 sm:text-4xl">{{ dieu.name }}</h1>
                 <p class="mt-2 text-sm text-mythic-gold sm:text-base">{{ dieu.title }}</p>
-                {% include 'public/dieu/_partials/_sacred_level.html.twig' with {dieu: dieu} only %}
+                {% if not dieu.img %}
+                    {% include 'public/dieu/_partials/_sacred_level.html.twig' with {dieu: dieu} only %}
+                {% endif %}
                 <div class="mt-7 whitespace-pre-line text-[15px] leading-7 text-slate-600">{{ dieu.description }}</div>
 
                 {% if dieu.symboles is not empty %}
