@@ -22,10 +22,10 @@
                 <p class="relative mt-5 text-[9px] uppercase tracking-[0.28em] text-[#8a6d24]">Profil de l’Initié</p>
                 <h1 id="profile-title" class="relative mt-1 break-words font-mythic text-2xl text-[#41505b] sm:text-4xl">{{ profileUser.pseudo }}</h1>
                 <div class="relative mx-auto mt-3 inline-flex flex-col items-center rounded-full border border-mythic-gold/50 bg-white/75 px-5 py-2 shadow-sm">
-                    <span class="font-mythic text-[11px] uppercase tracking-[0.09em] text-[#8b6814] sm:text-sm">{{ currentInitiationRank.title }}</span>
+                    <span class="font-mythic text-[11px] uppercase tracking-[0.09em] text-[#8b6814] sm:text-sm">{{ displayedInitiationRank.title }}</span>
                     <span class="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#73828a]">Niveau {{ currentInitiationRank.level }}</span>
                 </div>
-                <p class="relative mx-auto mt-3 max-w-2xl text-xs leading-5 text-[#586b74] sm:text-sm">{{ currentInitiationRank.meaning }}</p>
+                <p class="relative mx-auto mt-3 max-w-2xl text-xs leading-5 text-[#586b74] sm:text-sm">{{ displayedInitiationRank.meaning }}</p>
                 <p class="relative mx-auto mt-3 max-w-2xl text-sm italic leading-6 text-[#4d6670]">{{ profileUser.motto ?: 'Une devise personnelle pourra guider tes pas.' }}</p>
                 <div class="relative mt-5 flex flex-col items-center gap-2">
                     <button id="open-sanctuary" type="button" class="rounded-full border border-[#87959c]/60 bg-white/80 px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#52636b] shadow-sm transition hover:border-mythic-gold hover:text-[#8b6814] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-forest-900">Le Sanctuaire des paramètres</button>
@@ -45,22 +45,33 @@
                 <ol class="mx-auto mt-6 max-w-2xl" aria-label="Les douze rangs du Chemin de l’Initiation">
                     {% for rank in initiationRanks %}
                         {% set isCurrent = rank.level == currentInitiationRank.level %}
-                        {% set isObtained = rank.level < currentInitiationRank.level %}
-                        {% set stateLabel = isCurrent ? 'Rang actuel' : (isObtained ? 'Rang obtenu' : 'Rang à venir') %}
+                        {% set isUnlocked = rank.level <= currentInitiationRank.level %}
+                        {% set isSelected = rank.level == displayedInitiationRank.level %}
+                        {% set stateLabel = not isUnlocked ? 'Titre à venir' : (isCurrent and isSelected ? 'Rang actuel atteint. Titre sélectionné' : (isCurrent ? 'Rang actuel atteint. Titre débloqué' : (isSelected ? 'Titre débloqué. Titre sélectionné' : 'Titre débloqué'))) %}
                         <li class="relative grid min-h-[3.25rem] grid-cols-[2.75rem_minmax(0,1fr)] gap-3 pb-2 last:pb-0 sm:grid-cols-[3.25rem_minmax(0,1fr)] {{ isCurrent ? 'py-3' : 'py-1' }}" {% if isCurrent %}aria-current="step"{% endif %}>
                             {% if not loop.last %}<span class="absolute bottom-[-0.25rem] left-[1.35rem] top-[2.55rem] w-px sm:left-[1.6rem] {{ rank.level < currentInitiationRank.level ? 'bg-mythic-gold/60' : 'bg-slate-200' }}" aria-hidden="true"></span>{% endif %}
                             <div class="relative z-10 flex justify-center">
-                                <span class="relative flex items-center justify-center rounded-full border font-mythic {{ isCurrent ? 'size-11 border-2 border-mythic-gold bg-[#fff7d8] text-sm text-[#80600f] shadow-[0_0_0_6px_rgba(211,170,50,0.12),0_5px_16px_rgba(141,105,18,0.18)] sm:size-12' : (isObtained ? 'mt-1 size-8 border-mythic-gold/70 bg-[#fff8df] text-[11px] text-[#80600f] shadow-[0_0_0_3px_rgba(211,170,50,0.07)]' : 'mt-1 size-8 border-slate-300 bg-[#f4f5f5] text-[11px] text-slate-500') }}" aria-hidden="true">
+                                <span class="relative flex items-center justify-center rounded-full border font-mythic {{ isCurrent ? 'size-11 border-2 border-mythic-gold bg-[#fff7d8] text-sm text-[#80600f] shadow-[0_0_0_6px_rgba(211,170,50,0.12),0_5px_16px_rgba(141,105,18,0.18)] sm:size-12' : (isSelected ? 'mt-1 size-9 border-2 border-[#315f50] bg-[#edf6ef] text-xs text-[#244d40] shadow-[0_0_0_4px_rgba(49,95,80,0.1)]' : (isUnlocked ? 'mt-1 size-8 border-[#497565] bg-[#f1f7f2] text-[11px] text-[#315f50] shadow-[0_0_0_3px_rgba(49,117,101,0.06)]' : 'mt-1 size-8 border-slate-300 bg-[#f4f5f5] text-[11px] text-slate-500')) }}" aria-hidden="true">
                                     {{ rank.level }}
-                                    {% if isObtained %}<span class="absolute -right-1 -top-1 flex size-3.5 items-center justify-center rounded-full bg-mythic-gold text-[8px] text-white">✓</span>{% endif %}
+                                    {% if isUnlocked %}<span class="absolute -right-1 -top-1 flex size-3.5 items-center justify-center rounded-full bg-mythic-gold text-[8px] text-white">★</span>{% endif %}
                                 </span>
                             </div>
-                            <div class="min-w-0 {{ isCurrent ? 'rounded-2xl bg-[#fffdf6] px-4 py-3 shadow-[0_6px_20px_rgba(211,170,50,0.08)]' : 'pt-1.5' }}">
+                            <div class="min-w-0 {{ isCurrent and isSelected ? 'rounded-2xl border border-[#315f50] bg-[#fffdf4] px-4 py-3 shadow-[0_6px_22px_rgba(211,170,50,0.13)] ring-1 ring-mythic-gold/30' : (isCurrent ? 'rounded-2xl border border-mythic-gold/60 bg-[#fffdf6] px-4 py-3 shadow-[0_6px_20px_rgba(211,170,50,0.1)]' : (isSelected ? 'rounded-xl border-2 border-[#315f50] bg-[#f2f8f3] px-3 py-2 shadow-[0_5px_18px_rgba(49,95,80,0.12)]' : (isUnlocked ? 'rounded-xl border border-[#497565]/55 bg-[#f7faf7] px-3 py-2 shadow-[0_4px_14px_rgba(49,95,80,0.06)]' : 'pt-1.5'))) }}">
                                 <span class="sr-only">{{ stateLabel }}. </span>
-                                <h3 class="break-words font-mythic {{ isCurrent ? 'text-base uppercase tracking-[0.04em] text-[#5f4a12] sm:text-lg' : (isObtained ? 'text-sm text-[#435c55]' : 'text-sm text-slate-500') }}">{{ rank.title }}</h3>
+                                {% if isUnlocked %}<span class="text-[9px] text-mythic-gold" aria-hidden="true">★</span>{% endif %}
+                                <h3 class="break-words font-mythic {{ isCurrent ? 'text-base uppercase tracking-[0.04em] text-[#5f4a12] sm:text-lg' : (isUnlocked ? 'text-sm text-[#315f50]' : 'text-sm text-slate-500') }}">{{ rank.title }}</h3>
+                                {% if isCurrent or isSelected %}
+                                    <p class="mt-1 text-[8px] font-semibold uppercase tracking-[0.14em] {{ isSelected ? 'text-[#315f50]' : 'text-[#9a7a27]' }}">{{ isCurrent and isSelected ? 'Rang atteint · Titre sélectionné' : (isCurrent ? 'Rang atteint' : 'Titre sélectionné') }}</p>
+                                {% endif %}
                                 {% if isCurrent %}
                                     <p class="mt-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-[#9a7a27]">Niveau {{ rank.level }}</p>
                                     <p class="mt-2 text-xs leading-5 text-[#596a71] sm:text-sm">{{ rank.meaning }}</p>
+                                {% endif %}
+                                {% if isUnlocked and not isSelected %}
+                                    <form action="{{ path('app_profile_select_initiation_title', {level: rank.level}) }}" method="post" class="mt-1.5">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('select-initiation-title-' ~ rank.level) }}">
+                                        <button type="submit" class="rounded text-[9px] font-semibold text-[#315f50] underline decoration-mythic-gold/70 underline-offset-4 transition hover:text-[#8b6814] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#315f50]" aria-label="Choisir {{ rank.title }} comme titre affiché">Choisir ce titre</button>
+                                    </form>
                                 {% endif %}
                             </div>
                         </li>
