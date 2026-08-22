@@ -1,0 +1,39 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration — Celticlopédie{% endblock %}
+
+{% block admin_content %}
+    <section aria-labelledby="dashboard-title">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#967321]">EPIC 7 — Administration du contenu</p>
+        <div class="mt-2 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div><h1 id="dashboard-title" class="font-mythic text-2xl text-admin-forest sm:text-3xl">Tableau de bord</h1><p class="mt-2 max-w-2xl text-sm leading-6 text-[#5c706a]">Bienvenue dans le Sanctuaire du Grand Druide. Consulte l’état réel des archives avant de façonner les futurs outils de gestion.</p></div>
+            <span class="inline-flex w-fit items-center gap-2 rounded-full border border-[#a9862d]/25 bg-[#fffaf0] px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#7b6019]"><span class="size-2 rounded-full bg-[#4f866d]" aria-hidden="true"></span> Données synchronisées</span>
+        </div>
+    </section>
+
+    <section class="mt-8" aria-labelledby="statistics-title">
+        <h2 id="statistics-title" class="font-mythic text-lg text-admin-forest">Vue d’ensemble</h2>
+        <div class="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {% for statistic in statistics %}
+                <article class="relative overflow-hidden rounded-2xl border border-white bg-admin-ivory p-5 shadow-[0_8px_24px_rgba(24,58,48,0.07)]">
+                    <span class="absolute -right-5 -top-6 size-20 rounded-full border border-mythic-gold/15 bg-mythic-gold/5" aria-hidden="true"></span>
+                    <p class="relative text-[10px] font-semibold uppercase tracking-[0.17em] text-[#71847d]">{{ statistic.label }}</p>
+                    <p class="relative mt-3 font-mythic text-3xl text-admin-forest">{{ statistic.count|number_format(0, ',', ' ') }}</p>
+                    <p class="relative mt-1 text-xs text-[#71847d]">Enregistrement{{ statistic.count > 1 ? 's' : '' }} en base</p>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="mt-9 rounded-[1.6rem] border border-[#d8d2bf] bg-white p-5 shadow-[0_10px_30px_rgba(24,58,48,0.06)] sm:p-7" aria-labelledby="management-title">
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p class="text-[9px] uppercase tracking-[0.22em] text-[#967321]">Raccourcis</p><h2 id="management-title" class="mt-1 font-mythic text-lg text-admin-forest">Gestion du contenu</h2></div><p class="text-xs italic text-[#71847d]">Les outils seront ouverts progressivement, User Story par User Story.</p></div>
+        <div class="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {% for item in adminNavigation|slice(1) %}
+                <div class="flex min-h-20 items-center justify-between rounded-xl border border-[#dfe3da] bg-[#f8f9f5] px-4 py-3 text-left">
+                    <span class="font-semibold text-admin-forest">{{ item.label }}</span>
+                    <span class="rounded-full border border-[#a9862d]/25 bg-white px-2.5 py-1 text-[8px] font-semibold uppercase tracking-[0.12em] text-[#80651d]">À venir</span>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
