@@ -11,6 +11,8 @@ use App\Entity\Symbole;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -87,6 +89,23 @@ final class DieuType extends AbstractType
                 'label' => 'Musique associée',
                 'placeholder' => 'Aucune musique',
                 'required' => false,
+            ])
+            ->add('isVisible', CheckboxType::class, [
+                'label' => 'Visible sur le site',
+                'required' => false,
+            ])
+            ->add('sacredLevel', ChoiceType::class, [
+                'label' => 'Niveau sacré',
+                'help' => 'Le niveau sacré indique la notoriété de la divinité.',
+                'invalid_message' => 'Le niveau sacré doit être compris entre 1 et 5.',
+                'expanded' => true,
+                'choices' => [
+                    '★☆☆☆☆ — Très peu connue' => 1,
+                    '★★☆☆☆ — Peu connue' => 2,
+                    '★★★☆☆ — Moyennement connue' => 3,
+                    '★★★★☆ — Connue' => 4,
+                    '★★★★★ — Très connue' => 5,
+                ],
             ]);
     }
 
