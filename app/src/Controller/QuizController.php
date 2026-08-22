@@ -131,6 +131,9 @@ final class QuizController extends AbstractController
         if ($dieu === null) {
             throw new \LogicException(sprintf('La divinité du Quiz « %s » est absente de la base.', $winnerName));
         }
+        if (!$dieu->isVisible() && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createNotFoundException('Cette divinité n’est pas publiée.');
+        }
 
         $user = $this->getUser();
         if (!$user instanceof User) {
@@ -171,7 +174,7 @@ final class QuizController extends AbstractController
         $winnerName = $engine->calculate($attempt['answers'])['winner'];
         $dieu = $dieuRepository->findOneBy(['name' => $winnerName]);
         $user = $this->getUser();
-        if ($dieu === null || !$user instanceof User) {
+        if ($dieu === null || (!$dieu->isVisible() && !$this->isGranted('ROLE_ADMIN')) || !$user instanceof User) {
             throw $this->createAccessDeniedException();
         }
 

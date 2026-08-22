@@ -35,7 +35,10 @@ final class PublicPantheonController extends AbstractController
 
     private function renderPantheon(DieuRepository $repository, ?string $pantheon, string $pageTitle): Response
     {
-        $queryBuilder = $repository->createQueryBuilder('d')->orderBy('d.name', 'ASC');
+        $queryBuilder = $repository->createQueryBuilder('d')
+            ->andWhere('d.isVisible = :visible')
+            ->setParameter('visible', true)
+            ->orderBy('d.name', 'ASC');
 
         if ($pantheon !== null) {
             $queryBuilder

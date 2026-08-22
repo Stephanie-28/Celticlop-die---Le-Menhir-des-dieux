@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DieuRepository::class)]
 class Dieu
@@ -30,6 +31,13 @@ class Dieu
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $img = null;
+
+    #[ORM\Column(options: ['default' => true])]
+    private bool $isVisible = true;
+
+    #[ORM\Column(options: ['default' => 3])]
+    #[Assert\Range(min: 1, max: 5, notInRangeMessage: 'Le niveau sacré doit être compris entre {{ min }} et {{ max }}.')]
+    private int $sacredLevel = 3;
 
     /**
      * @var Collection<int, QuizResult>
@@ -141,6 +149,30 @@ class Dieu
     public function setImg(?string $img): static
     {
         $this->img = $img;
+
+        return $this;
+    }
+
+    public function isVisible(): bool
+    {
+        return $this->isVisible;
+    }
+
+    public function setIsVisible(bool $isVisible): static
+    {
+        $this->isVisible = $isVisible;
+
+        return $this;
+    }
+
+    public function getSacredLevel(): int
+    {
+        return $this->sacredLevel;
+    }
+
+    public function setSacredLevel(int $sacredLevel): static
+    {
+        $this->sacredLevel = $sacredLevel;
 
         return $this;
     }

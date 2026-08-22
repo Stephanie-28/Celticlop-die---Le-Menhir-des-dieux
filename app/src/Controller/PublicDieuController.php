@@ -22,6 +22,11 @@ final class PublicDieuController extends AbstractController
         DeityEditorialCatalog $editorialCatalog,
     ): Response
     {
+        $adminCanSeeHidden = $this->isGranted('ROLE_ADMIN');
+        if (!$dieu->isVisible() && !$adminCanSeeHidden) {
+            throw $this->createNotFoundException('Cette divinité n’est pas publiée.');
+        }
+
         $dagdaContext = null;
         $publicPantheon = $dieu->getPantheons()->findFirst(
             static fn (int $key, $pantheon): bool => in_array($pantheon->getTitle(), [
@@ -429,6 +434,7 @@ final class PublicDieuController extends AbstractController
                     ->setParameter('currentId', $dieu->getId())
                     ->orderBy('nextDieu.id', 'ASC')
                     ->setMaxResults(1)
+                    ->andWhere($adminCanSeeHidden ? '1 = 1' : 'nextDieu.isVisible = true')
                     ->getQuery()
                     ->getOneOrNullResult();
             }
@@ -436,7 +442,7 @@ final class PublicDieuController extends AbstractController
             foreach ($editorialProfile['associations'] as $name => $relation) {
                 $associatedDieu = $dieuRepository->findOneBy(['name' => $name]);
 
-                if ($associatedDieu instanceof Dieu) {
+                if ($associatedDieu instanceof Dieu && ($adminCanSeeHidden || $associatedDieu->isVisible())) {
                     $associatedDeities[] = [
                         'dieu' => $associatedDieu,
                         'relation' => $relation,
@@ -446,7 +452,7 @@ final class PublicDieuController extends AbstractController
 
             foreach ($additionalAssociations as $name => $relation) {
                 $associatedDieu = $dieuRepository->findOneBy(['name' => $name]);
-                if ($associatedDieu instanceof Dieu && !array_any(
+                if ($associatedDieu instanceof Dieu && ($adminCanSeeHidden || $associatedDieu->isVisible()) && !array_any(
                     $associatedDeities,
                     static fn (array $association): bool => $association['dieu']->getId() === $associatedDieu->getId(),
                 )) {
@@ -456,6 +462,9 @@ final class PublicDieuController extends AbstractController
 
             foreach ([...$editorialProfile['genealogy'], ...$additionalGenealogy] as $genealogyEntry) {
                 $genealogyDieu = $dieuRepository->findOneBy(['name' => $genealogyEntry['name']]);
+                if ($genealogyDieu instanceof Dieu && !$adminCanSeeHidden && !$genealogyDieu->isVisible()) {
+                    continue;
+                }
                 $genealogy[] = [
                     ...$genealogyEntry,
                     'dieu' => $genealogyDieu,
@@ -539,7 +548,7 @@ final class PublicDieuController extends AbstractController
             ] as $association) {
                 $associatedDieu = $dieuRepository->findOneBy(['name' => $association['name']]);
 
-                if ($associatedDieu instanceof Dieu) {
+                if ($associatedDieu instanceof Dieu && ($adminCanSeeHidden || $associatedDieu->isVisible())) {
                     $genealogy[] = [
                         'dieu' => $associatedDieu,
                         'relation' => $association['relation'],
@@ -563,6 +572,7 @@ final class PublicDieuController extends AbstractController
                 ->setParameter('currentId', $dieu->getId())
                 ->orderBy('nextDieu.id', 'ASC')
                 ->setMaxResults(1)
+                ->andWhere($adminCanSeeHidden ? '1 = 1' : 'nextDieu.isVisible = true')
                 ->getQuery()
                 ->getOneOrNullResult();
 
