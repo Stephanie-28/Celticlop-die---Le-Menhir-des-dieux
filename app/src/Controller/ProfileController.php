@@ -35,6 +35,17 @@ final class ProfileController extends AbstractController
 
         $currentRank = $initiationPath->forFavoriteCount($favoriteRepository->countForUser($user));
         $ceremony = null;
+        $selectedTitleLevel = $user->getSelectedInitiationTitleLevel();
+
+        if ($selectedTitleLevel !== null && ($selectedTitleLevel > $currentRank['level'] || $initiationPath->forLevel($selectedTitleLevel) === null)) {
+            $user->setSelectedInitiationTitleLevel(null);
+            $selectedTitleLevel = null;
+            $entityManager->flush();
+        }
+
+        $displayedRank = $selectedTitleLevel === null
+            ? $currentRank
+            : $initiationPath->forLevel($selectedTitleLevel) ?? $currentRank;
 
         if ($request->isMethod('GET')) {
             $lastPresentedLevel = $user->getLastPresentedInitiationLevel();
@@ -78,7 +89,40 @@ final class ProfileController extends AbstractController
             'openSanctuary' => $form->isSubmitted() && !$form->isValid(),
             'initiationRanks' => $initiationPath->all(),
             'currentInitiationRank' => $currentRank,
+            'displayedInitiationRank' => $displayedRank,
             'initiationCeremony' => $ceremony,
         ]);
+    }
+
+    #[Route('/profil/titre-initiatique/{level<\d+>}', name: 'app_profile_select_initiation_title', methods: ['POST'])]
+    public function selectInitiationTitle(
+        int $level,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        FavoriteRepository $favoriteRepository,
+        InitiationPath $initiationPath,
+    ): Response
+    {
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw $this->createAccessDeniedException();
+        }
+
+        if (!$this->isCsrfTokenValid('select-initiation-title-'.$level, (string) $request->request->get('_token'))) {
+            throw $this->createAccessDeniedException('Jeton de sécurité invalide.');
+        }
+
+        $currentRank = $initiationPath->forFavoriteCount($favoriteRepository->countForUser($user));
+        $requestedRank = $initiationPath->forLevel($level);
+
+        if ($requestedRank === null || !$initiationPath->canSelectTitle($level, $currentRank['level'])) {
+            throw $this->createAccessDeniedException('Ce titre initiatique n’est pas encore débloqué.');
+        }
+
+        $user->setSelectedInitiationTitleLevel($level);
+        $entityManager->flush();
+        $this->addFlash('profile_success', sprintf('Le titre « %s » accompagne désormais ton Profil.', $requestedRank['title']));
+
+        return $this->redirectToRoute('app_profile');
     }
 }

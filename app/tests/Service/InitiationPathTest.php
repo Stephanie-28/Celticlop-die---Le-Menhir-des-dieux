@@ -35,5 +35,11 @@ $assert(count($path->all()) === 12, 'Le Chemin doit contenir exactement douze ra
 $assert($path->changeDirection(5, 6) === 'up', 'Un niveau supérieur doit déclencher une montée.');
 $assert($path->changeDirection(6, 5) === 'down', 'Un niveau inférieur doit déclencher une descente.');
 $assert($path->changeDirection(6, 6) === null, 'Un niveau identique ne doit déclencher aucune cérémonie.');
+$assert($path->forLevel(5)['title'] === 'Maître des Chroniques', 'Le niveau 5 doit retrouver son titre sans stocker son nom.');
+$assert($path->forLevel(13) === null, 'Un niveau inexistant ne doit retrouver aucun titre.');
+$assert($path->canSelectTitle(5, 6), 'Un titre débloqué doit pouvoir être sélectionné.');
+$assert($path->canSelectTitle(6, 6), 'Le rang réel actuel doit pouvoir être sélectionné.');
+$assert(!$path->canSelectTitle(7, 6), 'Un titre futur doit être refusé côté serveur.');
+$assert(!$path->canSelectTitle(0, 6), 'Un niveau invalide doit être refusé côté serveur.');
 
 echo "InitiationPath: OK\n";

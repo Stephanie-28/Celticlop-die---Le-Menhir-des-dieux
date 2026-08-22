@@ -56,6 +56,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?int $lastPresentedInitiationLevel = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $selectedInitiationTitleLevel = null;
+
     /**
      * @var Collection<int, Favorite>
      */
@@ -229,6 +232,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastPresentedInitiationLevel(?int $lastPresentedInitiationLevel): static
     {
         $this->lastPresentedInitiationLevel = $lastPresentedInitiationLevel;
+
+        return $this;
+    }
+
+    public function getSelectedInitiationTitleLevel(): ?int
+    {
+        return $this->selectedInitiationTitleLevel;
+    }
+
+    public function setSelectedInitiationTitleLevel(?int $selectedInitiationTitleLevel): static
+    {
+        $this->selectedInitiationTitleLevel = $selectedInitiationTitleLevel;
 
         return $this;
     }

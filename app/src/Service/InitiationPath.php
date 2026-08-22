@@ -44,6 +44,19 @@ final class InitiationPath
         return self::RANKS[0];
     }
 
+    /**
+     * @return array{level: int, title: string, meaning: string, minimum: int, maximum: ?int}|null
+     */
+    public function forLevel(int $level): ?array
+    {
+        return self::RANKS[$level - 1] ?? null;
+    }
+
+    public function canSelectTitle(int $requestedLevel, int $currentLevel): bool
+    {
+        return $this->forLevel($requestedLevel) !== null && $requestedLevel <= $currentLevel;
+    }
+
     public function changeDirection(int $lastPresentedLevel, int $currentLevel): ?string
     {
         return match (true) {
