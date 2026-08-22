@@ -22,6 +22,7 @@
                 <p class="relative mt-5 text-[9px] uppercase tracking-[0.28em] text-[#8a6d24]">Profil de l’Initié</p>
                 <h1 id="profile-title" class="relative mt-1 break-words font-mythic text-2xl text-[#41505b] sm:text-4xl">{{ profileUser.pseudo }}</h1>
                 <div class="relative mx-auto mt-3 inline-flex flex-col items-center rounded-full border border-mythic-gold/50 bg-white/75 px-5 py-2 shadow-sm">
+                    {% include 'profile/_initiation_sparkles.html.twig' with {class: 'mb-1 size-8'} only %}
                     <span class="font-mythic text-[11px] uppercase tracking-[0.09em] text-[#8b6814] sm:text-sm">{{ displayedInitiationRank.title }}</span>
                     <span class="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#73828a]">Niveau {{ currentInitiationRank.level }}</span>
                 </div>
@@ -58,7 +59,11 @@
                             </div>
                             <div class="min-w-0 {{ isCurrent and isSelected ? 'rounded-2xl border border-[#315f50] bg-[#fffdf4] px-4 py-3 shadow-[0_6px_22px_rgba(211,170,50,0.13)] ring-1 ring-mythic-gold/30' : (isCurrent ? 'rounded-2xl border border-mythic-gold/60 bg-[#fffdf6] px-4 py-3 shadow-[0_6px_20px_rgba(211,170,50,0.1)]' : (isSelected ? 'rounded-xl border-2 border-[#315f50] bg-[#f2f8f3] px-3 py-2 shadow-[0_5px_18px_rgba(49,95,80,0.12)]' : (isUnlocked ? 'rounded-xl border border-[#497565]/55 bg-[#f7faf7] px-3 py-2 shadow-[0_4px_14px_rgba(49,95,80,0.06)]' : 'pt-1.5'))) }}">
                                 <span class="sr-only">{{ stateLabel }}. </span>
-                                {% if isUnlocked %}<span class="text-[9px] text-mythic-gold" aria-hidden="true">★</span>{% endif %}
+                                {% if isSelected %}
+                                    <span class="mb-1 inline-flex" aria-label="Titre sélectionné">{% include 'profile/_initiation_sparkles.html.twig' with {class: 'size-7'} only %}</span>
+                                {% elseif isUnlocked %}
+                                    <span class="text-[9px] text-mythic-gold" aria-hidden="true">★</span>
+                                {% endif %}
                                 <h3 class="break-words font-mythic {{ isCurrent ? 'text-base uppercase tracking-[0.04em] text-[#5f4a12] sm:text-lg' : (isUnlocked ? 'text-sm text-[#315f50]' : 'text-sm text-slate-500') }}">{{ rank.title }}</h3>
                                 {% if isCurrent or isSelected %}
                                     <p class="mt-1 text-[8px] font-semibold uppercase tracking-[0.14em] {{ isSelected ? 'text-[#315f50]' : 'text-[#9a7a27]' }}">{{ isCurrent and isSelected ? 'Rang atteint · Titre sélectionné' : (isCurrent ? 'Rang atteint' : 'Titre sélectionné') }}</p>
