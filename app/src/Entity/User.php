@@ -8,9 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[UniqueEntity(fields: ['email'], message: 'Cette adresse e-mail est déjà liée à un autre Initié.')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -39,8 +41,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
 
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $firstName = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $lastName = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $motto = null;
+
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $lastPresentedInitiationLevel = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $selectedInitiationTitleLevel = null;
 
     /**
      * @var Collection<int, Favorite>
@@ -159,6 +176,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): static
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): static
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getMotto(): ?string
+    {
+        return $this->motto;
+    }
+
+    public function setMotto(?string $motto): static
+    {
+        $this->motto = $motto;
+
+        return $this;
+    }
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -167,6 +220,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getLastPresentedInitiationLevel(): ?int
+    {
+        return $this->lastPresentedInitiationLevel;
+    }
+
+    public function setLastPresentedInitiationLevel(?int $lastPresentedInitiationLevel): static
+    {
+        $this->lastPresentedInitiationLevel = $lastPresentedInitiationLevel;
+
+        return $this;
+    }
+
+    public function getSelectedInitiationTitleLevel(): ?int
+    {
+        return $this->selectedInitiationTitleLevel;
+    }
+
+    public function setSelectedInitiationTitleLevel(?int $selectedInitiationTitleLevel): static
+    {
+        $this->selectedInitiationTitleLevel = $selectedInitiationTitleLevel;
 
         return $this;
     }

@@ -35,11 +35,11 @@
                 {% set isAtepomarus = dieu.name|lower == 'atepomarus' %}
                 {% set isMorrigan = dieu.name|lower == 'morrigan' %}
 
-                <div class="relative overflow-hidden bg-celestial-50 {{ isDagda ? 'w-full' : 'mx-auto aspect-[2/3] w-full max-w-[560px]' }}">
+                <div class="relative w-full overflow-hidden bg-celestial-50">
                     <img
                         src="{{ asset('uploads/dieux/' ~ dieu.img) }}"
                         alt="{{ dieu.name }}"
-                        class="{{ isDagda ? 'h-auto w-full' : 'h-full w-full' }} object-contain object-center"
+                        class="block h-auto w-full object-contain object-center"
                     >
 
                     {% if dieu.quote is not empty %}

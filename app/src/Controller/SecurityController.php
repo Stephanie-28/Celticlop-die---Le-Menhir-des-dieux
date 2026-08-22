@@ -13,7 +13,7 @@ final class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser() !== null) {
-            return $this->redirect('/quiz');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('security/login.html.twig', [
@@ -25,6 +25,6 @@ final class SecurityController extends AbstractController
     #[Route('/deconnexion', name: 'app_logout', methods: ['GET'])]
     public function logout(): never
     {
-        throw new \LogicException('Cette méthode est interceptée par le pare-feu Symfony.');
+        throw new \LogicException('Cette méthode est interceptée par le firewall Symfony.');
     }
 }

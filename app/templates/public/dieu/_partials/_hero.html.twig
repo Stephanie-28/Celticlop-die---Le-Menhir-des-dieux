@@ -4,11 +4,11 @@
 
 <section class="overflow-hidden bg-white shadow-[0_8px_24px_rgba(52,87,109,0.08)] sm:mt-8 sm:rounded-3xl" aria-labelledby="{{ heroTitleId }}">
     {% if dieu.img %}
-        <div class="relative mx-auto aspect-[2/3] w-full max-w-[560px] overflow-hidden bg-celestial-50">
+        <div class="relative w-full overflow-hidden bg-celestial-50">
             <img
                 src="{% include '_partials/_deity_portrait_src.html.twig' with {dieu: dieu} only %}"
                 alt="Portrait de {{ dieu.name }}"
-                class="h-full w-full object-contain object-center"
+                class="block h-auto w-full object-contain object-center"
             >
 
             {% if dieu.quote is not empty %}

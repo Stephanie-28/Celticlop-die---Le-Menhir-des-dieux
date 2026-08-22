@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+{% block title %}Mon Profil d’Initié — Le Menhir des Dieux{% endblock %}
+
+{% block stylesheets %}
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Metamorphous&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">@theme { --font-mythic: "Metamorphous", serif; --font-editorial: "Lora", serif; --color-mythic-gold: #d3aa32; --color-forest-900: #173d34; --color-parchment: #f8f3e7; }</style>
+{% endblock %}
+
+{% block body %}
+    {% include '_partials/_header.html.twig' %}
+    <main class="min-h-screen bg-[#f4f5f4] px-3 pb-28 pt-5 font-editorial text-forest-900 sm:px-6 sm:pt-9">
+        {% for message in app.flashes('profile_success') %}<div class="mx-auto mb-5 max-w-4xl rounded-2xl border border-[#b7d4bd] bg-[#edf8ef] px-5 py-4 text-sm text-[#285c38] shadow-sm" role="status">{{ message }}</div>{% endfor %}
+
+        <div class="mx-auto max-w-4xl space-y-8">
+            <section class="relative overflow-hidden rounded-[1.4rem] border border-white/80 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.98),rgba(224,231,234,0.88)_43%,rgba(185,195,201,0.75)_100%)] px-5 pb-6 pt-7 text-center shadow-[0_12px_34px_rgba(36,53,62,0.13)] sm:rounded-[1.8rem] sm:px-10 sm:pb-8 sm:pt-10" aria-labelledby="profile-title">
+                <div class="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(165deg,transparent_45%,rgba(255,255,255,0.72)_46%,rgba(255,255,255,0.72)_57%,transparent_58%)]" aria-hidden="true"></div>
+                <div class="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden opacity-[0.30]" aria-hidden="true">
+                    {% include '_partials/_celtic_triquetra.html.twig' with {class: 'size-full object-contain object-center'} only %}
+                </div>
+                <div class="relative mx-auto flex size-24 items-center justify-center overflow-hidden rounded-full border-[3px] border-white bg-[#e7dfca] shadow-[0_0_0_2px_#d3aa32,0_8px_22px_rgba(34,51,61,0.24)] sm:size-32">
+                    {% if profileUser.avatar %}<img src="{{ asset('uploads/avatars/' ~ profileUser.avatar) }}" alt="Avatar de {{ profileUser.pseudo }}" class="size-full object-cover">{% else %}<span class="font-mythic text-5xl" aria-label="Avatar par défaut">{{ profileUser.pseudo|first|upper }}</span>{% endif %}
+                </div>
+                <p class="relative mt-5 text-[9px] uppercase tracking-[0.28em] text-[#8a6d24]">Profil de l’Initié</p>
+                <h1 id="profile-title" class="relative mt-1 break-words font-mythic text-2xl text-[#41505b] sm:text-4xl">{{ profileUser.pseudo }}</h1>
+                <div class="relative mx-auto mt-3 inline-flex flex-col items-center rounded-full border border-mythic-gold/50 bg-white/75 px-5 py-2 shadow-sm">
+                    <span class="font-mythic text-[11px] uppercase tracking-[0.09em] text-[#8b6814] sm:text-sm">{{ displayedInitiationRank.title }}</span>
+                    <span class="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#73828a]">Niveau {{ currentInitiationRank.level }}</span>
+                </div>
+                <p class="relative mx-auto mt-3 max-w-2xl text-xs leading-5 text-[#586b74] sm:text-sm">{{ displayedInitiationRank.meaning }}</p>
+                <p class="relative mx-auto mt-3 max-w-2xl text-sm italic leading-6 text-[#4d6670]">{{ profileUser.motto ?: 'Une devise personnelle pourra guider tes pas.' }}</p>
+                <div class="relative mt-5 flex flex-col items-center gap-2">
+                    <button id="open-sanctuary" type="button" class="rounded-full border border-[#87959c]/60 bg-white/80 px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#52636b] shadow-sm transition hover:border-mythic-gold hover:text-[#8b6814] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-forest-900">Le Sanctuaire des paramètres</button>
+                    <a href="{{ path('app_logout') }}" class="rounded-full px-4 py-1.5 text-[10px] uppercase tracking-[0.08em] text-[#9c6870] underline decoration-[#cba9ae] underline-offset-4 transition hover:text-[#7d3f49] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-900">Se déconnecter</a>
+                </div>
+            </section>
+
+            <section class="px-1 sm:px-2" aria-labelledby="favorites-title">
+                <div class="flex items-end justify-between gap-4 border-b border-[#cfd6d8] pb-3"><div><p class="text-[9px] uppercase tracking-[0.24em] text-[#9a7a27]">Trésors conservés</p><h2 id="favorites-title" class="mt-1 flex items-center gap-2 font-mythic text-xl text-[#344853] sm:text-2xl"><span class="text-mythic-gold" aria-hidden="true">★</span> Mes Favoris</h2></div><span class="text-[10px] italic text-slate-500">Aperçu bientôt disponible</span></div>
+                <div class="mt-5 space-y-6" aria-label="Aperçu des favoris à venir">
+                    {% for category in ['Dieux', 'Mythes', 'Symboles', 'Animaux', 'Musiques'] %}
+                        <section aria-labelledby="favorites-{{ loop.index }}">
+                            <h3 id="favorites-{{ loop.index }}" class="font-mythic text-sm uppercase tracking-[0.08em] text-[#526961]">{{ category }}</h3>
+                            <div class="mt-2 grid grid-cols-3 gap-2 sm:gap-3" aria-hidden="true">
+                                {% for item in 1..3 %}<div class="h-20 rounded-xl border border-[#e4dfd2] bg-white shadow-[0_5px_14px_rgba(45,60,66,0.06)]"></div>{% endfor %}
+                            </div>
+                        </section>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="rounded-[1.6rem] bg-white px-5 py-7 shadow-[0_10px_30px_rgba(45,60,66,0.06)] sm:px-9 sm:py-9" aria-labelledby="path-title">
+                <p class="text-[9px] uppercase tracking-[0.24em] text-[#9a7a27]">Progression initiatique</p><h2 id="path-title" class="mt-1 flex items-center gap-2 font-mythic text-xl text-[#344853] sm:text-2xl"><span class="text-[#a99de8]" aria-hidden="true">♙</span> Chemin de l’Initiation</h2>
+                <p class="mt-3 max-w-2xl text-xs leading-5 text-slate-600">Les douze étapes de ton parcours restent visibles. Ton rang évolue avec les trésors que tu choisis de préserver.</p>
+                <ol class="mx-auto mt-6 max-w-2xl" aria-label="Les douze rangs du Chemin de l’Initiation">
+                    {% for rank in initiationRanks %}
+                        {% set isCurrent = rank.level == currentInitiationRank.level %}
+                        {% set isUnlocked = rank.level <= currentInitiationRank.level %}
+                        {% set isSelected = rank.level == displayedInitiationRank.level %}
+                        {% set stateLabel = not isUnlocked ? 'Titre à venir' : (isCurrent and isSelected ? 'Rang actuel atteint. Titre sélectionné' : (isCurrent ? 'Rang actuel atteint. Titre débloqué' : (isSelected ? 'Titre débloqué. Titre sélectionné' : 'Titre débloqué'))) %}
+                        <li class="relative grid min-h-[3.25rem] grid-cols-[2.75rem_minmax(0,1fr)] gap-3 pb-2 last:pb-0 sm:grid-cols-[3.25rem_minmax(0,1fr)] {{ isCurrent ? 'py-3' : 'py-1' }}" {% if isCurrent %}aria-current="step"{% endif %}>
+                            {% if not loop.last %}<span class="absolute bottom-[-0.25rem] left-[1.35rem] top-[2.55rem] w-px sm:left-[1.6rem] {{ rank.level < currentInitiationRank.level ? 'bg-mythic-gold/60' : 'bg-slate-200' }}" aria-hidden="true"></span>{% endif %}
+                            <div class="relative z-10 flex justify-center">
+                                <span class="relative flex items-center justify-center rounded-full border font-mythic {{ isCurrent ? 'size-11 border-2 border-mythic-gold bg-[#fff7d8] text-sm text-[#80600f] shadow-[0_0_0_6px_rgba(211,170,50,0.12),0_5px_16px_rgba(141,105,18,0.18)] sm:size-12' : (isSelected ? 'mt-1 size-9 border-2 border-[#315f50] bg-[#edf6ef] text-xs text-[#244d40] shadow-[0_0_0_4px_rgba(49,95,80,0.1)]' : (isUnlocked ? 'mt-1 size-8 border-[#497565] bg-[#f1f7f2] text-[11px] text-[#315f50] shadow-[0_0_0_3px_rgba(49,117,101,0.06)]' : 'mt-1 size-8 border-slate-300 bg-[#f4f5f5] text-[11px] text-slate-500')) }}" aria-hidden="true">
+                                    {{ rank.level }}
+                                </span>
+                            </div>
+                            <div class="min-w-0 {{ isCurrent and isSelected ? 'rounded-2xl border border-[#315f50] bg-[#fffdf4] px-4 py-3 shadow-[0_6px_22px_rgba(211,170,50,0.13)] ring-1 ring-mythic-gold/30' : (isCurrent ? 'rounded-2xl border border-mythic-gold/60 bg-[#fffdf6] px-4 py-3 shadow-[0_6px_20px_rgba(211,170,50,0.1)]' : (isSelected ? 'rounded-xl border-2 border-[#315f50] bg-[#f2f8f3] px-3 py-2 shadow-[0_5px_18px_rgba(49,95,80,0.12)]' : (isUnlocked ? 'rounded-xl border border-[#497565]/55 bg-[#f7faf7] px-3 py-2 shadow-[0_4px_14px_rgba(49,95,80,0.06)]' : 'pt-1.5'))) }}">
+                                <span class="sr-only">{{ stateLabel }}. </span>
+                                <div class="flex items-start justify-between gap-3">
+                                    <h3 class="min-w-0 break-words font-mythic {{ isCurrent ? 'text-base uppercase tracking-[0.04em] text-[#5f4a12] sm:text-lg' : (isUnlocked ? 'text-sm text-[#315f50]' : 'text-sm text-slate-500') }}">{{ rank.title }}</h3>
+                                    {% if isSelected %}<span class="shrink-0" aria-label="Titre sélectionné">{% include 'profile/_initiation_sparkles.html.twig' with {class: 'size-7'} only %}</span>{% endif %}
+                                </div>
+                                {% if (isCurrent or isSelected) and not (isCurrent and isSelected) %}
+                                    <p class="mt-1 text-[8px] font-semibold uppercase tracking-[0.14em] {{ isSelected ? 'text-[#315f50]' : 'text-[#9a7a27]' }}">{{ isCurrent and isSelected ? 'Rang atteint · Titre sélectionné' : (isCurrent ? 'Rang atteint' : 'Titre sélectionné') }}</p>
+                                {% endif %}
+                                {% if isCurrent %}
+                                    <p class="mt-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-[#9a7a27]">Niveau {{ rank.level }}</p>
+                                    <p class="mt-2 text-xs leading-5 text-[#596a71] sm:text-sm">{{ rank.meaning }}</p>
+                                {% endif %}
+                                {% if isUnlocked and not isSelected %}
+                                    <form action="{{ path('app_profile_select_initiation_title', {level: rank.level}) }}" method="post" class="mt-1.5">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('select-initiation-title-' ~ rank.level) }}">
+                                        <button type="submit" class="rounded text-[9px] font-semibold text-[#315f50] underline decoration-mythic-gold/70 underline-offset-4 transition hover:text-[#8b6814] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#315f50]" aria-label="Choisir {{ rank.title }} comme titre affiché">Choisir ce titre</button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </section>
+        </div>
+
+        <dialog id="profile-sanctuary" class="m-auto max-h-[92vh] w-[calc(100%-2rem)] max-w-2xl overflow-y-auto rounded-[2rem] border-0 bg-parchment p-0 text-forest-900 shadow-[0_24px_80px_rgba(10,35,29,0.35)] backdrop:bg-[#0b2c25]/70 backdrop:backdrop-blur-sm">
+            <div class="relative p-6 sm:p-9">
+                <button id="close-sanctuary" type="button" class="absolute right-4 top-4 flex size-10 items-center justify-center rounded-full border border-forest-900/15 bg-white text-xl focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold" aria-label="Fermer le Sanctuaire">×</button>
+                <p class="pr-12 text-[11px] uppercase tracking-[0.24em] text-mythic-gold">Le Sanctuaire des paramètres</p><h2 class="mt-2 pr-12 font-mythic text-2xl sm:text-3xl">Façonne ton identité</h2>
+                {{ form_start(profileForm, {attr: {class: 'mt-8 space-y-8'}}) }}
+                    <section aria-label="Informations personnelles"><div class="grid gap-5 sm:grid-cols-2">
+                        {% for field in [profileForm.pseudo, profileForm.firstName, profileForm.lastName] %}<div>{{ form_label(field, null, {label_attr: {class: 'block text-sm font-semibold'}}) }}{{ form_widget(field, {attr: {class: 'mt-2 w-full rounded-xl border border-forest-900/20 bg-white px-4 py-3 outline-none focus:border-mythic-gold focus:ring-2 focus:ring-mythic-gold/20'}}) }}<div class="mt-1 text-xs text-red-700">{{ form_errors(field) }}</div></div>{% endfor %}
+                        <div class="sm:col-span-2">{{ form_label(profileForm.motto, null, {label_attr: {class: 'block text-sm font-semibold'}}) }}{{ form_widget(profileForm.motto, {attr: {class: 'mt-2 w-full resize-none rounded-xl border border-forest-900/20 bg-white px-4 py-3 outline-none'}}) }}<p class="mt-1 text-xs text-slate-500">100 caractères maximum.</p><div class="text-xs text-red-700">{{ form_errors(profileForm.motto) }}</div></div>
+                        <div class="sm:col-span-2">{{ form_label(profileForm.avatarFile, null, {label_attr: {class: 'block text-sm font-semibold'}}) }}{{ form_widget(profileForm.avatarFile, {attr: {class: 'mt-2 block w-full rounded-xl border border-dashed border-forest-900/25 bg-white px-4 py-4 text-sm'}}) }}<p class="mt-1 text-xs text-slate-500">JPEG, PNG ou WebP — 2 Mo maximum.</p><div class="text-xs text-red-700">{{ form_errors(profileForm.avatarFile) }}</div></div>
+                    </div></section>
+                    <section class="border-t border-forest-900/10 pt-7" aria-labelledby="sanctuary-account-title"><h3 id="sanctuary-account-title" class="font-mythic text-lg">Mon compte</h3><div class="mt-4">{{ form_label(profileForm.email, null, {label_attr: {class: 'block text-sm font-semibold'}}) }}{{ form_widget(profileForm.email, {attr: {class: 'mt-2 w-full rounded-xl border border-forest-900/20 bg-white px-4 py-3 outline-none'}}) }}<div class="text-xs text-red-700">{{ form_errors(profileForm.email) }}</div></div></section>
+                    <section class="rounded-2xl border border-mythic-gold/20 bg-[#fffaf0] p-5" aria-labelledby="sanctuary-security-title"><h3 id="sanctuary-security-title" class="font-mythic text-base">Sécurité du Sanctuaire</h3><p class="mt-2 text-sm text-slate-600">La modification du mot de passe sera ouverte dans l’US35.</p></section>
+                    <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end"><button data-close-sanctuary type="button" class="rounded-full border border-forest-900/20 px-6 py-3 text-sm font-semibold">Annuler</button><button type="submit" class="rounded-full bg-mythic-gold px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-[#bd9424]">Confier mes changements</button></div>
+                {{ form_end(profileForm) }}
+            </div>
+        </dialog>
+
+        {% if initiationCeremony %}
+            <dialog id="initiation-ceremony" class="m-auto w-[calc(100%-2rem)] max-w-xl rounded-[2rem] border border-mythic-gold/40 bg-parchment p-0 text-forest-900 shadow-[0_24px_80px_rgba(10,35,29,0.4)] backdrop:bg-[#0b2c25]/75 backdrop:backdrop-blur-sm" aria-labelledby="ceremony-title" aria-describedby="ceremony-description">
+                <div class="relative overflow-hidden px-6 py-9 text-center sm:px-10 sm:py-12">
+                    <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-mythic-gold to-transparent" aria-hidden="true"></div>
+                    <p class="text-[11px] uppercase tracking-[0.24em] text-mythic-gold">Chemin de l’Initiation</p>
+                    <h2 id="ceremony-title" class="mt-3 font-mythic text-2xl sm:text-3xl">{{ initiationCeremony.direction == 'up' ? 'Un nouveau chemin s’ouvre à toi' : 'Ton chemin se transforme' }}</h2>
+                    {% if initiationCeremony.direction == 'down' %}<p class="mt-4 text-sm italic text-[#64756f]">Les chemins de la connaissance ne suivent jamais une ligne droite.</p>{% endif %}
+                    <div class="mx-auto mt-7 flex size-20 items-center justify-center rounded-full border-2 border-mythic-gold bg-[#fff8df] font-mythic text-2xl text-[#8b6814] shadow-[0_0_0_8px_rgba(211,170,50,0.1)]" aria-hidden="true">{{ initiationCeremony.rank.level }}</div>
+                    <p class="mt-6 font-mythic text-xl uppercase tracking-[0.06em] text-mythic-gold">{{ initiationCeremony.rank.title }}</p>
+                    <p class="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#56736b]">Niveau {{ initiationCeremony.rank.level }}</p>
+                    <p id="ceremony-description" class="mx-auto mt-5 max-w-md text-sm leading-6 text-[#4d6670]">{{ initiationCeremony.rank.meaning }}</p>
+                    <button id="close-initiation-ceremony" type="button" class="mt-8 rounded-full bg-mythic-gold px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#bd9424] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-forest-900">{{ initiationCeremony.direction == 'up' ? 'Continuer mon chemin' : 'Poursuivre mon chemin' }}</button>
+                </div>
+            </dialog>
+        {% endif %}
+    </main>
+    {% include '_partials/_bottom_nav.html.twig' %}
+    <script>(() => { const dialog = document.getElementById('profile-sanctuary'); const opener = document.getElementById('open-sanctuary'); const closeButtons = dialog?.querySelectorAll('#close-sanctuary, [data-close-sanctuary]') ?? []; opener?.addEventListener('click', () => dialog?.showModal()); closeButtons.forEach((button) => button.addEventListener('click', () => dialog?.close())); dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); }); {% if openSanctuary %}dialog?.showModal();{% endif %} const ceremony = document.getElementById('initiation-ceremony'); const ceremonyClose = document.getElementById('close-initiation-ceremony'); if (ceremony) { ceremony.showModal(); ceremonyClose?.focus(); ceremonyClose?.addEventListener('click', () => ceremony.close()); } })();</script>
+{% endblock %}
