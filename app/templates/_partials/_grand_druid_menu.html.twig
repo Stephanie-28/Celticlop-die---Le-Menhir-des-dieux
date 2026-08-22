@@ -1,7 +1,7 @@
 {% if is_granted('ROLE_ADMIN') %}
     {% set grandDruidNavigation = [
         {label: 'Tableau de bord', route: 'app_admin_dashboard', available: true},
-        {label: 'Divinités', available: false},
+        {label: 'Divinités', route: 'app_admin_dieu_index', available: true},
         {label: 'Panthéons', available: false},
         {label: 'Symboles', available: false},
         {label: 'Bestiaire', available: false},

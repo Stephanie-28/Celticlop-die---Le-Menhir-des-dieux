@@ -29,11 +29,12 @@
         <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p class="text-[9px] uppercase tracking-[0.22em] text-[#967321]">Raccourcis</p><h2 id="management-title" class="mt-1 font-mythic text-lg text-admin-forest">Actions de Gouvernance</h2></div><p class="text-xs italic text-[#71847d]">Chaque action deviendra disponible avec son véritable CRUD.</p></div>
         <div class="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
             {% for item in adminNavigation|slice(1) %}
-                <div class="flex aspect-square min-h-32 flex-col items-center justify-center gap-3 rounded-2xl border border-mythic-gold/25 bg-admin-ivory p-4 text-center shadow-[0_6px_18px_rgba(24,58,48,0.05)]">
+                {% set tag = item.createRoute|default(null) ? 'a' : 'div' %}
+                <{{ tag }}{% if item.createRoute|default(null) %} href="{{ path(item.createRoute) }}"{% endif %} class="flex aspect-square min-h-32 flex-col items-center justify-center gap-3 rounded-2xl border border-mythic-gold/25 bg-admin-ivory p-4 text-center shadow-[0_6px_18px_rgba(24,58,48,0.05)] {{ item.createRoute|default(null) ? 'transition hover:-translate-y-0.5 hover:border-mythic-gold focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-admin-forest' : '' }}">
                     <span class="flex size-11 items-center justify-center rounded-full border border-mythic-gold/30 bg-white text-xl text-[#98751f]" aria-hidden="true">✦</span>
                     <span class="font-semibold text-admin-forest">{{ item.actionLabel }}</span>
-                    <span class="rounded-full border border-[#a9862d]/25 bg-white px-2.5 py-1 text-[8px] font-semibold uppercase tracking-[0.12em] text-[#80651d]">À venir</span>
-                </div>
+                    <span class="rounded-full border border-[#a9862d]/25 bg-white px-2.5 py-1 text-[8px] font-semibold uppercase tracking-[0.12em] text-[#80651d]">{{ item.createRoute|default(null) ? 'Ouvrir' : 'À venir' }}</span>
+                </{{ tag }}>
             {% endfor %}
         </div>
     </section>

@@ -2,7 +2,7 @@
 
 {% set adminNavigation = [
     {label: 'Tableau de bord', key: 'dashboard', route: 'app_admin_dashboard', available: true},
-    {label: 'Divinités', actionLabel: 'Ajouter un Dieu', key: 'deities', available: false},
+    {label: 'Divinités', actionLabel: 'Ajouter un Dieu', key: 'deities', route: 'app_admin_dieu_index', createRoute: 'app_admin_dieu_new', available: true},
     {label: 'Panthéons', actionLabel: 'Ajouter un Panthéon', key: 'pantheons', available: false},
     {label: 'Symboles', actionLabel: 'Ajouter un Symbole', key: 'symbols', available: false},
     {label: 'Bestiaire', actionLabel: 'Ajouter un Animal sacré', key: 'animals', available: false},
@@ -12,6 +12,7 @@
     {label: 'Musique', actionLabel: 'Ajouter une Musique', key: 'music', available: false},
     {label: 'Quiz', actionLabel: 'Ajouter / gérer le Quiz', key: 'quiz', available: false}
 ] %}
+{% set currentAdminRoute = app.request.attributes.get('_route')|default('') %}
 
 {% block stylesheets %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,7 +60,8 @@
                 <nav class="mt-3 space-y-1.5">
                     {% for item in adminNavigation %}
                         {% if item.available %}
-                            <a href="{{ path(item.route) }}" class="flex items-center justify-between rounded-xl bg-white/12 px-3 py-3 text-sm font-semibold text-white ring-1 ring-white/12 transition hover:bg-white/18 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#f0d57e]" aria-current="page"><span>{{ item.label }}</span><span class="text-[#f0d57e]" aria-hidden="true">◆</span></a>
+                            {% set itemActive = item.key == 'dashboard' ? currentAdminRoute == 'app_admin_dashboard' : currentAdminRoute starts with 'app_admin_dieu_' %}
+                            <a href="{{ path(item.route) }}" class="flex items-center justify-between rounded-xl px-3 py-3 text-sm font-semibold text-white ring-1 ring-white/12 transition hover:bg-white/18 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#f0d57e] {{ itemActive ? 'bg-white/16' : 'bg-white/8' }}"{% if itemActive %} aria-current="page"{% endif %}><span>{{ item.label }}</span><span class="text-[#f0d57e]" aria-hidden="true">◆</span></a>
                         {% else %}
                             <span class="flex cursor-not-allowed items-center justify-between rounded-xl px-3 py-2.5 text-sm text-white/65" aria-disabled="true"><span>{{ item.label }}</span><span class="rounded-full border border-white/15 px-2 py-0.5 text-[8px] uppercase tracking-wider text-white/55">À venir</span></span>
                         {% endif %}
@@ -72,6 +74,9 @@
             </aside>
 
             <main class="min-w-0 flex-1 px-4 py-7 sm:px-7 sm:py-9 lg:px-10" id="admin-content">
+                {% for type, messages in app.flashes %}
+                    {% for message in messages %}<div class="mb-5 rounded-xl border px-4 py-3 text-sm {{ type == 'success' ? 'border-[#7fa18f] bg-[#edf8f1] text-[#245440]' : 'border-[#c78b8b] bg-[#fff2f1] text-[#854f55]' }}" role="status">{{ message }}</div>{% endfor %}
+                {% endfor %}
                 {% block admin_content %}{% endblock %}
             </main>
         </div>
