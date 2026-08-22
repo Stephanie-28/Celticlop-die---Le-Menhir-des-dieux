@@ -2,15 +2,15 @@
 
 {% set adminNavigation = [
     {label: 'Tableau de bord', key: 'dashboard', route: 'app_admin_dashboard', available: true},
-    {label: 'Divinités', key: 'deities', available: false},
-    {label: 'Panthéons', key: 'pantheons', available: false},
-    {label: 'Symboles', key: 'symbols', available: false},
-    {label: 'Bestiaire', key: 'animals', available: false},
-    {label: 'Mythes', key: 'myths', available: false},
-    {label: 'Chroniques', key: 'chronicles', available: false},
-    {label: 'Savoirs préservés', key: 'knowledge', available: false},
-    {label: 'Musique', key: 'music', available: false},
-    {label: 'Quiz', key: 'quiz', available: false}
+    {label: 'Divinités', actionLabel: 'Ajouter un Dieu', key: 'deities', available: false},
+    {label: 'Panthéons', actionLabel: 'Ajouter un Panthéon', key: 'pantheons', available: false},
+    {label: 'Symboles', actionLabel: 'Ajouter un Symbole', key: 'symbols', available: false},
+    {label: 'Bestiaire', actionLabel: 'Ajouter un Animal sacré', key: 'animals', available: false},
+    {label: 'Mythes', actionLabel: 'Ajouter un Mythe', key: 'myths', available: false},
+    {label: 'Chroniques', actionLabel: 'Ajouter une Chronique', key: 'chronicles', available: false},
+    {label: 'Savoirs préservés', actionLabel: 'Ajouter un Savoir préservé', key: 'knowledge', available: false},
+    {label: 'Musique', actionLabel: 'Ajouter une Musique', key: 'music', available: false},
+    {label: 'Quiz', actionLabel: 'Ajouter / gérer le Quiz', key: 'quiz', available: false}
 ] %}
 
 {% block stylesheets %}
@@ -92,3 +92,5 @@
         })();
     </script>
 {% endblock %}
+
+{% block grand_druid_tools %}{% endblock %}

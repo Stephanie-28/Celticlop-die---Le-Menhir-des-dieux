@@ -26,11 +26,12 @@
     </section>
 
     <section class="mt-9 rounded-[1.6rem] border border-[#d8d2bf] bg-white p-5 shadow-[0_10px_30px_rgba(24,58,48,0.06)] sm:p-7" aria-labelledby="management-title">
-        <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p class="text-[9px] uppercase tracking-[0.22em] text-[#967321]">Raccourcis</p><h2 id="management-title" class="mt-1 font-mythic text-lg text-admin-forest">Gestion du contenu</h2></div><p class="text-xs italic text-[#71847d]">Les outils seront ouverts progressivement, User Story par User Story.</p></div>
-        <div class="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p class="text-[9px] uppercase tracking-[0.22em] text-[#967321]">Raccourcis</p><h2 id="management-title" class="mt-1 font-mythic text-lg text-admin-forest">Actions de Gouvernance</h2></div><p class="text-xs italic text-[#71847d]">Chaque action deviendra disponible avec son véritable CRUD.</p></div>
+        <div class="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
             {% for item in adminNavigation|slice(1) %}
-                <div class="flex min-h-20 items-center justify-between rounded-xl border border-[#dfe3da] bg-[#f8f9f5] px-4 py-3 text-left">
-                    <span class="font-semibold text-admin-forest">{{ item.label }}</span>
+                <div class="flex aspect-square min-h-32 flex-col items-center justify-center gap-3 rounded-2xl border border-mythic-gold/25 bg-admin-ivory p-4 text-center shadow-[0_6px_18px_rgba(24,58,48,0.05)]">
+                    <span class="flex size-11 items-center justify-center rounded-full border border-mythic-gold/30 bg-white text-xl text-[#98751f]" aria-hidden="true">✦</span>
+                    <span class="font-semibold text-admin-forest">{{ item.actionLabel }}</span>
                     <span class="rounded-full border border-[#a9862d]/25 bg-white px-2.5 py-1 text-[8px] font-semibold uppercase tracking-[0.12em] text-[#80651d]">À venir</span>
                 </div>
             {% endfor %}

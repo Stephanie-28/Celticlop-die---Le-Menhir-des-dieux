@@ -23,6 +23,12 @@
 {% block body %}
     {% include '_partials/_header.html.twig' %}
 
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="fixed right-4 top-20 z-40 sm:right-7" aria-label="Outils d’administration de la fiche">
+            {% include 'admin/_partials/_edit_pencil.html.twig' with {contentType: 'la divinité', contentName: dieu.name} only %}
+        </div>
+    {% endif %}
+
     {% if dieu.name|lower == 'dagda' %}
         {% include 'public/dieu/_dagda_show.html.twig' with {dieu: dieu, dagdaContext: dagdaContext} only %}
     {% elseif usesUnifiedLayout %}
