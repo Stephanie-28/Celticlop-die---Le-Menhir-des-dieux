@@ -96,15 +96,15 @@ final class DieuType extends AbstractType
             ])
             ->add('sacredLevel', ChoiceType::class, [
                 'label' => 'Niveau sacré',
-                'help' => 'Le niveau sacré indique la notoriété de la divinité.',
+                'help' => 'Indique le niveau de notoriété historique et culturelle de cette divinité, et non sa puissance.',
                 'invalid_message' => 'Le niveau sacré doit être compris entre 1 et 5.',
                 'expanded' => true,
                 'choices' => [
-                    '★☆☆☆☆ — Très peu connue' => 1,
+                    '★☆☆☆☆ — Très obscure' => 1,
                     '★★☆☆☆ — Peu connue' => 2,
-                    '★★★☆☆ — Moyennement connue' => 3,
-                    '★★★★☆ — Connue' => 4,
-                    '★★★★★ — Très connue' => 5,
+                    '★★★☆☆ — Bien attestée' => 3,
+                    '★★★★☆ — Majeure' => 4,
+                    '★★★★★ — Emblématique' => 5,
                 ],
             ]);
     }
