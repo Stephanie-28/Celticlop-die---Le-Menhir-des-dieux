@@ -1,0 +1,22 @@
+{% set level = dieu.sacredLevel %}
+{% set levelLabels = {
+    1: 'Divinité très obscure',
+    2: 'Divinité peu connue',
+    3: 'Divinité bien attestée',
+    4: 'Divinité majeure',
+    5: 'Divinité emblématique'
+} %}
+{% set levelLabel = levelLabels[level]|default('Notoriété non renseignée') %}
+
+<div class="mt-5" aria-label="Niveau sacré : {{ level }} sur 5 — {{ levelLabel }}">
+    <p class="text-[9px] font-semibold uppercase tracking-[0.2em] text-celestial-600">Niveau sacré</p>
+    <div class="mt-2 flex items-center gap-1.5" aria-hidden="true">
+        {% for star in 1..5 %}
+            <svg viewBox="0 0 24 24" class="size-5 shrink-0 {{ star <= level ? 'text-mythic-gold' : 'text-celestial-100' }}" xmlns="http://www.w3.org/2000/svg">
+                <path d="m12 2.9 2.72 5.51 6.08.88-4.4 4.29 1.04 6.06L12 16.78l-5.44 2.86 1.04-6.06-4.4-4.29 6.08-.88L12 2.9Z" fill="currentColor" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>
+            </svg>
+        {% endfor %}
+    </div>
+    <p class="mt-1.5 text-xs font-medium text-celestial-800">{{ levelLabel }}</p>
+    <p class="mt-1 max-w-md text-[10px] leading-4 text-slate-400">Le Niveau sacré indique la notoriété historique et culturelle de cette divinité.</p>
+</div>
