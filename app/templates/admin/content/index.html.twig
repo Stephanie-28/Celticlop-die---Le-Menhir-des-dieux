@@ -7,7 +7,10 @@
         <p class="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#967321]">{{ userStory }}</p>
         <div class="mt-2 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div><h1 id="content-title" class="font-mythic text-2xl text-admin-forest sm:text-3xl">{{ title }}</h1><p class="mt-2 max-w-2xl text-sm leading-6 text-[#5c706a]">{{ description }}</p></div>
-            <a href="{{ path(newRoute) }}" class="inline-flex min-h-11 items-center justify-center rounded-full bg-admin-forest px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#1b5144] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold">{{ newLabel }}</a>
+            <div class="flex flex-wrap gap-2">
+                {% for action in secondaryActions|default([]) %}<a href="{{ path(action.route) }}" class="inline-flex min-h-11 items-center justify-center rounded-full border border-admin-forest/25 px-4 py-3 text-sm font-semibold text-admin-forest focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold">{{ action.label }}</a>{% endfor %}
+                <a href="{{ path(newRoute) }}" class="inline-flex min-h-11 items-center justify-center rounded-full bg-admin-forest px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#1b5144] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold">{{ newLabel }}</a>
+            </div>
         </div>
     </section>
 
