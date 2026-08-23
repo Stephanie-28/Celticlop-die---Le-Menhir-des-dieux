@@ -37,13 +37,13 @@
             </section>
 
             <section class="px-1 sm:px-2" aria-labelledby="favorites-title">
-                <div class="flex items-end justify-between gap-4 border-b border-[#cfd6d8] pb-3"><div><p class="text-[9px] uppercase tracking-[0.24em] text-[#9a7a27]">Trésors conservés</p><h2 id="favorites-title" class="mt-1 flex items-center gap-2 font-mythic text-xl text-[#344853] sm:text-2xl"><span class="text-mythic-gold" aria-hidden="true">★</span> Mes Favoris</h2></div><span class="text-[10px] italic text-slate-500">Aperçu bientôt disponible</span></div>
-                <div class="mt-5 space-y-6" aria-label="Aperçu des favoris à venir">
-                    {% for category in ['Dieux', 'Mythes', 'Symboles', 'Animaux', 'Musiques'] %}
-                        <section aria-labelledby="favorites-{{ loop.index }}">
-                            <h3 id="favorites-{{ loop.index }}" class="font-mythic text-sm uppercase tracking-[0.08em] text-[#526961]">{{ category }}</h3>
-                            <div class="mt-2 grid grid-cols-3 gap-2 sm:gap-3" aria-hidden="true">
-                                {% for item in 1..3 %}<div class="h-20 rounded-xl border border-[#e4dfd2] bg-white shadow-[0_5px_14px_rgba(45,60,66,0.06)]"></div>{% endfor %}
+                <div class="flex items-end justify-between gap-4 border-b border-[#cfd6d8] pb-3"><div><p class="text-[9px] uppercase tracking-[0.24em] text-[#9a7a27]">Trésors conservés</p><h2 id="favorites-title" class="mt-1 flex items-center gap-2 font-mythic text-xl text-[#344853] sm:text-2xl"><span class="text-mythic-gold" aria-hidden="true">★</span> Mes Favoris</h2></div><a href="{{ path('app_public_sanctuary') }}" class="text-[10px] font-semibold text-[#8a6a18] underline decoration-mythic-gold/60 underline-offset-4">Voir tout</a></div>
+                <div class="mt-5 space-y-6" aria-label="Aperçu des favoris">
+                    {% for key, group in favoriteGroups %}
+                        <section aria-labelledby="favorites-{{ key }}">
+                            <div class="flex items-center justify-between gap-3"><h3 id="favorites-{{ key }}" class="font-mythic text-sm uppercase tracking-[0.08em] text-[#526961]">{{ group.label }}</h3><a href="{{ path('app_public_sanctuary') }}#{{ key }}" class="text-[9px] text-[#8a6a18]">Voir tout</a></div>
+                            <div class="mt-2 grid grid-cols-3 gap-2 sm:gap-3">
+                                {% for item in group.items|slice(0, 3) %}<article class="min-w-0 overflow-hidden rounded-xl border border-[#e4dfd2] bg-white shadow-[0_5px_14px_rgba(45,60,66,0.06)]">{% if item.image %}<img src="{{ asset(item.image) }}" alt="" class="aspect-square w-full object-cover">{% endif %}<p class="truncate px-2 py-2 text-[10px] text-[#344853]">{{ item.label }}</p></article>{% else %}<p class="col-span-3 rounded-xl border border-dashed border-[#ddd7c8] px-3 py-5 text-center text-[10px] text-slate-400">Aucun favori.</p>{% endfor %}
                             </div>
                         </section>
                     {% endfor %}

@@ -7,6 +7,7 @@ use App\Form\ProfileType;
 use App\Repository\FavoriteRepository;
 use App\Service\AvatarUploader;
 use App\Service\InitiationPath;
+use App\Service\FavoriteCatalog;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -25,6 +26,7 @@ final class ProfileController extends AbstractController
         EntityManagerInterface $entityManager,
         AvatarUploader $avatarUploader,
         FavoriteRepository $favoriteRepository,
+        FavoriteCatalog $favoriteCatalog,
         InitiationPath $initiationPath,
     ): Response
     {
@@ -91,6 +93,7 @@ final class ProfileController extends AbstractController
             'currentInitiationRank' => $currentRank,
             'displayedInitiationRank' => $displayedRank,
             'initiationCeremony' => $ceremony,
+            'favoriteGroups' => $favoriteCatalog->forUser($user),
         ]);
     }
 

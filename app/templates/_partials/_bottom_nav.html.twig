@@ -2,8 +2,8 @@
 {% set navigationItems = [
     { key: 'home', label: 'Accueil', url: path('app_home'), active: currentRoute == 'app_home', available: true },
     { key: 'quiz', label: 'Quiz', url: path('app_quiz_index'), active: currentRoute starts with 'app_quiz_', available: true },
-    { key: 'myths', label: 'Mythes', url: '#', active: currentRoute starts with 'app_public_mythe_', available: false },
-    { key: 'relics', label: 'Reliques', url: '#', active: currentRoute starts with 'app_public_relique_', available: false },
+    { key: 'myths', label: 'Mythes', url: path('app_public_chronique_index'), active: currentRoute starts with 'app_public_chronique_', available: true },
+    { key: 'relics', label: 'Reliques', url: path('app_public_relique_index'), active: currentRoute starts with 'app_public_relique_', available: true },
     { key: 'encyclopedia', label: 'Encyclopédie', url: path('app_public_pantheon_all'), active: currentRoute starts with 'app_public_pantheon_' or currentRoute starts with 'app_public_dieu_', available: true },
     { key: 'music', label: 'Music', url: '#', active: currentRoute starts with 'app_public_music_', available: false }
 ] %}

@@ -1,0 +1,7 @@
+{% extends 'public/content/_layout.html.twig' %}
+{% block title %}{{ chronique.title }} — Chroniques Mythiques{% endblock %}
+{% block content %}
+    {% if is_granted('ROLE_ADMIN') %}<div class="mb-5 flex justify-end">{% include 'admin/_partials/_edit_pencil.html.twig' with {contentType: '', contentName: chronique.title, editUrl: path('app_admin_chronique_edit', {id: chronique.id})} only %}</div>{% endif %}
+    <article class="rounded-[1.75rem] bg-white px-6 py-9 shadow-[0_12px_35px_rgba(30,58,49,0.1)] sm:px-11 sm:py-12"><p class="text-[10px] uppercase tracking-[0.25em] text-mythic-gold">{{ chronique.mythe.title }}</p><h1 class="mt-3 font-mythic text-3xl text-celestial-800 sm:text-4xl">{{ chronique.title }}</h1><time class="mt-3 block text-xs text-slate-400">{{ chronique.publishedAt|date('d/m/Y') }}</time><div class="mt-8 whitespace-pre-line text-[15px] leading-8 text-slate-600">{{ chronique.content }}</div></article>
+    <a href="{{ path('app_public_chronique_index') }}" class="mt-7 inline-flex text-sm font-semibold text-[#8a6a18]">← Retour aux Chroniques</a>
+{% endblock %}

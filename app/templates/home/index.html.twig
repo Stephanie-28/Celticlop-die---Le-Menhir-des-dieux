@@ -121,10 +121,10 @@
 
             {% set druidArchives = {
                 description: 'Accédez au savoir numérisé du monde antique. Des écritures oghamiques à la géométrie sacrée, nos archives offrent un aperçu à la fois érudit et accessible de la vie celtique.',
-                objectsButtonText: 'Parcourir les objets',
-                objectsUrl: '#',
-                sacredSitesButtonText: 'Voir les sites sacrés',
-                sacredSitesUrl: '#'
+                objectsButtonText: 'Ouvrir les Archives',
+                objectsUrl: path('app_public_savoir_index'),
+                sacredSitesButtonText: 'Lire les Chroniques',
+                sacredSitesUrl: path('app_public_chronique_index')
             } %}
 
             {% include '_partials/_druid_archives_card.html.twig' with {
