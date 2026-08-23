@@ -3,14 +3,14 @@
 {% set adminNavigation = [
     {label: 'Tableau de bord', key: 'dashboard', route: 'app_admin_dashboard', available: true},
     {label: 'Divinités', actionLabel: 'Ajouter un Dieu', key: 'deities', route: 'app_admin_dieu_index', createRoute: 'app_admin_dieu_new', available: true},
-    {label: 'Panthéons', actionLabel: 'Ajouter un Panthéon', key: 'pantheons', available: false},
-    {label: 'Symboles', actionLabel: 'Ajouter un Symbole', key: 'symbols', available: false},
-    {label: 'Bestiaire', actionLabel: 'Ajouter un Animal sacré', key: 'animals', available: false},
-    {label: 'Mythes', actionLabel: 'Ajouter un Mythe', key: 'myths', available: false},
-    {label: 'Chroniques', actionLabel: 'Ajouter une Chronique', key: 'chronicles', available: false},
-    {label: 'Savoirs préservés', actionLabel: 'Ajouter un Savoir préservé', key: 'knowledge', available: false},
-    {label: 'Musique', actionLabel: 'Ajouter une Musique', key: 'music', available: false},
-    {label: 'Quiz', actionLabel: 'Ajouter / gérer le Quiz', key: 'quiz', available: false}
+    {label: 'Panthéons', actionLabel: 'Ajouter un Panthéon', key: 'pantheons', route: 'app_admin_pantheon_index', createRoute: 'app_admin_pantheon_new', available: true},
+    {label: 'Symboles', actionLabel: 'Ajouter un Symbole', key: 'symbols', route: 'app_admin_symbole_index', createRoute: 'app_admin_symbole_new', available: true},
+    {label: 'Bestiaire', actionLabel: 'Ajouter un Animal sacré', key: 'animals', route: 'app_admin_animal_index', createRoute: 'app_admin_animal_new', available: true},
+    {label: 'Mythes', actionLabel: 'Ajouter un Mythe', key: 'myths', route: 'app_admin_mythe_index', createRoute: 'app_admin_mythe_new', available: true},
+    {label: 'Chroniques', actionLabel: 'Ajouter une Chronique', key: 'chronicles', route: 'app_admin_chronique_index', createRoute: 'app_admin_chronique_new', available: true},
+    {label: 'Savoirs préservés', actionLabel: 'Ajouter un Savoir préservé', key: 'knowledge', route: 'app_admin_savoir_index', createRoute: 'app_admin_savoir_new', available: true},
+    {label: 'Musique', actionLabel: 'Ajouter une Musique', key: 'music', route: 'app_admin_music_index', createRoute: 'app_admin_music_new', available: true},
+    {label: 'Quiz', actionLabel: 'Ajouter / gérer le Quiz', key: 'quiz', route: 'app_admin_quiz_index', createRoute: 'app_admin_quiz_new', available: true}
 ] %}
 {% set currentAdminRoute = app.request.attributes.get('_route')|default('') %}
 
@@ -60,7 +60,7 @@
                 <nav class="mt-3 space-y-1.5">
                     {% for item in adminNavigation %}
                         {% if item.available %}
-                            {% set itemActive = item.key == 'dashboard' ? currentAdminRoute == 'app_admin_dashboard' : currentAdminRoute starts with 'app_admin_dieu_' %}
+                            {% set itemActive = item.key == 'dashboard' ? currentAdminRoute == 'app_admin_dashboard' : currentAdminRoute starts with (item.route|replace({'index': ''})) %}
                             <a href="{{ path(item.route) }}" class="flex items-center justify-between rounded-xl px-3 py-3 text-sm font-semibold text-white ring-1 ring-white/12 transition hover:bg-white/18 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#f0d57e] {{ itemActive ? 'bg-white/16' : 'bg-white/8' }}"{% if itemActive %} aria-current="page"{% endif %}><span>{{ item.label }}</span><span class="text-[#f0d57e]" aria-hidden="true">◆</span></a>
                         {% else %}
                             <span class="flex cursor-not-allowed items-center justify-between rounded-xl px-3 py-2.5 text-sm text-white/65" aria-disabled="true"><span>{{ item.label }}</span><span class="rounded-full border border-white/15 px-2 py-0.5 text-[8px] uppercase tracking-wider text-white/55">À venir</span></span>

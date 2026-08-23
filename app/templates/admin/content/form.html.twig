@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ isCreation ? newTitle : editTitle }} — Administration{% endblock %}
+
+{% block admin_content %}
+    {% set inputClass = 'mt-2 min-h-11 w-full rounded-xl border border-[#c9c4b3] bg-white px-3 py-2.5 text-sm text-admin-forest shadow-sm focus:border-mythic-gold focus:outline-none focus:ring-2 focus:ring-mythic-gold/20' %}
+    <section aria-labelledby="form-title">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#967321]">{{ userStory }}</p>
+        <h1 id="form-title" class="mt-2 font-mythic text-2xl text-admin-forest sm:text-3xl">{{ isCreation ? newTitle : editTitle }}</h1>
+        <p class="mt-2 max-w-2xl text-sm leading-6 text-[#5c706a]">Seuls les champs et relations réellement définis dans le modèle sont proposés.</p>
+    </section>
+
+    {{ form_start(form, {attr: {class: 'mt-7', novalidate: 'novalidate'}}) }}
+        <div class="rounded-[1.6rem] border border-[#d8d2bf] bg-white p-5 shadow-[0_10px_30px_rgba(24,58,48,0.06)] sm:p-7">
+            <div class="grid gap-5 lg:grid-cols-2">
+                {% for field in form %}
+                    {% if field.vars.name != '_token' %}
+                        <div class="{{ 'textarea' in field.vars.block_prefixes or field.vars.multiple|default(false) ? 'lg:col-span-2' : '' }}">
+                            {% if 'checkbox' in field.vars.block_prefixes %}
+                                <label class="flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border border-[#d8d2bf] bg-admin-ivory px-4 py-3 text-sm font-semibold text-admin-forest">{{ form_widget(field, {attr: {class: 'size-4 accent-[#123b31]'}}) }} {{ field.vars.label }}</label>
+                            {% else %}
+                                {{ form_label(field, null, {label_attr: {class: 'text-sm font-semibold text-admin-forest'}}) }}
+                                {{ form_widget(field, {attr: {class: inputClass}}) }}
+                            {% endif %}
+                            {% if field.vars.help %}<p class="mt-1 text-xs leading-5 text-[#71847d]">{{ field.vars.help }}</p>{% endif %}
+                            <div class="mt-1 text-xs text-[#984c54]">{{ form_errors(field) }}</div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {{ form_rest(form) }}
+            <div class="mt-7 flex flex-col-reverse gap-3 border-t border-[#ded8c7] pt-5 sm:flex-row sm:justify-end">
+                <a href="{{ path(indexRoute) }}" class="min-h-11 rounded-full border border-[#bcc8c1] px-5 py-3 text-center text-sm text-admin-forest hover:bg-admin-ivory focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold">Annuler</a>
+                <button type="submit" class="min-h-11 rounded-full bg-admin-forest px-5 py-3 text-sm font-semibold text-white shadow-md hover:bg-[#1b5144] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold">Enregistrer</button>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
