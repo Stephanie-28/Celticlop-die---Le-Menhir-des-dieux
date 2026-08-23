@@ -22,6 +22,11 @@
 
 {% block body %}
     {% include '_partials/_header.html.twig' %}
+    {% if is_granted('ROLE_ADMIN') and pantheonEntity %}
+        <div class="fixed right-4 top-20 z-40 sm:right-7" aria-label="Outils d’administration du panthéon">
+            {% include 'admin/_partials/_edit_pencil.html.twig' with {contentType: '', contentName: pantheonEntity.title, editUrl: path('app_admin_pantheon_edit', {id: pantheonEntity.id})} only %}
+        </div>
+    {% endif %}
     <main class="min-h-screen bg-[#fbfcfd] px-4 pb-28 pt-8 font-editorial text-celestial-800">
         <div class="mx-auto max-w-6xl">
             <h1 class="text-center font-mythic text-3xl sm:text-4xl">{{ pageTitle }}</h1>

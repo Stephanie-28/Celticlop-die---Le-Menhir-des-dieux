@@ -3,12 +3,17 @@
 namespace App\Controller;
 
 use App\Repository\DieuRepository;
+use App\Repository\PantheonsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class PublicPantheonController extends AbstractController
 {
+    public function __construct(private readonly PantheonsRepository $pantheonsRepository)
+    {
+    }
+
     #[Route('/pantheon', name: 'app_public_pantheon_all', methods: ['GET'])]
     public function all(DieuRepository $repository): Response
     {
@@ -35,7 +40,10 @@ final class PublicPantheonController extends AbstractController
 
     private function renderPantheon(DieuRepository $repository, ?string $pantheon, string $pageTitle): Response
     {
-        $queryBuilder = $repository->createQueryBuilder('d')->orderBy('d.name', 'ASC');
+        $queryBuilder = $repository->createQueryBuilder('d')
+            ->andWhere('d.isVisible = :visible')
+            ->setParameter('visible', true)
+            ->orderBy('d.name', 'ASC');
 
         if ($pantheon !== null) {
             $queryBuilder
@@ -49,6 +57,12 @@ final class PublicPantheonController extends AbstractController
             'dieux' => $queryBuilder->getQuery()->getResult(),
             'activePantheon' => $pantheon ?? 'all',
             'pageTitle' => $pageTitle,
+            'pantheonEntity' => $pantheon === null ? null : $this->pantheonsRepository->createQueryBuilder('p')
+                ->andWhere('LOWER(p.title) LIKE :pantheon')
+                ->setParameter('pantheon', '%'.$pantheon.'%')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getOneOrNullResult(),
         ]);
     }
 }

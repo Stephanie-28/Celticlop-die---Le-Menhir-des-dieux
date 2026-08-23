@@ -1,0 +1,50 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ isCreation ? 'Ajouter une Divinité' : 'Modifier ' ~ dieu.name }} — Administration{% endblock %}
+
+{% block admin_content %}
+    {% set inputClass = 'mt-2 min-h-11 w-full rounded-xl border border-[#cfd7cf] bg-white px-4 py-3 text-sm text-admin-forest shadow-inner outline-none transition focus:border-mythic-gold focus:ring-2 focus:ring-mythic-gold/25' %}
+    <section aria-labelledby="deity-form-title">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#967321]">US43 — Rituel éditorial</p>
+        <h1 id="deity-form-title" class="mt-2 font-mythic text-2xl text-admin-forest sm:text-3xl">{{ isCreation ? 'Ajouter une nouvelle divinité' : 'Modifier ' ~ dieu.name }}</h1>
+        <p class="mt-2 max-w-2xl text-sm leading-6 text-[#64766f]">Chaque information enregistrée nourrit directement la fiche publique correspondante.</p>
+
+        {{ form_start(form, {attr: {class: 'mt-7', novalidate: 'novalidate'}}) }}
+        {{ form_errors(form) }}
+        <div class="grid gap-6 xl:grid-cols-[minmax(0,1fr)_19rem]">
+            <div class="space-y-6">
+                <section class="rounded-2xl border border-[#ded8c7] bg-white p-5 shadow-[0_7px_22px_rgba(24,58,48,0.06)] sm:p-7" aria-labelledby="portrait-title">
+                    <h2 id="portrait-title" class="font-mythic text-lg text-admin-forest">Divin Portrait</h2>
+                    <div class="mt-5 grid gap-5 sm:grid-cols-[10rem_1fr] sm:items-center">
+                        <div class="mx-auto aspect-[3/4] w-36 overflow-hidden rounded-2xl border border-mythic-gold/30 bg-[#eef2ed] sm:mx-0 sm:w-40">{% if dieu.img %}<img src="{{ asset('uploads/dieux/' ~ dieu.img) }}" alt="Portrait actuel de {{ dieu.name }}" class="size-full object-contain object-center">{% else %}<span class="flex size-full items-center justify-center text-center text-xs text-[#71847d]">Emplacement du portrait divin</span>{% endif %}</div>
+                        <div><label class="text-sm font-semibold text-admin-forest" for="{{ form.portraitFile.vars.id }}">{{ form.portraitFile.vars.label }}</label>{{ form_widget(form.portraitFile, {attr: {class: inputClass, accept: 'image/jpeg,image/png,image/webp'}}) }}<p class="mt-2 text-xs leading-5 text-[#71847d]">{{ form.portraitFile.vars.help }}</p>{{ form_errors(form.portraitFile) }}</div>
+                    </div>
+                </section>
+
+                <section class="rounded-2xl border border-[#ded8c7] bg-white p-5 shadow-[0_7px_22px_rgba(24,58,48,0.06)] sm:p-7" aria-labelledby="identity-title">
+                    <h2 id="identity-title" class="font-mythic text-lg text-admin-forest">Identité de la Divinité</h2>
+                    <div class="mt-5 grid gap-5 md:grid-cols-2">
+                        <div><label class="text-sm font-semibold text-admin-forest" for="{{ form.name.vars.id }}">{{ form.name.vars.label }}</label>{{ form_widget(form.name, {attr: {class: inputClass}}) }}{{ form_errors(form.name) }}</div>
+                        <div><label class="text-sm font-semibold text-admin-forest" for="{{ form.title.vars.id }}">{{ form.title.vars.label }}</label>{{ form_widget(form.title, {attr: {class: inputClass}}) }}{{ form_errors(form.title) }}</div>
+                    </div>
+                    <fieldset class="mt-5"><legend class="text-sm font-semibold text-admin-forest">{{ form.pantheons.vars.label }}</legend><div class="mt-3 flex flex-wrap gap-2">{% for choice in form.pantheons %}<label class="cursor-pointer rounded-full border border-[#cfd7cf] bg-[#f8faf6] px-3 py-2 text-xs has-[:checked]:border-mythic-gold has-[:checked]:bg-[#fff7d9]">{{ form_widget(choice, {attr: {class: 'mr-1.5 accent-[#123b31]'}}) }} {{ choice.vars.label }}</label>{% endfor %}</div>{{ form_errors(form.pantheons) }}</fieldset>
+                    <div class="mt-5"><label class="text-sm font-semibold text-admin-forest" for="{{ form.description.vars.id }}">{{ form.description.vars.label }}</label>{{ form_widget(form.description, {attr: {class: inputClass}}) }}{{ form_errors(form.description) }}</div>
+                    <div class="mt-5"><label class="text-sm font-semibold text-admin-forest" for="{{ form.quote.vars.id }}">{{ form.quote.vars.label }}</label>{{ form_widget(form.quote, {attr: {class: inputClass}}) }}{{ form_errors(form.quote) }}</div>
+                </section>
+
+                {% for field in [form.symboles, form.animaux, form.mythes] %}
+                    <section class="rounded-2xl border border-[#ded8c7] bg-white p-5 shadow-[0_7px_22px_rgba(24,58,48,0.06)] sm:p-7">
+                        <fieldset><legend class="font-mythic text-base text-admin-forest">{{ field.vars.label }}</legend><div class="mt-4 flex max-h-64 flex-wrap gap-2 overflow-y-auto pr-1">{% for choice in field %}<label class="cursor-pointer rounded-full border border-[#d8d2bf] bg-admin-ivory px-3 py-2 text-xs has-[:checked]:border-mythic-gold has-[:checked]:bg-[#fff5cf]">{{ form_widget(choice, {attr: {class: 'mr-1.5 accent-[#123b31]'}}) }} {{ choice.vars.label }}</label>{% else %}<span class="text-sm italic text-[#71847d]">Aucune donnée disponible.</span>{% endfor %}</div>{{ form_errors(field) }}</fieldset>
+                    </section>
+                {% endfor %}
+            </div>
+
+            <aside class="space-y-5 xl:sticky xl:top-24 xl:self-start" aria-label="État de l’archive">
+                <section class="rounded-2xl border border-mythic-gold/25 bg-admin-ivory p-5"><p class="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#967321]">Archive Status</p><h2 class="mt-2 font-mythic text-base text-admin-forest">Publication</h2><label class="mt-5 flex min-h-12 cursor-pointer items-center justify-between gap-4 rounded-xl border border-[#d8d2bf] bg-white px-4 py-3"><span class="text-sm font-semibold text-admin-forest">{{ form.isVisible.vars.label }}</span><span class="relative inline-flex h-7 w-12 items-center">{{ form_widget(form.isVisible, {attr: {class: 'peer absolute inset-0 z-10 cursor-pointer opacity-0'}}) }}<span class="pointer-events-none absolute inset-0 rounded-full bg-[#c8d0ca] transition peer-checked:bg-admin-forest"></span><span class="pointer-events-none absolute left-1 size-5 rounded-full bg-white shadow transition peer-checked:translate-x-5"></span></span></label>{{ form_errors(form.isVisible) }}<fieldset class="mt-5"><legend class="text-sm font-semibold text-admin-forest">{{ form.sacredLevel.vars.label }}</legend><p class="mt-1 text-xs font-semibold text-[#80651d]">Notoriété historique et culturelle</p><p class="mt-1 text-xs leading-5 text-[#71847d]">{{ form.sacredLevel.vars.help }}</p><div class="mt-3 grid gap-2">{% for choice in form.sacredLevel %}<label class="cursor-pointer rounded-xl border border-[#d8d2bf] bg-white px-3 py-2 text-xs text-[#80651d] has-[:checked]:border-mythic-gold has-[:checked]:bg-[#fff6d7]">{{ form_widget(choice, {attr: {class: 'mr-2 accent-[#123b31]'}}) }} {{ choice.vars.label }}</label>{% endfor %}</div>{{ form_errors(form.sacredLevel) }}</fieldset><p class="mt-5 border-t border-[#d8d2bf] pt-4 text-xs text-[#71847d]">Reliques : relation absente du modèle actuel.</p></section>
+                <section class="rounded-2xl border border-[#ded8c7] bg-white p-5"><label class="text-sm font-semibold text-admin-forest" for="{{ form.music.vars.id }}">{{ form.music.vars.label }}</label>{{ form_widget(form.music, {attr: {class: inputClass}}) }}{{ form_errors(form.music) }}</section>
+                <div class="grid gap-3"><button type="submit" class="min-h-12 rounded-full bg-admin-forest px-5 py-3 text-sm font-semibold text-white shadow-md hover:bg-[#1b5144] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold">{{ isCreation ? 'Enregistrer la Divinité' : 'Enregistrer les modifications' }}</button><a href="{{ isCreation ? path('app_admin_dieu_index') : path('app_public_dieu_show', {id: dieu.id}) }}" class="min-h-11 rounded-full border border-[#bcc8c1] px-5 py-3 text-center text-sm text-admin-forest hover:bg-white focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold">Annuler</a></div>
+            </aside>
+        </div>
+        {{ form_end(form) }}
+    </section>
+{% endblock %}

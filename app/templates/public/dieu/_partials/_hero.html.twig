@@ -11,6 +11,8 @@
                 class="block h-auto w-full object-contain object-center"
             >
 
+            {% include 'public/dieu/_partials/_sacred_level.html.twig' with {dieu: dieu, overlay: true} only %}
+
             {% if dieu.quote is not empty %}
                 <div class="absolute right-[3%] bottom-[5%] z-10 flex w-fit max-w-[62%] items-center justify-center rounded-[50%] border-2 border-mythic-gold/55 bg-white/85 px-5 py-5 shadow-[0_3px_10px_rgba(52,87,109,0.08)] backdrop-blur-[1px] sm:px-6 sm:py-6">
                     <p class="relative text-center font-editorial text-[14px] leading-relaxed italic text-celestial-800 sm:text-[15px]">« {{ dieu.quote }} »</p>
@@ -25,5 +27,8 @@
         {% endif %}
         <h1 id="{{ heroTitleId }}" class="mt-3 font-mythic text-3xl uppercase text-celestial-800 sm:text-4xl">{{ heroName }}</h1>
         <p class="mt-2 text-sm italic text-mythic-gold sm:text-base">{{ dieu.title }}</p>
+        {% if not dieu.img %}
+            {% include 'public/dieu/_partials/_sacred_level.html.twig' with {dieu: dieu} only %}
+        {% endif %}
     </div>
 </section>

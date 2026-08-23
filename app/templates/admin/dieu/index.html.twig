@@ -1,0 +1,32 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Divinités — Administration{% endblock %}
+
+{% block admin_content %}
+    <section aria-labelledby="deities-title">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div><p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#967321]">US43 — Archives divines</p><h1 id="deities-title" class="mt-2 font-mythic text-2xl text-admin-forest sm:text-3xl">Gérer les Divinités</h1><p class="mt-2 text-sm text-[#64766f]">{{ dieux|length }} figures conservées dans les panthéons de Celticlopédie.</p></div>
+            <a href="{{ path('app_admin_dieu_new') }}" class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-admin-forest px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#1b5144] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold"><span aria-hidden="true">＋</span> Ajouter une Divinité</a>
+        </div>
+
+        <div class="mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {% for dieu in dieux %}
+                <article class="overflow-hidden rounded-2xl border border-[#ded8c7] bg-white shadow-[0_7px_22px_rgba(24,58,48,0.07)]">
+                    <div class="flex min-h-40 gap-4 p-4">
+                        <div class="h-32 w-24 shrink-0 overflow-hidden rounded-xl border border-mythic-gold/20 bg-[#eef2ed]">
+                            {% if dieu.img %}<img src="{{ asset('uploads/dieux/' ~ dieu.img) }}" alt="Portrait de {{ dieu.name }}" class="size-full object-cover object-top">{% else %}<span class="flex size-full items-center justify-center font-mythic text-2xl text-[#9b8e6d]" aria-label="Aucun portrait">{{ dieu.name|first|upper }}</span>{% endif %}
+                        </div>
+                        <div class="min-w-0 flex-1"><div class="flex flex-wrap items-center gap-2"><h2 class="font-mythic text-lg text-admin-forest">{{ dieu.name }}</h2><span class="rounded-full px-2 py-1 text-[8px] font-semibold uppercase tracking-wider {{ dieu.visible ? 'bg-[#eaf6ee] text-[#2d654b]' : 'bg-[#f2ecec] text-[#87555a]' }}">{{ dieu.visible ? 'Visible' : 'Masquée' }}</span></div><p class="mt-1 text-xs italic text-[#98751f]">{{ dieu.title }}</p><p class="mt-2 text-sm tracking-[0.08em] text-mythic-gold" aria-label="Niveau de notoriété : {{ dieu.sacredLevel }} sur 5">{% for star in 1..5 %}{{ star <= dieu.sacredLevel ? '★' : '☆' }}{% endfor %}</p><p class="mt-3 text-[10px] uppercase tracking-[0.13em] text-[#71847d]">{{ dieu.pantheons is empty ? 'Panthéon non renseigné' : dieu.pantheons|map(p => p.title)|join(' · ') }}</p><p class="mt-3 line-clamp-2 text-xs leading-5 text-[#64766f]">{{ dieu.description }}</p></div>
+                    </div>
+                    <div class="grid grid-cols-3 border-t border-[#e5e1d5] text-center text-xs">
+                        <a href="{{ path('app_public_dieu_show', {id: dieu.id}) }}" class="min-h-11 px-2 py-3 text-admin-forest hover:bg-[#f7f8f4] focus-visible:outline-3 focus-visible:outline-inset focus-visible:outline-mythic-gold">Voir la fiche</a>
+                        <a href="{{ path('app_admin_dieu_edit', {id: dieu.id}) }}" class="min-h-11 border-x border-[#e5e1d5] px-2 py-3 font-semibold text-[#80651d] hover:bg-[#fff9e8] focus-visible:outline-3 focus-visible:outline-inset focus-visible:outline-mythic-gold">Modifier</a>
+                        <form method="post" action="{{ path('app_admin_dieu_delete', {id: dieu.id}) }}" onsubmit="return confirm('Retirer {{ dieu.name|e('js') }} des archives ?');"><input type="hidden" name="_token" value="{{ csrf_token('delete-dieu-' ~ dieu.id) }}"><button type="submit" class="min-h-11 w-full px-2 py-3 text-[#98565b] hover:bg-[#fff3f2] focus-visible:outline-3 focus-visible:outline-inset focus-visible:outline-[#98565b]" aria-label="Supprimer {{ dieu.name }}">Supprimer</button></form>
+                    </div>
+                </article>
+            {% else %}
+                <div class="col-span-full rounded-2xl border border-dashed border-mythic-gold/40 bg-admin-ivory p-10 text-center"><p class="font-mythic text-admin-forest">Les archives divines sont encore vides.</p><a href="{{ path('app_admin_dieu_new') }}" class="mt-4 inline-flex text-sm font-semibold text-[#80651d] underline-offset-4 hover:underline">Ajouter la première divinité</a></div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

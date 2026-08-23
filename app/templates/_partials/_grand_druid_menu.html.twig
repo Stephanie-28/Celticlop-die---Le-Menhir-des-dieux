@@ -1,0 +1,44 @@
+{% if is_granted('ROLE_ADMIN') %}
+    {% set grandDruidNavigation = [
+        {label: 'Tableau de bord', route: 'app_admin_dashboard', available: true},
+        {label: 'Divinités', route: 'app_admin_dieu_index', available: true},
+        {label: 'Panthéons', available: false},
+        {label: 'Symboles', available: false},
+        {label: 'Bestiaire', available: false},
+        {label: 'Mythes', available: false},
+        {label: 'Chroniques', available: false},
+        {label: 'Savoirs préservés', available: false},
+        {label: 'Musique', available: false},
+        {label: 'Quiz', available: false}
+    ] %}
+
+    <style>
+        .grand-druid-launcher{position:fixed;top:5.25rem;left:1rem;z-index:80;width:3rem;height:3rem;border:1px solid rgba(211,170,50,.75);border-radius:999px;background:#123b31;color:#f4d879;box-shadow:0 7px 22px rgba(18,59,49,.28);display:grid;place-items:center;cursor:pointer}.grand-druid-launcher:focus-visible,.grand-druid-panel a:focus-visible,.grand-druid-close:focus-visible{outline:3px solid #d3aa32;outline-offset:3px}.grand-druid-backdrop{position:fixed;inset:0;z-index:81;background:rgba(5,25,21,.58);backdrop-filter:blur(2px)}.grand-druid-panel{position:fixed;inset:0 auto 0 0;z-index:82;width:min(21rem,90vw);padding:1.25rem;background:#123b31;color:#fff;box-shadow:12px 0 35px rgba(5,25,21,.3);font-family:Lora,Georgia,serif;overflow-y:auto}.grand-druid-panel[hidden],.grand-druid-backdrop[hidden]{display:none}.grand-druid-panel-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.14)}.grand-druid-panel-title{margin:0;color:#f4d879;font:400 .9rem Metamorphous,Georgia,serif}.grand-druid-close{width:2.75rem;height:2.75rem;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:transparent;color:#fff;font-size:1.4rem;cursor:pointer}.grand-druid-list{display:grid;gap:.35rem;margin:1.2rem 0;padding:0;list-style:none}.grand-druid-list a,.grand-druid-list span{display:flex;align-items:center;justify-content:space-between;min-height:2.75rem;padding:.65rem .8rem;border-radius:.75rem;color:#fff;text-decoration:none;font-size:.9rem}.grand-druid-list a{background:rgba(255,255,255,.1)}.grand-druid-list a:hover{background:rgba(255,255,255,.17)}.grand-druid-list span{color:rgba(255,255,255,.62)}.grand-druid-status{font-size:.55rem;text-transform:uppercase;letter-spacing:.08em}.grand-druid-public{display:block;margin-top:1rem;padding:.75rem;border:1px solid rgba(244,216,121,.4);border-radius:.75rem;color:#f4d879;text-align:center;text-decoration:none;font-size:.8rem}@media (min-width:768px){.grand-druid-launcher{top:5.75rem;left:1.5rem}}@media (prefers-reduced-motion:reduce){.grand-druid-panel,.grand-druid-backdrop{scroll-behavior:auto}}
+    </style>
+
+    <button class="grand-druid-launcher" id="grand-druid-menu-open" type="button" aria-controls="grand-druid-menu" aria-expanded="false" aria-label="Ouvrir les outils du Grand Druide">
+        <svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M5 7h14M5 12h14M5 17h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="5" cy="7" r="1" fill="currentColor"/><circle cx="19" cy="17" r="1" fill="currentColor"/></svg>
+    </button>
+    <div class="grand-druid-backdrop" id="grand-druid-menu-backdrop" hidden></div>
+    <aside class="grand-druid-panel" id="grand-druid-menu" aria-label="Outils du Grand Druide" hidden>
+        <div class="grand-druid-panel-head"><h2 class="grand-druid-panel-title">Sanctuaire du Grand Druide</h2><button class="grand-druid-close" id="grand-druid-menu-close" type="button" aria-label="Fermer les outils du Grand Druide">×</button></div>
+        <ul class="grand-druid-list">
+            {% for item in grandDruidNavigation %}
+                <li>{% if item.available %}<a href="{{ path(item.route) }}">{{ item.label }} <span aria-hidden="true">◆</span></a>{% else %}<span aria-disabled="true">{{ item.label }} <small class="grand-druid-status">À venir</small></span>{% endif %}</li>
+            {% endfor %}
+        </ul>
+        <a class="grand-druid-public" href="{{ path('app_home') }}">Retour au site</a>
+    </aside>
+    <script>
+        (() => {
+            const open = document.getElementById('grand-druid-menu-open');
+            const close = document.getElementById('grand-druid-menu-close');
+            const panel = document.getElementById('grand-druid-menu');
+            const backdrop = document.getElementById('grand-druid-menu-backdrop');
+            const show = () => { panel.hidden = false; backdrop.hidden = false; open.setAttribute('aria-expanded', 'true'); close.focus(); };
+            const hide = () => { panel.hidden = true; backdrop.hidden = true; open.setAttribute('aria-expanded', 'false'); open.focus(); };
+            open.addEventListener('click', show); close.addEventListener('click', hide); backdrop.addEventListener('click', hide);
+            document.addEventListener('keydown', event => { if (event.key === 'Escape' && !panel.hidden) hide(); });
+        })();
+    </script>
+{% endif %}
