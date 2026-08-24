@@ -6,7 +6,9 @@ use App\Entity\Chronique;
 use App\Entity\Savoir;
 use App\Entity\User;
 use App\Repository\ChroniqueRepository;
+use App\Repository\AnimalRepository;
 use App\Repository\SavoirRepository;
+use App\Repository\SymboleRepository;
 use App\Service\FavoriteCatalog;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,9 +46,12 @@ final class PublicContentController extends AbstractController
     }
 
     #[Route('/reliques', name: 'app_public_relique_index', methods: ['GET'])]
-    public function reliques(): Response
+    public function reliques(SymboleRepository $symboleRepository, AnimalRepository $animalRepository): Response
     {
-        return $this->render('public/content/reliques.html.twig');
+        return $this->render('public/content/reliques.html.twig', [
+            'symboles' => $symboleRepository->findBy([], ['name' => 'ASC']),
+            'animaux' => $animalRepository->findBy([], ['name' => 'ASC']),
+        ]);
     }
 
     #[IsGranted('ROLE_USER')]
