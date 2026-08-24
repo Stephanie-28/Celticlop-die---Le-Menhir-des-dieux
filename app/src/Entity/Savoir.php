@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\SavoirEditorialType;
 use App\Repository\SavoirRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -19,6 +20,12 @@ class Savoir
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $summary = null;
+
+    #[ORM\Column(length: 20, enumType: SavoirEditorialType::class)]
+    private SavoirEditorialType $editorialType = SavoirEditorialType::OFFICIEL;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $img = null;
@@ -54,6 +61,30 @@ class Savoir
     public function setContent(string $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getSummary(): ?string
+    {
+        return $this->summary;
+    }
+
+    public function setSummary(?string $summary): static
+    {
+        $this->summary = $summary;
+
+        return $this;
+    }
+
+    public function getEditorialType(): SavoirEditorialType
+    {
+        return $this->editorialType;
+    }
+
+    public function setEditorialType(SavoirEditorialType $editorialType): static
+    {
+        $this->editorialType = $editorialType;
 
         return $this;
     }

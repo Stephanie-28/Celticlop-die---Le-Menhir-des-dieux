@@ -16,6 +16,24 @@ class SavoirRepository extends ServiceEntityRepository
         parent::__construct($registry, Savoir::class);
     }
 
+    public function clearFocusExcept(?int $savoirId): void
+    {
+        $query = $this->createQueryBuilder('s')
+            ->update()
+            ->set('s.isFocus', ':disabled')
+            ->where('s.isFocus = :enabled')
+            ->setParameter('disabled', false)
+            ->setParameter('enabled', true);
+
+        if ($savoirId !== null) {
+            $query
+                ->andWhere('s.id != :savoirId')
+                ->setParameter('savoirId', $savoirId);
+        }
+
+        $query->getQuery()->execute();
+    }
+
     //    /**
     //     * @return Savoir[] Returns an array of Savoir objects
     //     */
