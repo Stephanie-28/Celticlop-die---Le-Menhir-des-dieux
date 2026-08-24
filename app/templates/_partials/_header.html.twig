@@ -1,5 +1,10 @@
 <header class="border-b border-slate-200 bg-white font-editorial" aria-label="En-tête principal">
     <div class="mx-auto flex h-14 max-w-6xl items-center px-4">
+        {% if is_granted('ROLE_ADMIN') %}
+            <button id="grand-druid-menu-open" type="button" class="mr-2 flex size-9 shrink-0 items-center justify-center rounded-lg border border-mythic-gold/70 bg-[#123b31] text-[#f4d879] shadow-sm transition hover:bg-[#194c40] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold sm:mr-3" aria-controls="grand-druid-menu" aria-expanded="false" aria-label="Ouvrir les outils du Grand Druide">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="size-5"><path d="M5 7h14M5 12h14M5 17h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="5" cy="7" r="1" fill="currentColor"/><circle cx="19" cy="17" r="1" fill="currentColor"/></svg>
+            </button>
+        {% endif %}
         <a href="{{ path('app_home') }}" class="flex min-w-0 items-center gap-2" aria-label="Le Menhir des Dieux — Accueil">
             <img src="{{ asset('images/logo-menhir-officiel.png') }}" alt="" class="h-11 w-auto shrink-0 object-contain" aria-hidden="true">
             <span class="truncate font-mythic text-[13px] text-celestial-800 sm:text-base">Le Menhir des Dieux</span>
