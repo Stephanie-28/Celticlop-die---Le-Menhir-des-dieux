@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Chronique;
 use App\Entity\Savoir;
 use App\Entity\User;
+use App\Enum\SavoirEditorialType;
 use App\Repository\ChroniqueRepository;
 use App\Repository\AnimalRepository;
 use App\Repository\SavoirRepository;
@@ -20,8 +21,28 @@ final class PublicContentController extends AbstractController
     #[Route('/archives-du-druide', name: 'app_public_savoir_index', methods: ['GET'])]
     public function savoirIndex(SavoirRepository $repository): Response
     {
+        $dossierOrder = ['Parchemins Anciens', 'Alphabet Ogham', "Secrets d'Avalon", 'Prophéties', 'Sagesse Druidique'];
+        $dossiersByTitle = [];
+        foreach ($repository->findByEditorialType(SavoirEditorialType::DOSSIER) as $dossier) {
+            $dossiersByTitle[$dossier->getTitle()] = $dossier;
+        }
+
         return $this->render('public/content/savoirs.html.twig', [
-            'savoirs' => $repository->findBy([], ['isFocus' => 'DESC', 'createdAt' => 'DESC']),
+            'dossiers' => array_values(array_filter(array_map(
+                static fn (string $title): ?Savoir => $dossiersByTitle[$title] ?? null,
+                $dossierOrder,
+            ))),
+            'focus' => $repository->findFocus(),
+        ]);
+    }
+
+    #[Route('/archives-du-druide/bibliotheque', name: 'app_public_savoir_library', methods: ['GET'])]
+    public function savoirLibrary(SavoirRepository $repository): Response
+    {
+        return $this->render('public/content/savoir_library.html.twig', [
+            'officialSavoirs' => $repository->findByEditorialType(SavoirEditorialType::OFFICIEL),
+            'discoveries' => $repository->findByEditorialType(SavoirEditorialType::DECOUVERTE),
+            'dossiers' => $repository->findByEditorialType(SavoirEditorialType::DOSSIER),
         ]);
     }
 

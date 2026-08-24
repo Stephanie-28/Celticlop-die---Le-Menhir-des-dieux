@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Savoir;
+use App\Enum\SavoirEditorialType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -32,6 +33,17 @@ class SavoirRepository extends ServiceEntityRepository
         }
 
         $query->getQuery()->execute();
+    }
+
+    /** @return Savoir[] */
+    public function findByEditorialType(SavoirEditorialType $type): array
+    {
+        return $this->findBy(['editorialType' => $type], ['createdAt' => 'DESC', 'title' => 'ASC']);
+    }
+
+    public function findFocus(): ?Savoir
+    {
+        return $this->findOneBy(['isFocus' => true], ['createdAt' => 'DESC']);
     }
 
     //    /**
