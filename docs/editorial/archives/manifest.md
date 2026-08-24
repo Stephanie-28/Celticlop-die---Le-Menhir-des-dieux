@@ -119,6 +119,18 @@ Les trois statuts `DUPLICATE` ci-dessus proviennent du signalement documentaire 
 | Ancien Sanctuaire | PDF VIII | LEGACY_SOURCE_ONLY | FULL | UNIQUE | Mon Sanctuaire actuel | Ne pas modifier |
 | Ancien Profil de l'Initié | PDF IX | LEGACY_SOURCE_ONLY | FULL | UNIQUE | Profil actuel | Ne pas modifier |
 
+## Décision d'interface pour l'étape d'intégration
+
+`UI_ARCHIVES_SAVOIRS: CAROUSEL_HORIZONTAL`
+
+- La section « Savoirs Préservés » présente une rangée horizontale glissante de cinq portes d'entrée, dans cet ordre : Parchemins Anciens, Alphabet Ogham, Secrets d'Avalon, Prophéties, Sagesse Druidique.
+- Sur mobile, une carte principale et une amorce de la suivante restent visibles ; seul le carrousel défile horizontalement.
+- Sur tablette et desktop, plusieurs cartes peuvent être visibles, tout en conservant le défilement horizontal si nécessaire.
+- Le comportement doit privilégier `overflow-x-auto`, `flex-nowrap` et le scroll snap, sans dépendance JavaScript lourde.
+- Le lien « Tout voir » reste distinct du carrousel et mène à la bibliothèque complète des Savoirs.
+- La valeur `GRID` est explicitement rejetée pour cette section.
+- Cette décision est documentaire uniquement : aucun template n'est modifié pendant l'étape de sécurisation.
+
 ## Contrôles et divergences
 
 - **12/12** Savoirs officiels inventoriés ; 12 résumés, 12 corps longs manquants.
