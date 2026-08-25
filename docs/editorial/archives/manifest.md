@@ -1,5 +1,7 @@
 # Manifest du corpus Archives
 
+Source complémentaire autorisée : `Archives_du_Druide_Documentation_Complete_Codex.pdf` (110 pages).
+
 ## Légende
 
 - **Texte long** : `FULL`, `SUMMARY_ONLY`, `MISSING`.
@@ -10,18 +12,18 @@
 
 | Titre | Source | Type actuel | Texte long | Doublon | Destination future | Action |
 |---|---|---|---|---|---|---|
-| La Quête du Graal Celte | PDF VII.1 | SAVOIR_OFFICIEL | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| Les Cycles Arthuriens et leurs Racines Celtiques | PDF VII.2 | SAVOIR_OFFICIEL | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| La Femme dans la Société Celtique | PDF VII.3 | SAVOIR_OFFICIEL | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| Les Druides — Mythes et Réalités | PDF VII.4 | SAVOIR_OFFICIEL | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| La Mort et l'Au-delà dans la Pensée Celtique | PDF VII.5 | SAVOIR_OFFICIEL | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| Les Vikings et les Celtes — Rencontres et Influences | PDF VII.6 | SAVOIR_OFFICIEL | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| L'Héritage Celtique dans la Culture Moderne | PDF VII.7 | SAVOIR_OFFICIEL | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| Les Fomoriens — Les Ennemis des Dieux | PDF VII.8 | SAVOIR_OFFICIEL | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| La Souveraineté Sacrée — Le Roi et la Terre | PDF VII.9 | SAVOIR_OFFICIEL | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| Les Celtes et Rome — Conquête et Résistance | PDF VII.10 | SAVOIR_OFFICIEL | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| La Transmission Orale — Comment les Mythes Ont Survécu | PDF VII.11 | SAVOIR_OFFICIEL | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| Le Renouveau Celtique — De la Renaissance à Aujourd'hui | PDF VII.12 | SAVOIR_OFFICIEL | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
+| La Quête du Graal Celte | PDF VII.1 | SAVOIR_OFFICIEL | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| Les Cycles Arthuriens et leurs Racines Celtiques | PDF VII.2 | SAVOIR_OFFICIEL | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| La Femme dans la Société Celtique | PDF VII.3 | SAVOIR_OFFICIEL | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| Les Druides — Mythes et Réalités | PDF VII.4 | SAVOIR_OFFICIEL | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| La Mort et l'Au-delà dans la Pensée Celtique | PDF VII.5 | SAVOIR_OFFICIEL | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| Les Vikings et les Celtes — Rencontres et Influences | PDF VII.6 | SAVOIR_OFFICIEL | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| L'Héritage Celtique dans la Culture Moderne | PDF VII.7 | SAVOIR_OFFICIEL | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| Les Fomoriens — Les Ennemis des Dieux | PDF VII.8 | SAVOIR_OFFICIEL | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| La Souveraineté Sacrée — Le Roi et la Terre | PDF VII.9 | SAVOIR_OFFICIEL | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| Les Celtes et Rome — Conquête et Résistance | PDF VII.10 | SAVOIR_OFFICIEL | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| La Transmission Orale — Comment les Mythes Ont Survécu | PDF VII.11 | SAVOIR_OFFICIEL | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| Le Renouveau Celtique — De la Renaissance à Aujourd'hui | PDF VII.12 | SAVOIR_OFFICIEL | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
 
 ## Dernières Découvertes
 
@@ -38,14 +40,14 @@
 | Le Code d'Honneur des Fianna | PDF V.9 | SAVOIR_DECOUVERTE | SUMMARY_ONLY | DUPLICATE | Archives du Druide | Doublon brut signalé ; conserver occurrence canonique |
 | Les Trois Fonctions Sacrées | PDF V.10 | SAVOIR_DECOUVERTE | SUMMARY_ONLY | DUPLICATE | Archives du Druide | Doublon brut signalé ; conserver occurrence canonique |
 | Les Portes de l'Autre Monde | PDF V.11 | SAVOIR_DECOUVERTE | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| Le Langage Secret des Arbres | PDF V.12 | SAVOIR_DECOUVERTE | SUMMARY_ONLY | PARTIAL_OVERLAP | Archives du Druide | Garder distinct du dossier Ogham |
+| Le Langage Secret des Arbres | PDF V.12 | SAVOIR_DECOUVERTE | FULL | PARTIAL_OVERLAP | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
 | Les Triades Celtiques | PDF V.13 | SAVOIR_DECOUVERTE | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
 | L'Art de la Forge Druidique | PDF V.14 | SAVOIR_DECOUVERTE | SUMMARY_ONLY | DUPLICATE | Archives du Druide | Doublon brut signalé ; conserver occurrence canonique |
 | Les Nombres Sacrés | PDF V.15 | SAVOIR_DECOUVERTE | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| La Musique des Sphères Celtiques | PDF V.16 | SAVOIR_DECOUVERTE | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| Les Rites de Passage Celtiques | PDF V.17 | SAVOIR_DECOUVERTE | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| La Médecine des Druides | PDF V.18 | SAVOIR_DECOUVERTE | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
-| Les Inscriptions Sacrées de Gaule | PDF V.19 | SAVOIR_DECOUVERTE | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
+| La Musique des Sphères Celtiques | PDF V.16 | SAVOIR_DECOUVERTE | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| Les Rites de Passage Celtiques | PDF V.17 | SAVOIR_DECOUVERTE | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| La Médecine des Druides | PDF V.18 | SAVOIR_DECOUVERTE | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
+| Les Inscriptions Sacrées de Gaule | PDF V.19 | SAVOIR_DECOUVERTE | FULL | UNIQUE | Archives du Druide | Texte long réintégré depuis le PDF complémentaire |
 | L'Astronomie Druidique | PDF V.20 | SAVOIR_DECOUVERTE | SUMMARY_ONLY | UNIQUE | Archives du Druide | Conserver résumé ; rechercher texte long |
 
 Les trois statuts `DUPLICATE` ci-dessus proviennent du signalement documentaire fourni. Une seule occurrence est matériellement présente dans le PDF accessible ; les autres fichiers bruts n'étant pas disponibles, aucune comparaison mot à mot supplémentaire n'est possible.
@@ -54,10 +56,10 @@ Les trois statuts `DUPLICATE` ci-dessus proviennent du signalement documentaire 
 
 | Titre | Source | Type actuel | Texte long | Doublon | Destination future | Action |
 |---|---|---|---|---|---|---|
-| Parchemins Anciens | PDF VI.1 | DOSSIER_ARCHIVES | FULL | UNIQUE | Savoirs Préservés | Porte d'entrée éditoriale |
-| Alphabet Ogham | PDF VI.2 | DOSSIER_ARCHIVES | FULL | PARTIAL_OVERLAP | Savoirs Préservés | Dossier général / vitrine |
-| Secrets d'Avalon | PDF VI.3 | DOSSIER_ARCHIVES | FULL | UNIQUE | Savoirs Préservés | Porte d'entrée éditoriale |
-| Prophéties | PDF VI.4 | DOSSIER_ARCHIVES | FULL | UNIQUE | Savoirs Préservés | Garder distinct de l'étude sur l'art prophétique |
+| Parchemins Anciens | PDF VI.1 | DOSSIER_ARCHIVES | FULL | UNIQUE | Savoirs Préservés | Contenu long complété depuis le PDF complémentaire |
+| Alphabet Ogham | PDF VI.2 | DOSSIER_ARCHIVES | FULL | PARTIAL_OVERLAP | Savoirs Préservés | Contenu long complété depuis le PDF complémentaire |
+| Secrets d'Avalon | PDF VI.3 | DOSSIER_ARCHIVES | FULL | UNIQUE | Savoirs Préservés | Contenu long complété depuis le PDF complémentaire |
+| Prophéties | PDF VI.4 | DOSSIER_ARCHIVES | FULL | UNIQUE | Savoirs Préservés | Contenu long complété depuis le PDF complémentaire |
 | Sagesse Druidique | PDF X + structure validée | DOSSIER_ARCHIVES | FULL | UNIQUE | Savoirs Préservés | Porte vers le corpus des Sagesses |
 | Phrases de sagesse druidique | PDF X | SAGESSE | FULL | UNIQUE | Source documentaire unique | Arbitrer le total annoncé 70 / matériel 72 avant intégration |
 
@@ -133,11 +135,11 @@ Les trois statuts `DUPLICATE` ci-dessus proviennent du signalement documentaire 
 
 ## Contrôles et divergences
 
-- **12/12** Savoirs officiels inventoriés ; 12 résumés, 12 corps longs manquants.
-- **20/20** Découvertes inventoriées ; 20 résumés, 20 corps longs manquants.
+- **12/12** Savoirs officiels inventoriés ; 12 résumés et 12 corps longs conservés.
+- **20/20** Découvertes inventoriées ; 20 résumés, 5 corps longs conservés et 15 corps longs manquants.
 - **5/5** dossiers éditoriaux identifiés.
 - **40/40** Chroniques identifiées et laissées hors de `Savoir`.
-- Les trois PDF accessibles sont des copies exactes (`DUPLICATE` au niveau fichier).
+- Les trois copies du PDF original de 42 pages sont identiques. Le PDF complémentaire autorisé de 110 pages est une source distincte contenant les développements longs.
 - Doublons bruts signalés : L'Art de la Forge Druidique, Le Code d'Honneur des Fianna, Les Trois Fonctions Sacrées. Les copies brutes ne sont pas accessibles pour comparaison.
 - Chevauchements partiels : Alphabet Ogham / L'Écriture Ogham Décodée / Le Langage Secret des Arbres.
 - Le PDF annonce **70** Sagesses mais contient **72 phrases uniques** réparties 12 + 10 + 10 + 10 + 10 + 10 + 10. Les 72 sont conservées ; supprimer deux phrases violerait la règle de conservation absolue. Arbitrage éditorial requis avant intégration.

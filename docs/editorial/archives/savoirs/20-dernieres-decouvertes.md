@@ -2,7 +2,7 @@
 
 Source : section V, « Les Dernières Découvertes », de `Celticlopedie_Contenu_Complet.pdf`.
 
-Le PDF fournit pour chaque entrée une catégorie et une description courte, mais aucun corps d'article long. Pour les vingt entrées : **SUMMARY_ONLY — FULL_TEXT_MISSING**.
+Le PDF original fournit pour chaque entrée une catégorie et une description courte. Le PDF complémentaire autorisé fournit un texte long pour cinq Découvertes, désormais lié ci-dessous. Les quinze autres restent limitées à leur résumé ; leur marqueur individuel `FULL_TEXT_MISSING` est conservé.
 
 ## 01 — Le Chant des Chênes
 
@@ -98,7 +98,7 @@ Les lieux et moments qui rendent perméable le voile : les fêtes sacrées (Sama
 
 La signification spirituelle du chêne, de l'if, du frêne, du sorbier et du noisetier — les cinq grands arbres sacrés celtiques et leurs connexions avec le divin.
 
-**FULL_TEXT_MISSING**
+**Texte long : [`decouvertes/le-langage-secret-des-arbres.md`](decouvertes/le-langage-secret-des-arbres.md)**
 
 ## 13 — Les Triades Celtiques
 
@@ -130,7 +130,7 @@ Les nombres 3, 5, 7, 9 et 12 dans la tradition celtique — chacun une structure
 
 La Harpe du Dagda, les Oiseaux de Rhiannon, les trois musiques irlandaises (guérison, sommeil, éveil) — la musique comme force cosmique réelle.
 
-**FULL_TEXT_MISSING**
+**Texte long : [`decouvertes/la-musique-des-spheres-celtiques.md`](decouvertes/la-musique-des-spheres-celtiques.md)**
 
 ## 17 — Les Rites de Passage Celtiques
 
@@ -138,7 +138,7 @@ La Harpe du Dagda, les Oiseaux de Rhiannon, les trois musiques irlandaises (gué
 
 Naissance (lecture des présages, attribution du nom), initiation (vingt ans pour les druides), mariage (handfasting, neuf formes), mort (équipement pour le voyage).
 
-**FULL_TEXT_MISSING**
+**Texte long : [`decouvertes/les-rites-de-passage-celtiques.md`](decouvertes/les-rites-de-passage-celtiques.md)**
 
 ## 18 — La Médecine des Druides
 
@@ -146,7 +146,7 @@ Naissance (lecture des présages, attribution du nom), initiation (vingt ans pou
 
 Diancecht, Brigit, Airmid — les dieux guérisseurs — et les pratiques médicales : pharmacopée végétale, chirurgie (trépanation attestée), médecine de l'âme.
 
-**FULL_TEXT_MISSING**
+**Texte long : [`decouvertes/la-medecine-des-druides.md`](decouvertes/la-medecine-des-druides.md)**
 
 ## 19 — Les Inscriptions Sacrées de Gaule
 
@@ -154,7 +154,7 @@ Diancecht, Brigit, Airmid — les dieux guérisseurs — et les pratiques médic
 
 Le Pilier des Nautes, le Chaudron de Gundestrup, les autels aux Matres, les ex-voto des sanctuaires de guérison — traces tangibles de la civilisation gauloise.
 
-**FULL_TEXT_MISSING**
+**Texte long : [`decouvertes/les-inscriptions-sacrees-de-gaule.md`](decouvertes/les-inscriptions-sacrees-de-gaule.md)**
 
 ## 20 — L'Astronomie Druidique
 
