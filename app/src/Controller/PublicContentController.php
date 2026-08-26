@@ -11,6 +11,8 @@ use App\Repository\AnimalRepository;
 use App\Repository\SavoirRepository;
 use App\Repository\SymboleRepository;
 use App\Service\FavoriteCatalog;
+use App\Service\ArchiveCatalog;
+use App\Service\SavoirDossierPresenter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -37,19 +39,34 @@ final class PublicContentController extends AbstractController
     }
 
     #[Route('/archives-du-druide/bibliotheque', name: 'app_public_savoir_library', methods: ['GET'])]
-    public function savoirLibrary(SavoirRepository $repository): Response
+    public function savoirLibrary(SavoirRepository $repository, ArchiveCatalog $archiveCatalog): Response
     {
+        $officialSavoirs = $repository->findByEditorialType(SavoirEditorialType::OFFICIEL);
+        $discoveries = $repository->findByEditorialType(SavoirEditorialType::DECOUVERTE);
+        $dossiersByTitle = [];
+        foreach ($repository->findByEditorialType(SavoirEditorialType::DOSSIER) as $dossier) {
+            $dossiersByTitle[$dossier->getTitle()] = $dossier;
+        }
+        $dossiers = array_values(array_filter(array_map(
+            static fn (string $title): ?Savoir => $dossiersByTitle[$title] ?? null,
+            ['Parchemins Anciens', 'Alphabet Ogham', "Secrets d'Avalon", 'Prophéties', 'Sagesse Druidique'],
+        )));
+
         return $this->render('public/content/savoir_library.html.twig', [
-            'officialSavoirs' => $repository->findByEditorialType(SavoirEditorialType::OFFICIEL),
-            'discoveries' => $repository->findByEditorialType(SavoirEditorialType::DECOUVERTE),
-            'dossiers' => $repository->findByEditorialType(SavoirEditorialType::DOSSIER),
+            'officialSavoirs' => $officialSavoirs,
+            'discoveries' => $discoveries,
+            'dossiers' => $dossiers,
+            'catalog' => $archiveCatalog->build($officialSavoirs, $discoveries, $dossiers),
         ]);
     }
 
     #[Route('/archives-du-druide/{id}', name: 'app_public_savoir_show', requirements: ['id' => '\\d+'], methods: ['GET'])]
-    public function savoirShow(Savoir $savoir): Response
+    public function savoirShow(Savoir $savoir, SavoirDossierPresenter $dossierPresenter): Response
     {
-        return $this->render('public/content/savoir_show.html.twig', ['savoir' => $savoir]);
+        return $this->render('public/content/savoir_show.html.twig', [
+            'savoir' => $savoir,
+            'dossierPresentation' => $dossierPresenter->present($savoir),
+        ]);
     }
 
     #[Route('/chroniques-mythiques', name: 'app_public_chronique_index', methods: ['GET'])]

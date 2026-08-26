@@ -1,0 +1,68 @@
+<article class="mx-auto max-w-5xl overflow-hidden rounded-[1.75rem] bg-white shadow-[0_12px_35px_rgba(30,58,49,0.1)]">
+    {% if savoir.img %}<img src="{{ asset('uploads/savoirs/' ~ savoir.img) }}" alt="Illustration de {{ savoir.title }}" class="h-auto w-full bg-[#eee8d9] object-contain object-center">{% endif %}
+    <header class="border-b border-[#eee6d1] px-6 py-9 sm:px-10 sm:py-11">
+        <p class="text-[10px] font-semibold uppercase tracking-[0.24em] text-mythic-gold">{{ presentation.positioning }}</p>
+        <h1 class="mt-3 font-mythic text-3xl text-celestial-800 sm:text-5xl">{{ savoir.title }}</h1>
+        <p class="mt-3 font-mythic text-xl text-[#9a7416] sm:text-2xl">{{ presentation.subtitle }}</p>
+        <p class="mt-5 max-w-3xl text-base italic leading-7 text-slate-600">{{ presentation.description }}</p>
+        <p class="mt-5 max-w-3xl border-l-2 border-mythic-gold/70 pl-4 text-sm leading-7 text-slate-500">{{ presentation.publicSummary ?? savoir.summary }}</p>
+    </header>
+
+    <div class="space-y-10 px-6 py-9 sm:px-10 sm:py-12">
+        {% for block in presentation.blocks %}
+            {% if block.type == 'text' %}
+                <section id="{{ block.anchor ?? 'dossier-block-' ~ loop.index }}" class="scroll-mt-24" aria-labelledby="dossier-heading-{{ loop.index }}">
+                    <h2 id="dossier-heading-{{ loop.index }}" class="font-mythic text-2xl text-celestial-800">{{ block.title }}</h2>
+                    <div class="mt-4 whitespace-pre-line text-[15px] leading-8 text-slate-600">{{ block.body }}</div>
+                </section>
+            {% elseif block.type == 'collection' %}
+                <section aria-labelledby="dossier-block-{{ loop.index }}">
+                    <h2 id="dossier-block-{{ loop.index }}" class="font-mythic text-2xl text-celestial-800">{{ block.title }}</h2>
+                    <div class="mt-5 grid gap-5 lg:grid-cols-2">
+                        {% for item in block.items %}
+                            <article id="{{ item.anchor }}" class="scroll-mt-24 rounded-2xl border border-[#e5dcc2] bg-[#fffdf7] p-5 sm:p-6">
+                                <h3 class="font-mythic text-lg text-[#8a6817]">{{ item.title }}</h3>
+                                <div class="mt-3 whitespace-pre-line text-sm leading-7 text-slate-600">{{ item.body }}</div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% elseif block.type == 'aicmes' %}
+                <section aria-labelledby="dossier-block-{{ loop.index }}">
+                    <h2 id="dossier-block-{{ loop.index }}" class="font-mythic text-2xl text-celestial-800">{{ block.title }}</h2>
+                    <div class="mt-6 space-y-7">
+                        {% set dossierBlockIndex = loop.index %}
+                        {% for group in block.groups %}
+                            <section id="{{ group.anchor }}" class="scroll-mt-24" aria-labelledby="aicme-{{ dossierBlockIndex }}-{{ loop.index }}">
+                                <h3 id="aicme-{{ dossierBlockIndex }}-{{ loop.index }}" class="font-mythic text-lg text-[#8a6817]">{{ group.title }}</h3>
+                                <div class="mt-3 overflow-x-auto rounded-2xl border border-[#e5dcc2]">
+                                    <table class="w-full min-w-[42rem] border-collapse text-left text-sm">
+                                        <thead class="bg-[#fff7dc] text-[10px] uppercase tracking-[0.14em] text-[#80600f]"><tr><th class="px-4 py-3">Lettre</th><th class="px-4 py-3">Nom</th><th class="px-4 py-3">Arbre</th><th class="px-4 py-3">Signification</th></tr></thead>
+                                        <tbody class="divide-y divide-[#eee5ce] bg-white">{% for row in group.items %}<tr id="{{ row.anchor }}" class="scroll-mt-24"><th scope="row" class="px-4 py-3 font-mythic text-lg text-mythic-gold">{{ row.letter }}</th><td class="px-4 py-3 text-celestial-800">{{ row.name }}</td><td class="px-4 py-3 text-slate-600">{{ row.tree }}</td><td class="px-4 py-3 text-slate-600">{{ row.meaning }}</td></tr>{% endfor %}</tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% elseif block.type == 'list' %}
+                <section aria-labelledby="dossier-block-{{ loop.index }}">
+                    <h2 id="dossier-block-{{ loop.index }}" class="font-mythic text-2xl text-celestial-800">{{ block.title }}</h2>
+                    <dl class="mt-5 grid gap-3 sm:grid-cols-2">{% for item in block.items %}<div id="{{ item.anchor }}" class="scroll-mt-24 rounded-xl border border-[#e8dfca] bg-[#fffdf8] p-4"><dt class="font-semibold text-celestial-800">{{ item.label }}</dt><dd class="mt-1 text-sm leading-6 text-slate-600">{{ item.value }}</dd></div>{% endfor %}</dl>
+                </section>
+            {% elseif block.type == 'table' %}
+                <section aria-labelledby="dossier-block-{{ loop.index }}">
+                    <h2 id="dossier-block-{{ loop.index }}" class="font-mythic text-2xl text-celestial-800">{{ block.title }}</h2>
+                    <div class="mt-4 overflow-x-auto rounded-2xl border border-[#e5dcc2]"><table class="w-full min-w-[34rem] border-collapse text-left text-sm"><thead class="bg-[#fff7dc] text-[#80600f]"><tr>{% for column in block.columns %}<th class="px-4 py-3">{{ column }}</th>{% endfor %}</tr></thead><tbody class="divide-y divide-[#eee5ce]">{% for row in block.rows %}<tr>{% for cell in row %}<td class="px-4 py-3 text-slate-600">{{ cell }}</td>{% endfor %}</tr>{% endfor %}</tbody></table></div>
+                </section>
+            {% elseif block.type == 'wisdom' %}
+                <section aria-labelledby="dossier-block-{{ loop.index }}">
+                    <h2 id="dossier-block-{{ loop.index }}" class="font-mythic text-2xl text-celestial-800">{{ block.title }}</h2>
+                    <div class="mt-6 space-y-8">{% for group in block.groups %}<section id="{{ group.anchor }}" class="scroll-mt-24 rounded-2xl border border-[#e7dfc9] bg-[#fffdf8] p-5 sm:p-7"><h3 class="font-mythic text-xl text-[#8a6817]">{{ group.title }}</h3><ol class="mt-4 space-y-3">{% for wisdom in group.items %}<li id="{{ wisdom.anchor }}" class="scroll-mt-24 flex gap-3 text-sm italic leading-7 text-slate-600"><span class="shrink-0 text-mythic-gold" aria-hidden="true">✦</span><span>{{ wisdom.title }}</span></li>{% endfor %}</ol></section>{% endfor %}</div>
+                </section>
+            {% elseif block.type == 'notice' and block.body %}
+                <aside class="rounded-2xl border border-mythic-gold/40 bg-[#fff8df] p-5" aria-label="{{ block.title }}"><p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8a6817]">{{ block.title }}</p><p class="mt-2 text-sm leading-7 text-slate-600">{{ block.body }}</p></aside>
+            {% endif %}
+        {% endfor %}
+    </div>
+</article>

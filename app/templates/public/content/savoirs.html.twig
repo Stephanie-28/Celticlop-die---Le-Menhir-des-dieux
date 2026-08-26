@@ -1,45 +1,67 @@
 {% extends 'public/content/_layout.html.twig' %}
 {% block title %}Archives du Druide — Le Menhir des Dieux{% endblock %}
 {% block content %}
-    <header class="overflow-hidden rounded-[1.75rem] bg-[#173d34] px-6 py-10 text-center text-white shadow-xl sm:px-10 sm:py-14">
-        <p class="text-[10px] uppercase tracking-[0.3em] text-[#e2c15f]">Le sanctuaire de la mémoire</p>
-        <h1 class="mt-3 font-mythic text-3xl sm:text-5xl">Archives du Druide</h1>
-        <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/75">Explore les connaissances conservées par les gardiens de Celticlopédie.</p>
+    <header class="mx-auto max-w-2xl px-3 pb-3 pt-2 text-center">
+        <span class="inline-flex text-2xl text-mythic-gold" aria-hidden="true">✦</span>
+        <h1 class="mt-5 font-mythic text-3xl leading-tight text-mythic-gold sm:text-5xl">Le Sanctuaire de la<br>Mémoire</h1>
+        <p class="mx-auto mt-9 max-w-xl text-sm leading-7 text-slate-600 sm:text-base">Entrez dans les archives sacrées où les murmures des anciens druides sont préservés à jamais. Un espace de silence et de lumière dédié à la sagesse ancestrale des peuples celtes.</p>
     </header>
 
     {% if is_granted('ROLE_ADMIN') %}
-        <nav class="mt-5 flex flex-wrap justify-end gap-3" aria-label="Administration des Archives">
+        <nav class="mx-auto mt-4 flex max-w-2xl flex-wrap justify-center gap-3" aria-label="Administration des Archives">
             <a href="{{ path('app_admin_savoir_index') }}" class="rounded-full border border-mythic-gold/40 bg-white px-4 py-2 text-xs font-semibold text-[#765916]">Gérer les Savoirs</a>
             <a href="{{ path('app_admin_savoir_new') }}" class="rounded-full bg-[#173d34] px-4 py-2 text-xs font-semibold text-[#f1d67c]">Confier un Savoir</a>
         </nav>
     {% endif %}
 
-    <section class="mt-10" aria-labelledby="preserved-knowledge-title">
-        <div class="flex items-end justify-between gap-4">
-            <div><p class="text-[10px] uppercase tracking-[0.25em] text-mythic-gold">Bibliothèque initiatique</p><h2 id="preserved-knowledge-title" class="mt-1 font-mythic text-2xl text-celestial-800 sm:text-3xl">Savoirs Préservés</h2></div>
-            <a href="{{ path('app_public_savoir_library') }}" class="shrink-0 text-sm font-semibold text-[#8a6a18] underline decoration-mythic-gold/50 underline-offset-4 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mythic-gold">Tout voir</a>
+    <section class="mx-auto mt-6 max-w-4xl" aria-labelledby="preserved-knowledge-title">
+        <div class="flex items-end justify-between gap-4 px-1">
+            <h2 id="preserved-knowledge-title" class="font-mythic text-xl text-mythic-gold sm:text-2xl">Savoirs Préservés</h2>
+            <a href="{{ path('app_public_savoir_library') }}" class="shrink-0 text-xs font-semibold text-[#8a6a18] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mythic-gold">Tout voir</a>
         </div>
-        <div class="mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-4" aria-label="Dossiers principaux">
+        <div class="mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain px-1 pb-4" aria-label="Dossiers principaux">
             {% for savoir in dossiers %}
-                <article class="flex min-h-64 basis-[84%] shrink-0 snap-start flex-col rounded-3xl border border-[#e4ddc8] bg-[#fffdf7] p-6 shadow-[0_8px_25px_rgba(30,58,49,0.08)] min-[494px]:basis-[46%] lg:basis-[31%]">
-                    <span class="text-[9px] font-semibold uppercase tracking-[0.2em] text-mythic-gold">Dossier des Archives</span>
-                    <h3 class="mt-3 font-mythic text-xl text-celestial-800">{{ savoir.title }}</h3>
-                    <p class="mt-3 line-clamp-5 text-sm leading-6 text-slate-600">{{ savoir.summary }}</p>
-                    <a href="{{ path('app_public_savoir_show', {id: savoir.id}) }}" class="mt-auto pt-5 text-sm font-semibold text-[#8a6a18]">Ouvrir le dossier →</a>
-                </article>
+                <a href="{{ path('app_public_savoir_show', {id: savoir.id}) }}" class="group flex min-h-48 basis-[78%] shrink-0 snap-start flex-col items-center justify-center rounded-xl border border-mythic-gold/45 bg-[#fffaf0] px-5 py-7 text-center shadow-[0_5px_18px_rgba(211,170,50,0.12)] transition hover:-translate-y-0.5 hover:border-mythic-gold/70 hover:shadow-[0_9px_24px_rgba(211,170,50,0.18)] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mythic-gold min-[500px]:basis-[43%] lg:basis-[29%]">
+                    <span class="flex size-12 items-center justify-center rounded-full bg-[#fff1c5] text-[#a77d0e]" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" class="size-6"><path d="M7 4h9.5A1.5 1.5 0 0 1 18 5.5V20l-4-2-4 2V7.5A1.5 1.5 0 0 0 8.5 6H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="m7 10 6 4m0-4-6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </span>
+                    <h3 class="mt-5 font-mythic text-sm leading-6 text-[#9b7312] sm:text-base">{{ savoir.title }}</h3>
+                    <p class="mt-1 line-clamp-2 text-[10px] leading-4 text-slate-500">{{ savoir.summary }}</p>
+                    <span class="mt-4 inline-flex items-center gap-1 text-[10px] font-semibold text-[#8a6a18] transition group-hover:translate-x-0.5">Lire ce savoir <span aria-hidden="true">→</span></span>
+                </a>
             {% endfor %}
         </div>
     </section>
 
     {% if focus %}
-        <section class="mt-8 overflow-hidden rounded-[1.75rem] border border-mythic-gold/30 bg-[#fffaf0] p-7 shadow-[0_12px_32px_rgba(30,58,49,0.08)] sm:p-10" aria-labelledby="focus-title">
-            <p class="text-[10px] font-semibold uppercase tracking-[0.25em] text-mythic-gold">Focus du mois</p>
-            <h2 id="focus-title" class="mt-3 font-mythic text-2xl text-celestial-800 sm:text-3xl">{{ focus.title }}</h2>
-            <p class="mt-4 max-w-3xl text-sm leading-7 text-slate-600">{{ focus.summary }}</p>
-            <a href="{{ path('app_public_savoir_show', {id: focus.id}) }}" class="mt-6 inline-flex rounded-full bg-[#173d34] px-5 py-2.5 text-sm font-semibold text-[#f1d67c]">Consulter ce savoir</a>
+        {% set focusImage = focus.img
+            ? asset('uploads/savoirs/' ~ focus.img)
+            : (focus.title == 'La Quête du Graal Celte' ? asset('images/archives/focus-graal-celte.png') : null) %}
+        <section class="mx-auto mt-6 max-w-4xl overflow-hidden rounded-xl border border-[#e4d5ad] bg-[#fffdf9] shadow-[0_8px_26px_rgba(30,58,49,0.06)]" aria-labelledby="focus-title">
+            <a href="{{ path('app_public_savoir_show', {id: focus.id}) }}" class="group block focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mythic-gold">
+                <div class="relative aspect-[16/9] overflow-hidden bg-[#152921] sm:aspect-[2.35/1]">
+                    {% if focusImage %}
+                        <img src="{{ focusImage }}" alt="Illustration de {{ focus.title }}" class="h-full w-full object-cover object-center transition duration-300 group-hover:scale-[1.015]">
+                    {% else %}
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(211,170,50,0.28),transparent_42%),linear-gradient(135deg,#173d34,#0d211c)]" role="img" aria-label="Illustration générique des Archives pour {{ focus.title }}">
+                            <span class="absolute inset-0 flex items-center justify-center font-mythic text-6xl text-mythic-gold/45" aria-hidden="true">✦</span>
+                        </div>
+                    {% endif %}
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" aria-hidden="true"></div>
+                    <div class="absolute inset-x-0 bottom-0 p-5 text-white sm:p-7">
+                        <p class="text-[9px] uppercase tracking-[0.18em] text-white/85">Focus du mois</p>
+                        <p class="mt-1 text-[9px] uppercase tracking-[0.16em] text-[#f1d67c]">{{ focus.editorialType.label }}</p>
+                        <h2 id="focus-title" class="mt-1 font-mythic text-xl underline decoration-white/35 underline-offset-4 sm:text-3xl">{{ focus.title }}</h2>
+                    </div>
+                </div>
+                <div class="p-6 sm:p-8">
+                    <p class="text-sm leading-7 text-slate-600">{{ focus.summary }}</p>
+                    <span class="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-celestial-800">Lire l’étude complète <span aria-hidden="true">→</span></span>
+                </div>
+            </a>
         </section>
     {% endif %}
 
-    <blockquote class="mx-auto my-10 max-w-3xl border-l-2 border-mythic-gold px-6 py-2 text-center text-base italic leading-8 text-celestial-800 sm:text-lg">« La vraie sagesse commence quand on accepte de ne pas savoir. »</blockquote>
-    <p class="mx-auto max-w-3xl text-center text-sm leading-7 text-slate-600">Les Archives rassemblent les savoirs officiels, les découvertes documentaires et les dossiers préservés du Menhir. Chaque entrée ouvre le contenu réellement disponible dans le corpus.</p>
+    <blockquote class="mx-auto mt-8 max-w-3xl border-l-2 border-mythic-gold px-5 py-1 text-sm italic leading-6 text-celestial-800 sm:text-base">« La connaissance est la seule flamme qui ne s’éteint pas dans le vent. »</blockquote>
+    <p class="mx-auto mt-8 max-w-3xl text-sm leading-7 text-slate-600">Chaque document numérisé dans ces archives provient de sites archéologiques protégés ou de collections privées cédées à la communauté Celticlopédie pour le bien de tous les chercheurs de vérité.</p>
 {% endblock %}

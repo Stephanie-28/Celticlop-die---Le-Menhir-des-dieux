@@ -1,31 +1,168 @@
 {% extends 'public/content/_layout.html.twig' %}
-{% block title %}Bibliothèque des Savoirs — Le Menhir des Dieux{% endblock %}
+{% block title %}Toutes les Archives — Le Menhir des Dieux{% endblock %}
+
 {% block content %}
-    <header class="rounded-[1.75rem] bg-[#173d34] px-6 py-9 text-center text-white shadow-xl sm:px-10">
-        <p class="text-[10px] uppercase tracking-[0.3em] text-[#e2c15f]">Archives du Druide</p>
-        <h1 class="mt-3 font-mythic text-3xl sm:text-4xl">Tous les Savoirs Préservés</h1>
-        <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/75">Les 37 entrées du corpus éditorial sécurisé.</p>
-    </header>
-    {% set groups = [
-        {title: 'Savoirs officiels', label: '12 études', items: officialSavoirs},
-        {title: 'Découvertes documentaires', label: '20 découvertes', items: discoveries},
-        {title: 'Dossiers des Archives', label: '5 dossiers', items: dossiers}
-    ] %}
-    {% for group in groups %}
-        <section class="mt-10" aria-labelledby="library-group-{{ loop.index }}">
-            <p class="text-[10px] uppercase tracking-[0.22em] text-mythic-gold">{{ group.label }}</p>
-            <h2 id="library-group-{{ loop.index }}" class="mt-1 font-mythic text-2xl text-celestial-800">{{ group.title }}</h2>
-            <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {% for savoir in group.items %}
-                    <article class="flex flex-col rounded-3xl border border-[#e4ddc8] bg-white p-6 shadow-[0_8px_25px_rgba(30,58,49,0.07)]">
-                        {% if savoir.isFocus %}<span class="text-[9px] font-semibold uppercase tracking-[0.2em] text-mythic-gold">Focus du mois</span>{% endif %}
-                        <h3 class="mt-2 font-mythic text-lg text-celestial-800">{{ savoir.title }}</h3>
-                        <p class="mt-3 line-clamp-4 text-sm leading-6 text-slate-600">{{ savoir.summary }}</p>
-                        <a href="{{ path('app_public_savoir_show', {id: savoir.id}) }}" class="mt-auto pt-5 text-sm font-semibold text-[#8a6a18]">Lire l’archive →</a>
-                    </article>
+{% set editorialEntries = catalog.entries|filter(entry => entry.type in ['Étude approfondie', 'Découverte documentaire']) %}
+<header class="overflow-hidden rounded-[1.75rem] bg-[#173d34] px-6 py-9 text-center text-white shadow-xl sm:px-10">
+    <p class="text-[10px] uppercase tracking-[0.3em] text-[#e2c15f]">Archives du Druide</p>
+    <h1 class="mt-3 font-mythic text-3xl text-[#e2c15f] sm:text-4xl">Toutes les Archives</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/75">Explorez la mémoire celtique par dossier, thème ou fragment documentaire.</p>
+    <div class="mt-6 flex flex-wrap justify-center gap-2 text-[10px] uppercase tracking-[0.16em]">
+        <span class="rounded-full border border-white/20 px-3 py-2">{{ catalog.readingCount }} lectures</span>
+        <span class="rounded-full border border-white/20 px-3 py-2">{{ catalog.nodeCount }} repères</span>
+        <span class="rounded-full border border-white/20 px-3 py-2">5 dossiers</span>
+    </div>
+</header>
+
+<section class="mt-8 rounded-3xl border border-[#e4ddc8] bg-white p-5 shadow-[0_8px_25px_rgba(30,58,49,0.06)] sm:p-7" data-archive-catalog>
+    <label for="archive-search" class="text-xs font-semibold text-[#173d34]">Rechercher dans les 173 entrées</label>
+    <input id="archive-search" type="search" autocomplete="off" placeholder="Beith, Avalon, prophétie, arbre…" class="mt-2 w-full rounded-2xl border border-[#d8d2c2] bg-[#faf9f5] px-4 py-3 text-sm text-[#173d34] outline-none transition placeholder:text-slate-400 focus:border-mythic-gold focus:ring-2 focus:ring-mythic-gold/20" data-archive-search>
+    <p class="mt-3 text-xs text-slate-500" aria-live="polite" data-archive-status>La recherche explore aussi les catégories actuellement repliées.</p>
+
+    <div data-browse-panel>
+        <div class="mt-7">
+            <p class="text-[10px] uppercase tracking-[0.22em] text-mythic-gold">Cinq portes d’entrée</p>
+            <h2 class="mt-1 font-mythic text-2xl text-celestial-800">Explorer les Archives</h2>
+            <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">Choisissez d’abord un dossier. Ses sections et ses lectures apparaîtront ensuite sans perdre le fil de navigation.</p>
+        </div>
+
+        <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {% for dossier in catalog.dossiers %}
+                <button type="button" class="group min-h-48 rounded-3xl border border-[#d3aa32]/50 bg-[#173d34] p-6 text-left text-white shadow-[0_10px_28px_rgba(23,61,52,0.16)] transition hover:-translate-y-0.5 hover:border-[#e2c15f] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mythic-gold" data-open-dossier="dossier-{{ dossier.id }}">
+                    <span class="text-[9px] uppercase tracking-[0.22em] text-[#e2c15f]">Dossier préservé</span>
+                    <strong class="mt-3 block font-mythic text-lg">{{ dossier.title }}</strong>
+                    <span class="mt-3 block text-xs leading-5 text-white/70">{{ dossier.meta }}</span>
+                    <span class="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-[#e2c15f]">Explorer <span aria-hidden="true">↓</span></span>
+                </button>
+            {% endfor %}
+        </div>
+
+        <div class="mt-8 space-y-4" aria-label="Contenu des cinq dossiers">
+            {% for dossier in catalog.dossiers %}
+                <details id="dossier-{{ dossier.id }}" class="scroll-mt-24 overflow-hidden rounded-3xl border border-[#d9cfb4] bg-[#fffdf8] shadow-sm" data-dossier-details>
+                    <summary class="cursor-pointer list-none px-5 py-5 marker:hidden focus-visible:outline-3 focus-visible:outline-offset-[-3px] focus-visible:outline-mythic-gold sm:px-7">
+                        <span class="flex items-center justify-between gap-4">
+                            <span><span class="block text-[9px] uppercase tracking-[0.2em] text-mythic-gold">{{ dossier.meta }}</span><span class="mt-1 block font-mythic text-xl text-celestial-800">{{ dossier.title }}</span></span>
+                            <span class="text-xl text-mythic-gold" aria-hidden="true">⌄</span>
+                        </span>
+                    </summary>
+                    <div class="border-t border-[#e7dfc9] px-5 py-6 sm:px-7">
+                        <a href="{{ path('app_public_savoir_show', {id: dossier.id}) }}" class="inline-flex rounded-full bg-[#173d34] px-4 py-2 text-xs font-semibold text-white focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold">Lire le dossier complet →</a>
+                        <div class="mt-6 space-y-6">
+                            {% for section in dossier.sections %}
+                                <section aria-labelledby="dossier-{{ dossier.id }}-section-{{ loop.index }}">
+                                    <h3 id="dossier-{{ dossier.id }}-section-{{ loop.index }}" class="font-mythic text-base text-[#8a6817]">{{ section.title }}</h3>
+                                    {% if section.type == 'links' %}
+                                        <div class="mt-3 grid gap-3 sm:grid-cols-2">
+                                            {% for item in section.items %}
+                                                <a href="{{ path('app_public_savoir_show', {id: dossier.id}) }}#{{ item.anchor }}" class="rounded-2xl border border-[#e5dcc2] bg-white p-4 transition hover:border-mythic-gold focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold"><strong class="block text-sm text-celestial-800">{{ item.title }}</strong><span class="mt-2 line-clamp-2 block text-xs leading-5 text-slate-500">{{ item.summary }}</span></a>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <div class="mt-3 space-y-3">
+                                            {% for group in section.groups %}
+                                                <details class="rounded-2xl border border-[#e5dcc2] bg-white">
+                                                    <summary class="cursor-pointer list-none px-4 py-4 text-sm font-semibold text-celestial-800 focus-visible:outline-3 focus-visible:outline-offset-[-3px] focus-visible:outline-mythic-gold"><span class="flex justify-between gap-3"><span>{{ group.title }}</span><span class="shrink-0 text-xs text-mythic-gold">{{ group.items|length }} contenus ⌄</span></span></summary>
+                                                    <div class="grid gap-2 border-t border-[#eee6d3] p-3 sm:grid-cols-2">
+                                                        {% for item in group.items %}<a href="{{ path('app_public_savoir_show', {id: dossier.id}) }}#{{ item.anchor }}" class="rounded-xl bg-[#f7f4eb] p-3 text-sm text-[#34576d] transition hover:bg-[#f0e8d5] focus-visible:outline-3 focus-visible:outline-mythic-gold">{{ item.title }}</a>{% endfor %}
+                                                    </div>
+                                                </details>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </section>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </details>
+            {% endfor %}
+        </div>
+
+        <details class="mt-9 overflow-hidden rounded-3xl border border-[#e4ddc8] bg-[#f8f6ef]" data-editorial-catalog>
+            <summary class="cursor-pointer list-none p-5 marker:hidden focus-visible:outline-3 focus-visible:outline-offset-[-3px] focus-visible:outline-mythic-gold sm:p-7">
+                <span class="flex items-center justify-between gap-4"><span><span class="block text-[10px] uppercase tracking-[0.2em] text-mythic-gold">32 lectures indépendantes</span><span class="mt-1 block font-mythic text-xl text-celestial-800">Études approfondies & découvertes documentaires</span></span><span class="shrink-0 text-mythic-gold" aria-hidden="true">⌄</span></span>
+            </summary>
+            <div class="border-t border-[#e4ddc8] p-5 sm:p-7">
+                <nav class="flex gap-2 overflow-x-auto pb-2 sm:flex-wrap" aria-label="Filtrer les études et découvertes">
+                    <button type="button" class="shrink-0 rounded-full bg-[#173d34] px-4 py-2 text-xs font-semibold text-white" aria-pressed="true" data-editorial-filter="all">Toutes</button>
+                    {% for category in catalog.categories %}<button type="button" class="shrink-0 rounded-full border border-[#d8d2c2] bg-white px-4 py-2 text-xs font-semibold text-[#34576d]" aria-pressed="false" data-editorial-filter="{{ category.key }}">{{ category.label }}</button>{% endfor %}
+                </nav>
+                <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-editorial-results>
+                    {% for entry in editorialEntries %}
+                        <a href="{{ path('app_public_savoir_show', {id: entry.parentId}) }}" class="rounded-2xl border border-[#e4ddc8] bg-white p-4 transition hover:border-mythic-gold focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold" data-editorial-entry data-categories="{{ entry.categories|join(' ') }}"><span class="text-[9px] uppercase tracking-[0.16em] text-[#a27c16]">{{ entry.type }}</span><h3 class="mt-2 font-mythic text-sm leading-6 text-celestial-800">{{ entry.title }}</h3><p class="mt-2 line-clamp-3 text-xs leading-5 text-slate-500">{{ entry.summary }}</p></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </details>
+    </div>
+
+        <details class="mt-4 overflow-hidden rounded-3xl border border-dashed border-[#a8b8ac] bg-[#eef3ef]" data-full-catalog>
+            <summary class="cursor-pointer list-none p-5 text-sm font-semibold text-[#34576d] marker:hidden focus-visible:outline-3 focus-visible:outline-offset-[-3px] focus-visible:outline-mythic-gold sm:px-7"><span class="flex justify-between gap-4"><span>Catalogue complet — afficher progressivement les {{ catalog.nodeCount }} repères</span><span aria-hidden="true">⌄</span></span></summary>
+            <div class="grid gap-3 border-t border-[#cfdcd2] p-5 sm:grid-cols-2 lg:grid-cols-3 sm:p-7">
+                {% for entry in catalog.entries %}
+                    {% set destination = path('app_public_savoir_show', {id: entry.parentId}) ~ (entry.anchor ? '#' ~ entry.anchor : '') %}
+                    <a href="{{ destination }}" class="rounded-xl bg-white p-3 text-sm text-[#34576d] shadow-sm focus-visible:outline-3 focus-visible:outline-mythic-gold" data-full-entry data-search="{{ (entry.title ~ ' ' ~ entry.summary ~ ' ' ~ entry.type ~ ' ' ~ (entry.parentTitle ?? ''))|lower|e('html_attr') }}"><span class="block text-[8px] uppercase tracking-[0.14em] text-[#a27c16]">{{ entry.type }}</span><span class="mt-1 block">{{ entry.title }}</span></a>
                 {% endfor %}
             </div>
-        </section>
-    {% endfor %}
-    <a href="{{ path('app_public_savoir_index') }}" class="mt-10 inline-flex text-sm font-semibold text-[#8a6a18]">← Retour aux Archives</a>
+        </details>
+</section>
+
+<a href="{{ path('app_public_savoir_index') }}" class="mt-10 inline-flex text-sm font-semibold text-[#8a6a18] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mythic-gold">← Retour aux Archives</a>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+(() => {
+    const root = document.querySelector('[data-archive-catalog]');
+    if (!root) return;
+    const search = root.querySelector('[data-archive-search]');
+    const browsePanel = root.querySelector('[data-browse-panel]');
+    const fullCatalog = root.querySelector('[data-full-catalog]');
+    const fullEntries = [...root.querySelectorAll('[data-full-entry]')];
+    const status = root.querySelector('[data-archive-status]');
+    const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+
+    search.addEventListener('input', () => {
+        const query = normalize(search.value);
+        if (!query) {
+            browsePanel.classList.remove('hidden');
+            fullCatalog.open = false;
+            fullEntries.forEach(entry => entry.hidden = false);
+            status.textContent = 'La recherche explore aussi les catégories actuellement repliées.';
+            return;
+        }
+        let visible = 0;
+        browsePanel.classList.add('hidden');
+        fullCatalog.open = true;
+        fullEntries.forEach(entry => {
+            const matches = normalize(entry.dataset.search).includes(query);
+            entry.hidden = !matches;
+            if (matches) visible++;
+        });
+        status.textContent = `${visible} résultat${visible > 1 ? 's' : ''} dans l’ensemble des Archives`;
+    });
+
+    root.querySelectorAll('[data-open-dossier]').forEach(button => button.addEventListener('click', () => {
+        const details = document.getElementById(button.dataset.openDossier);
+        details.open = true;
+        details.scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start'});
+    }));
+
+    const filterButtons = [...root.querySelectorAll('[data-editorial-filter]')];
+    const editorialEntries = [...root.querySelectorAll('[data-editorial-entry]')];
+    filterButtons.forEach(button => button.addEventListener('click', () => {
+        const category = button.dataset.editorialFilter;
+        filterButtons.forEach(candidate => {
+            const active = candidate === button;
+            candidate.setAttribute('aria-pressed', active ? 'true' : 'false');
+            candidate.classList.toggle('bg-[#173d34]', active);
+            candidate.classList.toggle('text-white', active);
+            candidate.classList.toggle('bg-white', !active);
+            candidate.classList.toggle('text-[#34576d]', !active);
+        });
+        editorialEntries.forEach(entry => entry.hidden = category !== 'all' && !entry.dataset.categories.split(' ').includes(category));
+    }));
+})();
+</script>
 {% endblock %}
