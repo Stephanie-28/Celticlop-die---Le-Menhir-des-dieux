@@ -31,7 +31,7 @@
                 <p class="relative mx-auto mt-3 max-w-2xl text-xs leading-5 text-[#586b74] sm:text-sm">{{ displayedInitiationRank.meaning }}</p>
                 <p class="relative mx-auto mt-3 max-w-2xl text-sm italic leading-6 text-[#4d6670]">{{ profileUser.motto ?: 'Une devise personnelle pourra guider tes pas.' }}</p>
                 <div class="relative mt-5 flex flex-col items-center gap-2">
-                    <button id="open-sanctuary" type="button" class="rounded-full border border-[#87959c]/60 bg-white/80 px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#52636b] shadow-sm transition hover:border-mythic-gold hover:text-[#8b6814] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-forest-900">Le Sanctuaire des paramètres</button>
+                    <a href="{{ path('app_profile_settings') }}" class="rounded-full border border-[#87959c]/60 bg-white/80 px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#52636b] shadow-sm transition hover:border-mythic-gold hover:text-[#8b6814] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-forest-900">Paramètres du clan</a>
                     <a href="{{ path('app_logout') }}" class="rounded-full px-4 py-1.5 text-[10px] uppercase tracking-[0.08em] text-[#9c6870] underline decoration-[#cba9ae] underline-offset-4 transition hover:text-[#7d3f49] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-900">Se déconnecter</a>
                 </div>
             </section>

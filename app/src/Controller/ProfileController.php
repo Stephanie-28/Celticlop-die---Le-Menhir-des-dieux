@@ -14,7 +14,9 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[IsGranted('ROLE_USER')]
@@ -127,5 +129,53 @@ final class ProfileController extends AbstractController
         $this->addFlash('profile_success', sprintf('Le titre « %s » accompagne désormais ton Profil.', $requestedRank['title']));
 
         return $this->redirectToRoute('app_profile');
+    }
+
+    #[Route('/profil/parametres-du-clan', name: 'app_profile_settings', methods: ['GET'])]
+    public function settings(): Response
+    {
+        return $this->render('profile/settings.html.twig');
+    }
+
+    #[Route('/profil/parametres-du-clan/supprimer', name: 'app_profile_delete_account', methods: ['POST'])]
+    public function deleteAccount(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $passwordHasher,
+        TokenStorageInterface $tokenStorage,
+        AvatarUploader $avatarUploader,
+    ): Response {
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw $this->createAccessDeniedException();
+        }
+
+        if (!$this->isCsrfTokenValid('delete-account', (string) $request->request->get('_token'))) {
+            throw $this->createAccessDeniedException('Jeton de sécurité invalide.');
+        }
+
+        $confirmation = trim((string) $request->request->get('confirmation'));
+        $password = (string) $request->request->get('password');
+        if ($confirmation !== 'SUPPRIMER' || !$passwordHasher->isPasswordValid($user, $password)) {
+            $this->addFlash('settings_error', 'La confirmation ou le mot de passe est incorrect. Le compte n’a pas été supprimé.');
+
+            return $this->redirectToRoute('app_profile_settings');
+        }
+
+        $avatar = $user->getAvatar();
+        foreach ($user->getFavorites()->toArray() as $favorite) {
+            $entityManager->remove($favorite);
+        }
+        foreach ($user->getQuizResults()->toArray() as $quizResult) {
+            $entityManager->remove($quizResult);
+        }
+
+        $entityManager->remove($user);
+        $entityManager->flush();
+        $avatarUploader->remove($avatar);
+        $tokenStorage->setToken(null);
+        $request->getSession()->invalidate();
+
+        return $this->redirectToRoute('app_home');
     }
 }

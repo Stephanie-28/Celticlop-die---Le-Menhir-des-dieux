@@ -43,4 +43,16 @@ final class AvatarUploader
 
         return $filename;
     }
+
+    public function remove(?string $filename): void
+    {
+        if ($filename === null || $filename === '' || basename($filename) !== $filename) {
+            return;
+        }
+
+        $path = $this->targetDirectory.'/'.$filename;
+        if (is_file($path)) {
+            @unlink($path);
+        }
+    }
 }
