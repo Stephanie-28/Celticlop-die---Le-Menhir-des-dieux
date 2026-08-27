@@ -30,6 +30,7 @@ final class ProfileController extends AbstractController
         FavoriteRepository $favoriteRepository,
         FavoriteCatalog $favoriteCatalog,
         InitiationPath $initiationPath,
+        UserPasswordHasherInterface $passwordHasher,
     ): Response
     {
         $user = $this->getUser();
@@ -70,12 +71,28 @@ final class ProfileController extends AbstractController
         $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
 
+        if ($form->isSubmitted()) {
+            $currentPassword = (string) $form->get('currentPassword')->getData();
+            $newPassword = (string) $form->get('plainPassword')->getData();
+
+            if ($newPassword !== '' && $currentPassword === '') {
+                $form->get('currentPassword')->addError(new FormError('Saisis ton mot de passe actuel.'));
+            } elseif ($newPassword !== '' && !$passwordHasher->isPasswordValid($user, $currentPassword)) {
+                $form->get('currentPassword')->addError(new FormError('Le mot de passe actuel est incorrect.'));
+            }
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $avatarFile = $form->get('avatarFile')->getData();
+            $newPassword = (string) $form->get('plainPassword')->getData();
 
             try {
                 if ($avatarFile instanceof UploadedFile) {
                     $user->setAvatar($avatarUploader->upload($avatarFile));
+                }
+
+                if ($newPassword !== '') {
+                    $user->setPassword($passwordHasher->hashPassword($user, $newPassword));
                 }
 
                 $entityManager->flush();
