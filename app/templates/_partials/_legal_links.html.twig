@@ -1,0 +1,6 @@
+{% if app.user %}<footer class="border-t border-mythic-gold/25 bg-[#fffefa] px-4 py-6 text-center font-editorial text-xs text-slate-600">
+    <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2" aria-label="Informations légales">
+        <a href="{{ path('app_public_accessibility') }}" class="hover:text-mythic-gold">Accessibilité (RGAA)</a>
+        <a href="{{ path('app_public_privacy') }}" class="hover:text-mythic-gold">Politique de confidentialité (RGPD)</a>
+    </nav>
+</footer>{% endif %}

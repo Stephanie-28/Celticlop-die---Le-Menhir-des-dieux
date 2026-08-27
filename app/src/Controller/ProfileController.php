@@ -14,8 +14,8 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -144,7 +144,8 @@ final class ProfileController extends AbstractController
         UserPasswordHasherInterface $passwordHasher,
         TokenStorageInterface $tokenStorage,
         AvatarUploader $avatarUploader,
-    ): Response {
+    ): Response
+    {
         $user = $this->getUser();
         if (!$user instanceof User) {
             throw $this->createAccessDeniedException();
@@ -169,10 +170,10 @@ final class ProfileController extends AbstractController
         foreach ($user->getQuizResults()->toArray() as $quizResult) {
             $entityManager->remove($quizResult);
         }
-
         $entityManager->remove($user);
         $entityManager->flush();
         $avatarUploader->remove($avatar);
+
         $tokenStorage->setToken(null);
         $request->getSession()->invalidate();
 

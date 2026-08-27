@@ -4,23 +4,28 @@
 
 {% block content %}
     <header class="text-center">
-        <p class="text-[10px] uppercase tracking-[0.28em] text-mythic-gold">Le Sanctuaire</p>
+        <span class="mx-auto flex size-12 items-center justify-center rounded-full border border-mythic-gold/50 bg-[#fff8df] text-[#8a6a18] shadow-sm" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" class="size-8"><path d="M20.3 3.7a5.9 5.9 0 0 0-8.4 0L5.2 10.4v8.4h8.4l6.7-6.7a5.9 5.9 0 0 0 0-8.4Z" fill="currentColor" fill-opacity="0.13" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round"/><path d="M16.2 7.8 2.8 21.2M17.7 15H9M5.2 18.8 4 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.5 22h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/></svg>
+        </span>
+        <p class="mt-4 text-[10px] uppercase tracking-[0.28em] text-mythic-gold">Le Sanctuaire</p>
         <h1 class="mt-2 font-mythic text-3xl text-celestial-800 sm:text-5xl">Paramètres du clan</h1>
         <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600">Consulte tes droits numériques et maîtrise les traces laissées au sein du Menhir.</p>
     </header>
 
-    {% for message in app.flashes('settings_error') %}
-        <div class="mx-auto mt-7 max-w-3xl rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-800" role="alert">{{ message }}</div>
-    {% endfor %}
+    {% for message in app.flashes('settings_error') %}<div class="mx-auto mt-7 max-w-3xl rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-800" role="alert">{{ message }}</div>{% endfor %}
 
     <div class="mx-auto mt-9 grid max-w-3xl gap-5 sm:grid-cols-2">
-        <a href="{{ path('app_public_accessibility') }}" class="rounded-2xl border border-mythic-gold/25 bg-white p-6 shadow-sm transition hover:border-mythic-gold/60 hover:shadow-md">
-            <h2 class="font-mythic text-lg text-celestial-800">Accessibilité (RGAA)</h2>
+        <section class="rounded-2xl border border-mythic-gold/25 bg-white p-6 shadow-sm">
+            <span class="flex size-9 items-center justify-center rounded-full bg-[#e5f0f2] text-celestial-800" aria-hidden="true">⚑</span>
+            <h2 class="mt-4 font-mythic text-lg text-celestial-800">Accessibilité (RGAA)</h2>
             <p class="mt-2 text-sm leading-6 text-slate-600">Consulter l’état d’accessibilité, les limites connues et les moyens de signaler un obstacle.</p>
-            <span class="mt-4 inline-flex text-sm font-semibold text-[#8a6a18]">Ouvrir la déclaration →</span>
-        </a>
-        <a href="{{ path('app_public_privacy') }}" class="rounded-2xl border border-mythic-gold/25 bg-white p-6 shadow-sm transition hover:border-mythic-gold/60 hover:shadow-md">
-            <h2 class="font-mythic text-lg text-celestial-800">Confidentialité (RGPD)</h2>
+            {% include '_partials/_font_size_controls.html.twig' %}
+            {% include '_partials/_contrast_controls.html.twig' %}
+            <a href="{{ path('app_public_accessibility') }}" class="mt-4 inline-flex text-sm font-semibold text-[#8a6a18]">Ouvrir la déclaration →</a>
+        </section>
+        <a href="{{ path('app_public_privacy') }}" class="group rounded-2xl border border-mythic-gold/25 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-mythic-gold/60 hover:shadow-md">
+            <span class="flex size-9 items-center justify-center rounded-full bg-[#e5f0f2] text-celestial-800" aria-hidden="true">♜</span>
+            <h2 class="mt-4 font-mythic text-lg text-celestial-800">Confidentialité (RGPD)</h2>
             <p class="mt-2 text-sm leading-6 text-slate-600">Comprendre quelles données sont utilisées et connaître tes droits d’accès, de rectification et d’effacement.</p>
             <span class="mt-4 inline-flex text-sm font-semibold text-[#8a6a18]">Lire la politique →</span>
         </a>
@@ -29,14 +34,14 @@
     <section class="mx-auto mt-8 max-w-3xl rounded-2xl border border-red-200 bg-white p-6 shadow-sm sm:p-8" aria-labelledby="delete-account-title">
         <p class="text-[10px] uppercase tracking-[0.22em] text-red-600">Zone irréversible</p>
         <h2 id="delete-account-title" class="mt-2 font-mythic text-xl text-red-800">Supprimer mon compte</h2>
-        <p class="mt-3 text-sm leading-7 text-slate-600">Cette action supprime définitivement ton profil, ton avatar, tes favoris et ton historique de quiz.</p>
+        <p class="mt-3 text-sm leading-7 text-slate-600">Cette action supprime définitivement ton profil, ton avatar, tes favoris et ton historique de quiz. Elle ne peut pas être annulée.</p>
         <details class="mt-5">
             <summary class="inline-flex cursor-pointer rounded-xl border border-red-300 px-5 py-3 text-sm font-semibold text-red-700 hover:bg-red-50">Commencer la suppression</summary>
             <form action="{{ path('app_profile_delete_account') }}" method="post" class="mt-5 space-y-4 rounded-xl bg-red-50 p-5">
                 <input type="hidden" name="_token" value="{{ csrf_token('delete-account') }}">
-                <div><label for="delete-confirmation" class="block text-sm font-semibold text-red-900">Écris SUPPRIMER pour confirmer</label><input id="delete-confirmation" name="confirmation" required autocomplete="off" pattern="SUPPRIMER" class="mt-2 w-full rounded-xl border border-red-200 bg-white px-4 py-3"></div>
-                <div><label for="delete-password" class="block text-sm font-semibold text-red-900">Mot de passe actuel</label><input id="delete-password" type="password" name="password" required autocomplete="current-password" class="mt-2 w-full rounded-xl border border-red-200 bg-white px-4 py-3"></div>
-                <button type="submit" class="rounded-xl bg-red-700 px-5 py-3 text-sm font-semibold text-white">Supprimer définitivement mon compte</button>
+                <div><label for="delete-confirmation" class="block text-sm font-semibold text-red-900">Écris SUPPRIMER pour confirmer</label><input id="delete-confirmation" name="confirmation" required autocomplete="off" pattern="SUPPRIMER" class="mt-2 w-full rounded-xl border border-red-200 bg-white px-4 py-3 outline-none focus:border-red-500 focus:ring-2 focus:ring-red-200"></div>
+                <div><label for="delete-password" class="block text-sm font-semibold text-red-900">Mot de passe actuel</label><input id="delete-password" type="password" name="password" required autocomplete="current-password" class="mt-2 w-full rounded-xl border border-red-200 bg-white px-4 py-3 outline-none focus:border-red-500 focus:ring-2 focus:ring-red-200"></div>
+                <button type="submit" class="rounded-xl bg-red-700 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-red-800">Supprimer définitivement mon compte</button>
             </form>
         </details>
     </section>

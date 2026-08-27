@@ -15,6 +15,13 @@
 
         <div class="mx-auto max-w-4xl space-y-8">
             <section class="relative overflow-hidden rounded-[1.4rem] border border-white/80 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.98),rgba(224,231,234,0.88)_43%,rgba(185,195,201,0.75)_100%)] px-5 pb-6 pt-7 text-center shadow-[0_12px_34px_rgba(36,53,62,0.13)] sm:rounded-[1.8rem] sm:px-10 sm:pb-8 sm:pt-10" aria-labelledby="profile-title">
+                <button id="open-sanctuary" type="button" class="absolute right-4 top-4 z-20 flex size-11 items-center justify-center rounded-full border border-mythic-gold/60 bg-white/90 text-[#8a6a18] shadow-md transition hover:-translate-y-0.5 hover:bg-[#fff8df] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-forest-900 sm:right-6 sm:top-6" aria-controls="profile-sanctuary" aria-haspopup="dialog" aria-label="Ouvrir les paramètres célestes" title="Paramètres célestes">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="size-7" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.3 3.7a5.9 5.9 0 0 0-8.4 0L5.2 10.4v8.4h8.4l6.7-6.7a5.9 5.9 0 0 0 0-8.4Z" fill="currentColor" fill-opacity="0.13" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round"/>
+                        <path d="M16.2 7.8 2.8 21.2M17.7 15H9M5.2 18.8 4 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2.5 22h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+                    </svg>
+                </button>
                 <div class="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(165deg,transparent_45%,rgba(255,255,255,0.72)_46%,rgba(255,255,255,0.72)_57%,transparent_58%)]" aria-hidden="true"></div>
                 <div class="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden opacity-[0.30]" aria-hidden="true">
                     {% include '_partials/_celtic_triquetra.html.twig' with {class: 'size-full object-contain object-center'} only %}
@@ -95,7 +102,7 @@
         <dialog id="profile-sanctuary" class="m-auto max-h-[92vh] w-[calc(100%-2rem)] max-w-2xl overflow-y-auto rounded-[2rem] border-0 bg-parchment p-0 text-forest-900 shadow-[0_24px_80px_rgba(10,35,29,0.35)] backdrop:bg-[#0b2c25]/70 backdrop:backdrop-blur-sm">
             <div class="relative p-6 sm:p-9">
                 <button id="close-sanctuary" type="button" class="absolute right-4 top-4 flex size-10 items-center justify-center rounded-full border border-forest-900/15 bg-white text-xl focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold" aria-label="Fermer le Sanctuaire">×</button>
-                <p class="pr-12 text-[11px] uppercase tracking-[0.24em] text-mythic-gold">Le Sanctuaire des paramètres</p><h2 class="mt-2 pr-12 font-mythic text-2xl sm:text-3xl">Façonne ton identité</h2>
+                <p class="pr-12 text-[11px] uppercase tracking-[0.24em] text-mythic-gold">Paramètres célestes</p><h2 class="mt-2 pr-12 font-mythic text-2xl sm:text-3xl">Façonne ton identité</h2>
                 {{ form_start(profileForm, {attr: {class: 'mt-8 space-y-8'}}) }}
                     <section aria-label="Informations personnelles"><div class="grid gap-5 sm:grid-cols-2">
                         {% for field in [profileForm.pseudo, profileForm.firstName, profileForm.lastName] %}<div>{{ form_label(field, null, {label_attr: {class: 'block text-sm font-semibold'}}) }}{{ form_widget(field, {attr: {class: 'mt-2 w-full rounded-xl border border-forest-900/20 bg-white px-4 py-3 outline-none focus:border-mythic-gold focus:ring-2 focus:ring-mythic-gold/20'}}) }}<div class="mt-1 text-xs text-red-700">{{ form_errors(field) }}</div></div>{% endfor %}

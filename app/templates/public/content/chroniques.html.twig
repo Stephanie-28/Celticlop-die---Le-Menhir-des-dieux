@@ -1,12 +1,51 @@
 {% extends 'public/content/_layout.html.twig' %}
+
 {% block title %}Chroniques Mythiques — Le Menhir des Dieux{% endblock %}
+
 {% block content %}
-    <header class="text-center"><p class="text-[10px] uppercase tracking-[0.3em] text-mythic-gold">Récits des anciens mondes</p><h1 class="mt-3 font-mythic text-3xl text-celestial-800 sm:text-5xl">Chroniques Mythiques</h1><p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600">Parcours les chroniques rattachées aux mythes préservés.</p></header>
-    <section class="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" aria-label="Chroniques disponibles">
-        {% for chronique in chroniques %}
-            <article class="flex min-h-64 flex-col rounded-3xl border border-[#e5dfcf] bg-white p-6 shadow-[0_8px_24px_rgba(45,70,62,0.08)]">
-                <p class="text-[9px] uppercase tracking-[0.18em] text-mythic-gold">{{ chronique.mythe.title }}</p><h2 class="mt-3 font-mythic text-xl text-celestial-800">{{ chronique.title }}</h2><p class="mt-4 line-clamp-5 text-sm leading-6 text-slate-600">{{ chronique.content }}</p><a href="{{ path('app_public_chronique_show', {id: chronique.id}) }}" class="mt-auto pt-6 text-sm font-semibold text-[#8a6a18]">Découvrir la chronique →</a>
+    <header class="text-center">
+        <p class="text-[10px] uppercase tracking-[0.3em] text-mythic-gold">Récits des anciens mondes</p>
+        <h1 class="mt-3 font-mythic text-3xl text-celestial-800 sm:text-5xl">Chroniques Mythiques</h1>
+        <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600">Explorez les récits du temps celte, où les dieux marchaient parmi les hommes sous les brumes d’Avalon.</p>
+    </header>
+
+    <section class="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" aria-label="Récits mythologiques à la une">
+        {% for story in featuredStories %}
+            <article id="{{ story.slug }}" class="group scroll-mt-5 overflow-hidden rounded-2xl bg-white shadow-[0_8px_24px_rgba(52,87,109,0.1)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_14px_35px_rgba(45,70,62,0.14)]">
+                <a href="{{ path('app_public_story_show', {slug: story.slug}) }}" class="block h-full focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-mythic-gold" aria-label="Lire le récit complet : {{ story.title }}">
+                    {% if story.image %}
+                        <div class="aspect-[2/3] overflow-hidden bg-[#f3f8fc]">
+                            <img src="{{ asset(story.image) }}" alt="{{ story.imageAlt }}" class="h-full w-full object-contain object-center transition duration-300 group-hover:scale-[1.02]" loading="{{ loop.first ? 'eager' : 'lazy' }}">
+                        </div>
+                    {% else %}
+                        <div class="flex aspect-[2/3] items-center justify-center bg-[#f3f8fc] px-6 text-center text-sm text-slate-500" role="img" aria-label="Portrait de {{ story.title }} indisponible">
+                            Image indisponible
+                        </div>
+                    {% endif %}
+                    <div class="p-5">
+                    <p class="text-[9px] uppercase tracking-[0.18em] text-mythic-gold">{{ story.eyebrow }}</p>
+                    <h2 class="mt-3 font-mythic text-xl leading-7 text-celestial-800">{{ story.title }}</h2>
+                    <p class="mt-3 text-sm leading-6 text-slate-600">{{ story.summary }}</p>
+                        <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#8a6a18]">Lire le récit complet <span class="transition group-hover:translate-x-1" aria-hidden="true">→</span></span>
+                    </div>
+                </a>
             </article>
-        {% else %}<p class="col-span-full rounded-3xl bg-white px-6 py-12 text-center text-slate-500">Aucune chronique n’est encore publiée.</p>{% endfor %}
+        {% endfor %}
     </section>
+
+    {% if chroniques is not empty %}
+        <section class="mt-12" aria-labelledby="published-chronicles-title">
+            <h2 id="published-chronicles-title" class="text-center font-mythic text-2xl text-celestial-800">Chroniques préservées</h2>
+            <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {% for chronique in chroniques %}
+                    <article class="flex min-h-64 flex-col rounded-3xl border border-[#e5dfcf] bg-white p-6 shadow-[0_8px_24px_rgba(45,70,62,0.08)]">
+                        <p class="text-[9px] uppercase tracking-[0.18em] text-mythic-gold">{{ chronique.mythe.title }}</p>
+                        <h3 class="mt-3 font-mythic text-xl text-celestial-800">{{ chronique.title }}</h3>
+                        <p class="mt-4 line-clamp-5 text-sm leading-6 text-slate-600">{{ chronique.content }}</p>
+                        <a href="{{ path('app_public_chronique_show', {id: chronique.id}) }}" class="mt-auto pt-6 text-sm font-semibold text-[#8a6a18]">Découvrir la chronique →</a>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
 {% endblock %}

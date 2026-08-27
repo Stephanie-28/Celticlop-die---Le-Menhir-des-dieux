@@ -3,14 +3,58 @@
 {% block title %}Accessibilité (RGAA) — Le Menhir des Dieux{% endblock %}
 
 {% block content %}
-    <a href="{{ path('app_profile_settings') }}" class="text-sm font-semibold text-[#8a6a18]">← Retour aux paramètres du clan</a>
-    <header class="mx-auto mt-7 max-w-2xl text-center">
-        <h1 class="font-mythic text-3xl text-celestial-800 sm:text-5xl">Accessibilité (RGAA)</h1>
-        <p class="mt-4 text-sm leading-7 text-slate-600">Déclaration d’accessibilité du site Le Menhir des Dieux.</p>
+    <a href="{{ path('app_profile_settings') }}" class="mb-7 inline-flex min-h-11 items-center gap-2 rounded-xl border border-mythic-gold/40 bg-white px-4 py-2.5 text-sm font-semibold text-[#8a6a18] shadow-sm hover:bg-[#fffaf0] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-celestial-800">
+        <span aria-hidden="true">←</span> Retour aux paramètres du clan
+    </a>
+    <header class="mx-auto max-w-2xl text-center">
+        <span class="mx-auto flex size-11 items-center justify-center rounded-full bg-[#e5f0f2] text-xl text-celestial-800" aria-hidden="true">⚑</span>
+        <h1 class="mt-4 font-mythic text-3xl text-celestial-800 sm:text-5xl">Accessibilité (RGAA)</h1>
+        <p class="mt-4 text-sm leading-7 text-slate-600">Déclaration d’accessibilité du site Le Menhir des Dieux, établie en référence au Référentiel général d’amélioration de l’accessibilité.</p>
     </header>
+
     <div class="mx-auto mt-9 grid max-w-3xl gap-5">
-        <section class="rounded-2xl bg-white p-6 shadow-sm"><h2 class="font-mythic text-lg text-celestial-800">État de conformité</h2><p class="mt-3 text-sm leading-7 text-slate-600">Le site est déclaré non conforme tant qu’un audit RGAA exhaustif n’a pas établi son niveau de conformité.</p></section>
-        <section class="rounded-2xl bg-white p-6 shadow-sm"><h2 class="font-mythic text-lg text-celestial-800">Contrôles réalisés</h2><ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-600"><li>navigation au clavier et focus visible ;</li><li>structure sémantique et libellés accessibles ;</li><li>alternatives textuelles des images.</li></ul></section>
-        <section class="rounded-2xl bg-white p-6 shadow-sm"><h2 class="font-mythic text-lg text-celestial-800">Signaler un obstacle</h2><p class="mt-3 text-sm leading-7 text-slate-600">Indiquez la page concernée, l’action souhaitée et la technologie d’assistance utilisée.</p></section>
+        <section class="rounded-2xl border border-mythic-gold/25 bg-white p-5 shadow-sm sm:p-7" aria-labelledby="display-settings-title">
+            <h2 id="display-settings-title" class="font-mythic text-lg text-celestial-800">Confort de lecture</h2>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Adaptez la taille des textes à votre besoin. Votre préférence sera conservée sur cet appareil.</p>
+            {% include '_partials/_font_size_controls.html.twig' %}
+            {% include '_partials/_contrast_controls.html.twig' %}
+        </section>
+        <section class="rounded-2xl border border-mythic-gold/25 bg-white p-5 shadow-sm sm:p-7" aria-labelledby="compliance-title">
+            <h2 id="compliance-title" class="font-mythic text-lg text-celestial-800">État de conformité</h2>
+            <div class="mt-4 rounded-xl bg-[#f2f6f7] p-4">
+                <div class="flex flex-wrap items-center justify-between gap-2 text-xs"><span class="font-semibold text-forest-900">Niveau d’engagement</span><span class="rounded-full bg-[#dcebf0] px-3 py-1 text-celestial-800">Audit à réaliser</span></div>
+                <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-slate-200"><span class="block h-full w-1/4 rounded-full bg-celestial-800"></span></div>
+            </div>
+            <p class="mt-4 text-sm leading-7 text-slate-600">Le Menhir des Dieux est déclaré non conforme au RGAA tant qu’un audit complet n’a pas permis d’établir précisément son niveau de conformité.</p>
+        </section>
+
+        <section class="rounded-2xl border border-mythic-gold/25 bg-white p-5 shadow-sm sm:p-7" aria-labelledby="tests-title">
+            <h2 id="tests-title" class="font-mythic text-lg text-celestial-800">Résultats des tests</h2>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Aucun audit RGAA exhaustif n’a encore été réalisé. Des contrôles techniques sont néanmoins intégrés au développement :</p>
+            <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-700">
+                <li class="flex gap-3"><span class="text-celestial-800" aria-hidden="true">✓</span><span><strong>Navigation clavier :</strong> liens, boutons et contrôles reçoivent un indicateur de focus visible.</span></li>
+                <li class="flex gap-3"><span class="text-celestial-800" aria-hidden="true">✓</span><span><strong>Structure :</strong> titres, régions de page et libellés accessibles sont utilisés dans les interfaces publiques.</span></li>
+                <li class="flex gap-3"><span class="text-celestial-800" aria-hidden="true">✓</span><span><strong>Images :</strong> les illustrations porteuses d’information disposent d’une alternative textuelle.</span></li>
+            </ul>
+        </section>
+
+        <section class="border-l-2 border-mythic-gold bg-white p-5 shadow-sm sm:p-7" aria-labelledby="limitations-title">
+            <h2 id="limitations-title" class="font-mythic text-lg text-celestial-800">Contenus non accessibles</h2>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Les contenus suivants nécessitent encore une vérification ou une correction :</p>
+            <ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-slate-600">
+                <li>certaines animations et transitions doivent être testées avec la préférence de réduction des mouvements ;</li>
+                <li>les contrastes de tous les états interactifs doivent être audités ;</li>
+                <li>les documents PDF historiques doivent être vérifiés ou accompagnés d’une alternative accessible.</li>
+            </ul>
+        </section>
+
+        <section class="rounded-2xl border border-mythic-gold/25 bg-white p-6 text-center shadow-sm sm:p-8" aria-labelledby="accessibility-contact-title">
+            <span class="mx-auto flex size-9 items-center justify-center rounded-full bg-[#eceaf8] text-celestial-800" aria-hidden="true">✉</span>
+            <h2 id="accessibility-contact-title" class="mt-3 font-mythic text-lg text-celestial-800">Amélioration et contact</h2>
+            <p class="mx-auto mt-3 max-w-xl text-sm leading-7 text-slate-600">Si vous rencontrez un obstacle d’accessibilité, contactez l’équipe en indiquant la page concernée, l’action souhaitée et la technologie d’assistance utilisée.</p>
+            <p class="mt-5 inline-flex rounded-xl bg-slate-200 px-6 py-3 text-sm font-semibold text-slate-700">Adresse de contact à configurer</p>
+        </section>
     </div>
+
+    <div class="mt-8 text-center"><a href="{{ path('app_profile_settings') }}" class="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#8a6a18]"><span aria-hidden="true">←</span> Retour aux paramètres du clan</a></div>
 {% endblock %}

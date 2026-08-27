@@ -3,6 +3,21 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            (() => {
+                try {
+                    const size = Number.parseInt(localStorage.getItem('menhir-font-size') || '100', 10);
+                    if ([87, 100, 112, 125].includes(size)) document.documentElement.style.fontSize = `${size}%`;
+                    if (localStorage.getItem('menhir-contrast') === 'high') document.documentElement.classList.add('menhir-high-contrast');
+                } catch (_) {}
+            })();
+        </script>
+        <style>
+            html.menhir-high-contrast body > * { filter: contrast(1.28); }
+            html.menhir-high-contrast a { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
+            html.menhir-high-contrast :focus-visible { outline: 3px solid #000 !important; outline-offset: 3px !important; }
+            html.menhir-high-contrast [data-contrast-mode="high"] { box-shadow: 0 0 0 3px #fff, 0 0 0 5px #102f28; }
+        </style>
         <title>{% block title %}Le Menhir des Dieux{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
@@ -23,5 +38,41 @@
         {% block grand_druid_tools %}
             {% include '_partials/_grand_druid_menu.html.twig' %}
         {% endblock %}
+        <script>
+            (() => {
+                const sizes = [87, 100, 112, 125];
+                const getSize = () => {
+                    const current = Number.parseInt(document.documentElement.style.fontSize || '100', 10);
+                    return sizes.includes(current) ? current : 100;
+                };
+                const applySize = (size) => {
+                    document.documentElement.style.fontSize = `${size}%`;
+                    try { localStorage.setItem('menhir-font-size', String(size)); } catch (_) {}
+                    document.querySelectorAll('[data-font-status]').forEach((status) => { status.textContent = `Taille actuelle : ${size} %`; });
+                };
+                document.querySelectorAll('[data-font-action]').forEach((button) => {
+                    button.addEventListener('click', () => {
+                        const action = button.dataset.fontAction;
+                        const index = sizes.indexOf(getSize());
+                        if (action === 'reset') applySize(100);
+                        if (action === 'decrease') applySize(sizes[Math.max(0, index - 1)]);
+                        if (action === 'increase') applySize(sizes[Math.min(sizes.length - 1, index + 1)]);
+                    });
+                });
+                applySize(getSize());
+
+                const applyContrast = (mode) => {
+                    const high = mode === 'high';
+                    document.documentElement.classList.toggle('menhir-high-contrast', high);
+                    try { localStorage.setItem('menhir-contrast', high ? 'high' : 'standard'); } catch (_) {}
+                    document.querySelectorAll('[data-contrast-status]').forEach((status) => { status.textContent = `Contraste actuel : ${high ? 'renforcé' : 'standard'}`; });
+                    document.querySelectorAll('[data-contrast-mode]').forEach((button) => { button.setAttribute('aria-pressed', String(button.dataset.contrastMode === (high ? 'high' : 'standard'))); });
+                };
+                document.querySelectorAll('[data-contrast-mode]').forEach((button) => button.addEventListener('click', () => applyContrast(button.dataset.contrastMode)));
+                let savedContrast = 'standard';
+                try { savedContrast = localStorage.getItem('menhir-contrast') === 'high' ? 'high' : 'standard'; } catch (_) {}
+                applyContrast(savedContrast);
+            })();
+        </script>
     </body>
 </html>

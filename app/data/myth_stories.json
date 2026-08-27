@@ -1,0 +1,959 @@
+[
+    {
+        "slug": "cernunnos",
+        "title": "Cernunnos",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu des animaux, de la fertilité et du monde souterrain",
+        "content": [
+            "Cernunnos est représenté sur le chaudron de Gundestrup assis en position de lotus, portant des bois de cerf et tenant un torque et un serpent. Il incarne la connexion entre le monde sauvage et le monde civilisé, entre la vie et la mort. Son nom signifie « le cornu ». Il est le dieu le plus emblématique du panthéon gaulois, médiateur entre les forces de la nature et le monde des hommes."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Cernunnos"
+    },
+    {
+        "slug": "taranis",
+        "title": "Taranis",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu du tonnerre et du ciel",
+        "content": [
+            "Taranis, dont le nom signifie « tonnerre » en gaulois, est l’équivalent celtique de Jupiter. Les poètes romains le décrivaient comme un dieu terrible exigeant des sacrifices humains par le feu. Sa roue à six rayons, symbole solaire et cosmique, orne de nombreuses stèles et monnaies gauloises. Il commandait les tempêtes et protégeait les guerriers au combat."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Taranis"
+    },
+    {
+        "slug": "toutatis-teutates",
+        "title": "Toutatis (Teutates)",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu protecteur de la tribu",
+        "content": [
+            "Toutatis est le gardien de la tribu — son nom vient de teuta, « le peuple ». Il était invoqué pour protéger la communauté entière contre les ennemis. Les Romains l’assimilaient à Mars. Lucain le mentionne parmi les trois grands dieux gaulois avec Esus et Taranis, nécessitant des sacrifices sanglants où les victimes étaient noyées dans un chaudron."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Toutatis (Teutates)"
+    },
+    {
+        "slug": "esus-hesus",
+        "title": "Esus (Hesus)",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu bûcheron, possiblement dieu de la végétation et du sacrifice",
+        "content": [
+            "Esus est représenté sur le pilier des Nautes abattant un arbre avec une hache, la tête d’un taureau et trois grues apparaissant dans les branches. Lucain le décrit comme un dieu cruel exigeant des sacrifices suspendus aux arbres. Son nom pourrait signifier « le maître » ou « l’ardent ». Certains chercheurs l’associent à un dieu de la végétation et du renouveau."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Esus (Hesus)"
+    },
+    {
+        "slug": "sucellus",
+        "title": "Sucellus",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu de l’agriculture, du vin et de la forgerie",
+        "content": [
+            "Sucellus, « le bon frappeur », est représenté avec un long maillet et un tonneau, accompagné de son épouse Nantosuelta. Il est le dieu bienfaiteur de l’agriculture et du travail de la terre, protecteur des paysans et des artisans. Son maillet pouvait à la fois détruire et créer, frappant la terre pour la féconder."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Sucellus"
+    },
+    {
+        "slug": "belenus",
+        "title": "Belenus",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu guérisseur et dieu de la lumière",
+        "content": [
+            "Belenus, dont le nom signifie « le brillant » ou « l’éclatant », était l’un des dieux les plus vénérés de Gaule et de Norique. Tertullien rapporte que les Aquiléiens lui dédiaient un culte particulier. Il était invoqué pour la guérison des malades et la protection des voyageurs. La fête de Beltane pourrait être liée à son culte."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Belenus"
+    },
+    {
+        "slug": "borvo",
+        "title": "Borvo",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu des sources thermales et de la guérison",
+        "content": [
+            "Borvo (ou Bormo), « le bouillonnant », est le dieu des eaux thermales chaudes et bouillonnantes. Il était vénéré dans de nombreuses stations thermales gauloises, notamment à Bourbon-Lancy et Bourbonne-les-Bains. Son épouse était Damona, déesse de la guérison et de la fertilité. Les malades venaient dans ses sanctuaires pour y dormir et obtenir des rêves guérisseurs."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Borvo"
+    },
+    {
+        "slug": "ogmios",
+        "title": "Ogmios",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu de l’éloquence et de l’érudition",
+        "content": [
+            "Ogmios est décrit par Lucien de Samosate comme un vieillard chauve et ridé, dont la langue est reliée par des chaînes d’or aux oreilles de ses fidèles qui le suivent joyeusement. Il représente la puissance de la parole et du langage, capable d’enchaîner les esprits par l’éloquence. Il est l’équivalent gaulois de l’Ogme irlandais."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Ogmios"
+    },
+    {
+        "slug": "maponos",
+        "title": "Maponos",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu de la jeunesse et de la poésie",
+        "content": [
+            "Maponos, « le fils divin » ou « le grand jeune homme », est le dieu de la jeunesse vigoureuse. Les Romains l’assimilaient à Apollon. Il était vénéré en Gaule et en Bretagne romaine, notamment dans le nord de l’Angleterre actuelle. Son culte est étroitement lié à celui de la déesse Mà, et il incarne la renaissance perpétuelle de la vitalité."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Maponos"
+    },
+    {
+        "slug": "nodens",
+        "title": "Nodens",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu des guérisons, de la mer, de la chasse et des chiens",
+        "content": [
+            "Nodens était vénéré dans un grand sanctuaire à Lydney Park en Angleterre. Les pèlerins y venaient chercher guérison par incubation, dormant dans le temple pour recevoir des rêves oraculaires. Il est associé aux chiens de chasse et à la mer, et pourrait être une forme ancienne de Nuada irlandais et de Nudd/Lludd gallois."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Nodens"
+    },
+    {
+        "slug": "ambisagrus",
+        "title": "Ambisagrus",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu du tonnerre, des éclairs, du ciel, du vent et de la grêle",
+        "content": [
+            "Ambisagrus est un dieu gaulois de la Gaule Cisalpine, assimilé à Jupiter par les Romains. Son nom pourrait signifier « celui qui est sous les auspices ». Il cumulait les fonctions de dieu du ciel et des phénomènes atmosphériques, ancêtre des dieux dans certaines traditions."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Ambisagrus"
+    },
+    {
+        "slug": "grannus",
+        "title": "Grannus",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu de la guérison et des sources thermales",
+        "content": [
+            "Apollo Grannus était vénéré dans tout le monde celtique, depuis la Gaule jusqu’à Rome et même en Écosse. L’empereur Caracalla lui rendit un culte en 215 apr. J.-C. Son nom est apparenté au mot irlandais grian, « soleil ». Il était associé aux sources thermales et à la guérison par l’eau et la lumière."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Grannus"
+    },
+    {
+        "slug": "cissonius",
+        "title": "Cissonius",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu des échanges et du commerce",
+        "content": [
+            "Cissonius était un dieu voyageur du commerce, souvent représenté sous les traits d’un Mercury gaulois. Son nom est lié à la notion d’échange et de transaction. Il protégeait les marchands et les voyageurs le long des routes gauloises, et son culte s’étendait de la Gaule à la Germanie."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Cissonius"
+    },
+    {
+        "slug": "condatis",
+        "title": "Condatis",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu des confluences et des rivières",
+        "content": [
+            "Condatis, « celui qui réunit », présidait aux confluents des rivières, lieux sacrés où les eaux se mêlaient. Son culte était particulièrement répandu dans le nord de l’Angleterre et en Écosse. Il symbolisait l’union et la réconciliation, la fusion des eaux reflétant l’harmonie entre les peuples."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Condatis"
+    },
+    {
+        "slug": "dis-pater",
+        "title": "Dis Pater",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu souterrain, dieu des morts et ancêtre des Gaulois",
+        "content": [
+            "Selon Jules César, les Gaulois se disaient tous descendants de Dis Pater, dieu des enfers. Cette croyance expliquait leur mépris de la mort : ils se savaient issus d’un dieu et retournaient à lui après leur trépas. C’est ce dieu que les druides invoquaient lors de la fête du Samain, lorsque le monde des vivants et celui des morts se rejoignaient."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Dis Pater"
+    },
+    {
+        "slug": "gobannus",
+        "title": "Gobannus",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu forgeron",
+        "content": [
+            "Gobannus (ou Cobannus) est le dieu forgeron du panthéon gaulois. Son nom signifie « le forgeron ». Il était le patron de tous les artisans travaillant le métal, créateur d’armes magiques et d’objets sacrés. Une inscription trouvée à Berne mentionne un certain Gobannus, forgeron venu de la lointaine Bretagne."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Gobannus"
+    },
+    {
+        "slug": "smertrios",
+        "title": "Smertrios",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu de la guerre",
+        "content": [
+            "Smertrios est représenté sur le chaudron de Gundestrup comme un guerrier brandissant une massue et combattant un serpent. Son nom signifie « le pourvoyeur » ou « celui qui pourvoit », suggérant un lien entre la guerre et l’abondance qu’elle procure. Il est parfois assimilé à Mars ou à Hercule."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Smertrios"
+    },
+    {
+        "slug": "moccus",
+        "title": "Moccus",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Protecteur des sangliers et des cochons",
+        "content": [
+            "Moccus, « le sanglier », était le dieu protecteur du sanglier, animal emblématique de la Gaule et symbole de force et de courage. Le sanglier était l’animal le plus représenté dans l’art gaulois, ornant les casques de guerre et les étendards. Moccus veillait sur les troupeaux et garantissait la prospérité de l’élevage."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Moccus"
+    },
+    {
+        "slug": "mullo",
+        "title": "Mullo",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu associé à Apollon, dieu guérisseur",
+        "content": [
+            "Mullo était vénéré en Gaule, notamment en Normandie et en Bretagne. Associé à Apollon, il combinait les fonctions de guérisseur et de dieu solaire. Son nom pourrait être apparenté au mot gaulois désignant le mulet, animal hybride puissant."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Mullo"
+    },
+    {
+        "slug": "nemausus",
+        "title": "Nemausus",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu vénéré à Nîmes",
+        "content": [
+            "Nemausus est le dieu éponyme de Nîmes, dont le nom signifie « celui du sanctuaire » ou « du bois sacré ». Il était le protecteur de la cité et de sa source sacrée. Les Romains lui dédièrent le temple de la Maison Carrée, l’un des monuments antiques les mieux conservés de France."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Nemausus"
+    },
+    {
+        "slug": "atepomarus",
+        "title": "Atepomarus",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu équestre",
+        "content": [
+            "Atepomarus, « le grand cavalier » ou « possesseur de grands chevaux », est un dieu lié au cheval, vénéré en Bourgogne et dans l’Indre. Il était invoqué pour la protection des cavaliers et la fécondité des équidés. Son culte témoigne de l’importance du cheval dans la culture gauloise."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Atepomarus"
+    },
+    {
+        "slug": "belatucadros",
+        "title": "Belatucadros",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu de la guerre",
+        "content": [
+            "Belatucadros, « le brillant au combat » ou « le brillant tueur », était vénéré dans le nord de l’Angleterre, particulièrement par les soldats romains d’origine celte. Plus de cinquante inscriptions lui sont dédiées. Il était invoqué pour la victoire au combat et la protection des frontières."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Belatucadros"
+    },
+    {
+        "slug": "ialonus",
+        "title": "Ialonus",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu des prairies et des clairières",
+        "content": [
+            "Ialonus présidait aux espaces ouverts, aux clairières dans les forêts où les Celtes aimaient établir leurs sanctuaires. Son nom est lié à la clairière et au champ défriché. Il garantissait la fertilité des pâturages et la protection des espaces sacrés en pleine nature."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Ialonus"
+    },
+    {
+        "slug": "abellio",
+        "title": "Abellio",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Dieu connecté aux pommiers",
+        "content": [
+            "Abellio était vénéré dans les Pyrénées françaises comme dieu des pommiers. La pomme est un fruit symbolique dans la mythologie celtique, associé à l’immortalité et à l’Autre Monde. L’île d’Avalon, « l’île des pommes », porte un nom apparenté."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Abellio"
+    },
+    {
+        "slug": "artio",
+        "title": "Artio",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse des ours",
+        "content": [
+            "Artio est représentée par une statue trouvée à Berne (Suisse) montrant une déesse assise devant une ourse, lui offrant des fruits dans une corbeille. Son nom vient du gaulois artos, « ours ». Elle protégeait les ours et incarnait la force sauvage et la fécondité de la nature."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Artio"
+    },
+    {
+        "slug": "arduinna",
+        "title": "Arduinna",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse de la forêt d’Ardenne",
+        "content": [
+            "Arduinna est la déesse éponyme de la forêt des Ardennes. Elle était représentée chevauchant un sanglier, un arc à la main. Les Romains l’assimilaient à Diane. Elle protégeait la faune et la flore de sa forêt, et les chasseurs devaient lui rendre un culte avant de pénétrer dans ses bois."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Arduinna"
+    },
+    {
+        "slug": "epona",
+        "title": "Epona",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse de la fertilité et protectrice des chevaux",
+        "content": [
+            "Epona est la seule déesse gauloise intégrée au panthéon romain avec un culte officiel. Représentée chevauchant une jument ou assise entre deux poulains, elle protégeait les cavaliers, les chevaux et les mulets. Son culte s’étendit dans tout l’Empire romain. Elle était la déesse du voyage, tant terrestre que spirituel."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Epona"
+    },
+    {
+        "slug": "belisama",
+        "title": "Belisama",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse des lacs, des rivières, du feu, des arts et de la lumière",
+        "content": [
+            "Belisama, « la très brillante », est l’épouse de Belenus. Elle présidait aux eaux, au feu et aux arts. Son nom est apparenté au sanskrit bhas, « briller ». Elle était vénérée en Gaule, notamment dans la région de Saint-Lizigne, où une inscription la dédie à Minerve Belisama."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Belisama"
+    },
+    {
+        "slug": "rosmerta",
+        "title": "Rosmerta",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse de la fertilité et de l’abondance",
+        "content": [
+            "Rosmerta, « la bonne pourvoyeuse », est la parèdre de Mercure gaulois. Représentée avec une corne d’abondance et un caducée, elle garantissait la prospérité et la richesse matérielle. Son association avec Mercure en fait la déesse du commerce florissant et de l’abondance partagée."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Rosmerta"
+    },
+    {
+        "slug": "nantosuelta",
+        "title": "Nantosuelta",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse de la nature, de la terre, du feu et de la fertilité",
+        "content": [
+            "Nantosuelta, « la rivière sinueuse » ou « la vallée ensoleillée », est la parèdre de Sucellus. Elle porte une maison miniature sur un pépie, symbole de foyer et de domesticité. Elle représente la fécondité de la terre et la protection du foyer domestique."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Nantosuelta"
+    },
+    {
+        "slug": "sequana",
+        "title": "Sequana",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse de la Seine",
+        "content": [
+            "Sequana est la déesse éponyme de la Seine, vénérée à la source de la rivière près de Dijon. Les pèlerins lui offraient des ex-voto en bois représentant des parties du corps malade. Elle est représentée debout sur une barque, coiffée d’un diadème, accompagnée d’un canard."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Sequana"
+    },
+    {
+        "slug": "sulis",
+        "title": "Sulis",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse des thermes de Bath",
+        "content": [
+            "Sulis Minerva est vénérée à Bath (Aquae Sulis) en Angleterre. Son nom est apparenté au mot celte pour « soleil » ou « œil ». Elle combinait les attributs d’une déesse solaire et guérisseuse. Les Romains l’assimilaient à Minerve. Les tablettes de malédiction retrouvées dans ses thermes témoignent de sa puissance."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Sulis"
+    },
+    {
+        "slug": "damona",
+        "title": "Damona",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse de la guérison, de la fertilité et de l’incubation",
+        "content": [
+            "Damona, « la grande vache », est la parèdre de Borvo et de Moritasgus. Elle représentait la fécondité et la guérison, la vache étant symbole de maternité et d’abondance. Les malades venaient dans ses sanctuaires dormir auprès des sources thermales pour recevoir des rêves guérisseurs."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Damona"
+    },
+    {
+        "slug": "andraste",
+        "title": "Andraste",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse de la victoire et de la guerre",
+        "content": [
+            "Andraste, « l’invincible », est la déesse de la victoire invoquée par la reine Boadicée (Boudicca) lors de sa révolte contre les Romains en 60 apr. J.-C. Boadicée relâcha un lièvre en son honneur avant la bataille. La déesse exigeait des sacrifices de sang pour garantir la victoire."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Andraste"
+    },
+    {
+        "slug": "andarta",
+        "title": "Andarta",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse de la guerre",
+        "content": [
+            "Andarta, « l’ourse puissante », est une déesse guerrière vénérée par les Voconces dans les Alpes. Son nom combine and-, « puissant », et artos, « ours ». L’ours était l’animal emblématique de la force et du courage au combat."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Andarta"
+    },
+    {
+        "slug": "cathubodua",
+        "title": "Cathubodua",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse de la guerre",
+        "content": [
+            "Cathubodua, « la corneille du combat », est la version gauloise de la Badb irlandaise. Elle apparaissait sur les champs de bataille sous forme de corbeau, annonçant la mort et la victoire. Son nom est apparenté à Boudicca, « la victorieuse ». Elle lavait les armes sanglantes dans les rivières."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Cathubodua"
+    },
+    {
+        "slug": "bricta-brixta",
+        "title": "Bricta (Brixta)",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse aquatique, consort de Luxovius",
+        "content": [
+            "Bricta était vénérée à Luxeuil-les-Bains, où elle était la parèdre du dieu Luxovius. Son nom pourrait signifier « la magicienne » ou « l’éloquente ». Elle présidait aux sources thermales et à la magie de l’eau guérisseuse."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Bricta (Brixta)"
+    },
+    {
+        "slug": "erecura-aeracura",
+        "title": "Erecura (Aeracura)",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse terrestre de la mort et de la fertilité",
+        "content": [
+            "Erecura est une déesse souterraine associée à la fois à la mort et à la fertilité, ce double aspect reflétant la croyance celtique en la régénération. Elle était vénérée dans les régions alpines et en Germanie supérieure. Les Romains l’assimilaient à Proserpine."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Erecura (Aeracura)"
+    },
+    {
+        "slug": "cailleach",
+        "title": "Cailleach",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Sorcière créatrice, destructrice et plus vieil ancêtre",
+        "content": [
+            "Cailleach, « la vieille femme », est une figure majeure du folklore écossais et irlandais. Créatrice des montagnes et des lacs, elle régnait sur l’hiver du Samain à Beltane. Elle pouvait transformer les hommes en pierre et commander aux tempêtes. Son bâton gelait le sol à son passage."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Cailleach"
+    },
+    {
+        "slug": "suleviae",
+        "title": "Suleviae",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Triades de déesses mères protectrices",
+        "content": [
+            "Les Suleviae étaient des déesses mères vénérées en triades dans tout le monde celtique. Elles protégeaient la maternité, la famille et la communauté. Leur nom pourrait signifier « les bonnes dirigeantes ». Elles apparaissent dans des inscriptions de Gaule, de Germanie et de Bretagne romaine."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Suleviae"
+    },
+    {
+        "slug": "dea-matrona",
+        "title": "Dea Matrona",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse mère de la Marne",
+        "content": [
+            "Dea Matrona est la déesse mère de la rivière Marne. Elle incarnait la fécondité des eaux et la maternité. Son culte, associé aux sources et aux rivières, reflète la vénération celtique pour les eaux comme sources de vie."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Dea Matrona"
+    },
+    {
+        "slug": "adsullata",
+        "title": "Adsullata",
+        "eyebrow": "Tradition gauloise",
+        "summary": "Déesse du fleuve Savu",
+        "content": [
+            "Adsullata est une déesse fluviale vénérée dans la région du fleuve Save (Savu) dans les Balkans. Elle présidait aux eaux courantes et à leur pouvoir purificateur et fécondateur."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Adsullata"
+    },
+    {
+        "slug": "dagda",
+        "title": "Dagda",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Dieu-père, dieu du savoir, de la magie et de la fertilité",
+        "content": [
+            "Le Dagda, « le bon dieu » ou « le dieu magnifique », est le chef des Tuatha Dé Danann. Son chaudron jamais vide nourrissait tous les convives, sa massue tuait d’un côté et ressuscitait de l’autre, et sa harpe commandait aux saisons. Il était à la fois guerrier, druide et père nourricier."
+        ],
+        "image": "images/dieux/dagda-portrait.png",
+        "imageAlt": "Illustration de Dagda"
+    },
+    {
+        "slug": "lugh",
+        "title": "Lugh",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Dieu du soleil, des arts, de la guerre et de l’habileté",
+        "content": [
+            "Lugh Lamfada, « Lugh au long bras », maître de tous les arts, tua Balor lors de la deuxième bataille de Mag Tuired en lui crevant l’œil avec une fronde. La fête de Lughnasadh (1er août) lui est dédiée. Il est le dieu de la lumière et de la compétence en toute chose."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Lugh"
+    },
+    {
+        "slug": "nuada",
+        "title": "Nuada",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Roi des Tuatha Dé Danann, dieu de la royauté et de la guerre",
+        "content": [
+            "Nuada Airgetlám, « Nuada au bras d’argent », perdit son bras lors de la première bataille de Mag Tuired. Déchu de la royauté car un roi devait être parfait, il reçut un bras d’argent du médecin Diancecht. Plus tard, Miach lui greffa un vrai bras, mais cette guérison suscita la jalousie du dieu."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Nuada"
+    },
+    {
+        "slug": "ogme-oghma",
+        "title": "Ogme (Oghma)",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Dieu de l’éloquence, de l’érudition et de la force",
+        "content": [
+            "Ogme est l’inventeur de l’écriture ogamique, le premier alphabet irlandais gravé sur les pierres. Dans la bataille de Mag Tuired, il captura un tiers de l’armée des Fomoires par la seule force de son éloquence. Il est le frère du Dagda et l’équivalent irlandais d’Ogmios."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Ogme (Oghma)"
+    },
+    {
+        "slug": "angus-aengus",
+        "title": "Angus (Aengus)",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Dieu de l’amour, de la jeunesse et de la poésie",
+        "content": [
+            "Angus Og, « le jeune Angus », vit en rêve une femme qu’il aima désespérément. Il la chercha pendant des années et la trouva sous forme de cygne au lac du Béc de la Dragonne. Il se transforma en cygne à son tour et ils s’envolèrent ensemble, chantant un air qui endormait les auditeurs trois jours durant."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Angus (Aengus)"
+    },
+    {
+        "slug": "mider",
+        "title": "Mider",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Dieu de l’Autre Monde et de l’amour",
+        "content": [
+            "Mider épousa Etain, mais celle-ci fut transformée en mouche par l’épouse jalouse de Mider. Pendant mille ans, Etain vécut sous cette forme avant de redevenir humaine. Leur histoire tragique illustre les liens entre l’Autre Monde et le monde des mortels."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Mider"
+    },
+    {
+        "slug": "manannan-mac-lir",
+        "title": "Manannan mac Lir",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Dieu de la mer et gardien de l’Autre Monde",
+        "content": [
+            "Manannan mac Lir, « fils de Lir le dieu de la mer », chevauchait les flots sur un char tiré par un cheval blanc. Son manteau pouvait se changer en brume, son bateau obéissait à sa pensée, et son cochon magique pouvait être mangé et ressuscité chaque jour."
+        ],
+        "image": "images/mythes/voyage-bran.png",
+        "imageAlt": "Illustration de Manannan mac Lir"
+    },
+    {
+        "slug": "goibniu",
+        "title": "Goibniu",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Dieu forgeron et brasseur",
+        "content": [
+            "Goibniu fabriquait des armes invincibles et des armures indestructibles pour les Tuatha Dé Danann. Sa bière conférait l’immortalité à ceux qui la buvaient. Lors de la bataille de Mag Tuired, il remplaçait chaque lance brisée par une nouvelle en un instant."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Goibniu"
+    },
+    {
+        "slug": "diancecht",
+        "title": "Diancecht",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Dieu médecin et guérisseur",
+        "content": [
+            "Diancecht créa le puits de Santé où les guerriers morts pouvaient être ressuscités, tant que leur tête n’était pas coupée. Il fabriqua le bras d’argent de Nuada. Il tua son propre fils Miach par jalousie, car celui-ci avait guéri Nuada en recréant un vrai bras."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Diancecht"
+    },
+    {
+        "slug": "balor",
+        "title": "Balor",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Roi des Fomoires, dieu de la mort",
+        "content": [
+            "Balor, le dieu Fomoire à l’œil destructeur, avait un œil dont le regard tuait instantanément. Quatre hommes étaient nécessaires pour soulever sa paupière. Une prophétie annonçait qu’il serait tué par son petit-fils. Lugh, son petit-fils, l’accomplit en lui lançant une pierre dans l’œil."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Balor"
+    },
+    {
+        "slug": "cian",
+        "title": "Cian",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Père de Lugh, guerrier des Tuatha Dé Danann",
+        "content": [
+            "Cian, père de Lugh, fut assassiné par les trois fils de Tuireann qu’il avait rencontrés sous forme de cochon. En mourant, il exigea un légitime paiement (eric). Lugh imposa alors aux meurtriers huit épreuves impossibles, dont aucune ne pouvait être accomplie sans périr."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Cian"
+    },
+    {
+        "slug": "the-morrigan",
+        "title": "The Morrigan",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Déesse de la guerre, du destin et de la mort",
+        "content": [
+            "La Morrigan, « la grande reine », est une déesse triple (Badb, Macha, Nemain) qui apparaissait sur les champs de bataille sous forme de corbeau. Elle lava les armes sanglantes de Cúchulainn avant sa mort, annonçant sa fin. Elle est la prophétesse suprême de la guerre et du destin."
+        ],
+        "image": "images/mythes/cycle-ulster.png",
+        "imageAlt": "Illustration de The Morrigan"
+    },
+    {
+        "slug": "brigid",
+        "title": "Brigid",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Déesse du feu, de la poésie, de la forge et de la guérison",
+        "content": [
+            "Brigid, fille du Dagda, est la déesse triple du feu : feu de l’inspiration poétique, feu de la forge, et feu du foyer. Son culte était si profond que l’Église la christianisa en sainte Brigitte. Sa croix tressée en roseaux est encore accrochée dans les foyers irlandais aujourd’hui."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Brigid"
+    },
+    {
+        "slug": "macha",
+        "title": "Macha",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Déesse de la guerre, de la souveraineté et de la fertilité",
+        "content": [
+            "Macha, sous sa forme de jument, courut plus vite que les chevaux du roi d’Ulster alors qu’elle était enceinte. Après sa victoire, elle accoucha de jumeaux et maudit les hommes d’Ulster de ressentir les douleurs de l’enfantement pendant cinq générations. Cette faiblesse coûta cher lors de la razzia des vaches de Cooley."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Macha"
+    },
+    {
+        "slug": "aine",
+        "title": "Aine",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Déesse de l’été, de l’amour et de la souveraineté",
+        "content": [
+            "Aine est la reine des fées du mont Knockainey. Elle fêtait le solstice d’été avec des torches et des feux de joie. Le roi Ailill Olom la viola, et elle le mordit à l’oreille, le rendant désormais incapable de régner, car un roi borgne ou blessé ne pouvait régner en Irlande."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Aine"
+    },
+    {
+        "slug": "danu",
+        "title": "Danu",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Déesse mère des Tuatha Dé Danann",
+        "content": [
+            "Danu est la déesse mère primordiale, ancêtre de la tribu des dieux, les Tuatha Dé Danann, littéralement « les gens de la déesse Danu ». Elle incarne la terre féconde et les eaux nourricières. Peu de mythes la mentionnent directement, mais son nom est porté par la rivière Danube et par le Don écossais."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Danu"
+    },
+    {
+        "slug": "badb",
+        "title": "Badb",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Déesse de la guerre, aspect de la Morrigan",
+        "content": [
+            "Badb, « la corneille », est l’un des trois aspects de la Morrigan. Elle apparaissait sous forme de corneille sur les épaules des guerriers au combat, semant la confusion dans les rangs ennemis. Après la bataille de Mag Tuired, elle chanta la victoire et la paix à venir."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Badb"
+    },
+    {
+        "slug": "nemain",
+        "title": "Nemain",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Déesse de la panique au combat",
+        "content": [
+            "Nemain, « la frénétique », est l’aspect de la Morrigan qui semait la terreur et la confusion parmi les guerriers. Son cri perçant faisait tomber les armes des mains des combattants. Cent guerriers pouvaient mourir de peur rien qu’en entendant sa voix."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Nemain"
+    },
+    {
+        "slug": "boann",
+        "title": "Boann",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Déesse de la rivière Boyne",
+        "content": [
+            "Boann défia l’interdiction de s’approcher du puits de la sagesse de son mari Nechtan. L’eau jaillit et la poursuivit, créant la rivière Boyne. Elle noya un chien, un sanglier et son propre chien Lapoé. C’est dans cette rivière que Finn Mac Cumhaill attrapa le saumon de la sagesse."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Boann"
+    },
+    {
+        "slug": "eriu",
+        "title": "Eriu",
+        "eyebrow": "Tradition irlandaise",
+        "summary": "Déesse de la souveraineté de l’Irlande",
+        "content": [
+            "Eriu, avec ses sœurs Banba et Fodla, est l’une des trois déesses éponymes de l’Irlande. Quand les Milesiens envahirent l’île, elle leur demanda de donner son nom au pays. Amorgen accepta, et l’Irlande (Eire) porte son nom depuis."
+        ],
+        "image": "images/placeholders/pantheon-irlandais.png",
+        "imageAlt": "Illustration de Eriu"
+    },
+    {
+        "slug": "math-fab-mathonwy",
+        "title": "Math fab Mathonwy",
+        "eyebrow": "Tradition galloise",
+        "summary": "Roi et magicien du Gwynedd, dieu de la magie",
+        "content": [
+            "Math devait garder les pieds dans le giron d’une vierge sauf en temps de guerre. Quand sa nièce Goewin fut violée par ses neveux Gilfaethwy et Gwydion, il les punit en les transformant tour à tour en animaux, leur faisant engendrer des enfants. Il créa Blodeuwedd, la femme-fleur, pour son neveu Llew Llaw Gyffes."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Math fab Mathonwy"
+    },
+    {
+        "slug": "gwydion",
+        "title": "Gwydion",
+        "eyebrow": "Tradition galloise",
+        "summary": "Magicien et guerrier, dieu de la magie et de la poésie",
+        "content": [
+            "Gwydion est le plus grand magicien du Mabinogi. Il vola les cochons d’Arawn pour provoquer une guerre, transforma les arbres en armée, et créa Blodeuwedd à partir de fleurs. Il enseigna la poésie et la magie à son neveu Llew, et l’aath arma lors de son initiation."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Gwydion"
+    },
+    {
+        "slug": "llew-llaw-gyffes",
+        "title": "Llew Llaw Gyffes",
+        "eyebrow": "Tradition galloise",
+        "summary": "Héros divin, dieu solaire",
+        "content": [
+            "Llew, « le lion à la main habile », équivalent gallois de Lugh, ne pouvait être tué ni debout ni couché, ni à pied ni à cheval, ni de jour ni de nuit, ni à l’intérieur ni à l’extérieur. Sa femme Blodeuwedd le trahit et il fut transpercé d’une lance, transformé en aigle avant d’être sauvé par Gwydion."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Llew Llaw Gyffes"
+    },
+    {
+        "slug": "arawn",
+        "title": "Arawn",
+        "eyebrow": "Tradition galloise",
+        "summary": "Roi d’Annwfn (l’Autre Monde gallois)",
+        "content": [
+            "Arawn, seigneur d’Annwfn, échangea son apparence avec Pwyll pendant un an pour combattre Hafgan, son rival. Pwyll réussit et gagna le titre de Pen Annwfn, « Tête de l’Autre Monde ». Arawn possédait des chiens de chasse blancs aux oreilles rouges, signe de leur origine surnaturelle."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Arawn"
+    },
+    {
+        "slug": "pwyll",
+        "title": "Pwyll",
+        "eyebrow": "Tradition galloise",
+        "summary": "Prince de Dyfed, seigneur d’Annwfn",
+        "content": [
+            "Pwyll rencontra Arawn en chassant et accepta d’échanger ses apparences pendant un an. Il vainquit Hafgan sans convoiter le royaume, gagnant le respect d’Arawn. Plus tard, il épousa Rhiannon, qu’il suivit jusque dans l’Autre Monde pour la gagner."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Pwyll"
+    },
+    {
+        "slug": "rhiannon",
+        "title": "Rhiannon",
+        "eyebrow": "Tradition galloise",
+        "summary": "Déesse équestre et de la souveraineté",
+        "content": [
+            "Rhiannon apparut à Pwyll chevauchant une jument blanche que personne ne pouvait rattraper, même au pas. Accusée à tort d’avoir tué son fils Pryderi, elle fut condamnée à porter les visiteurs sur son dos comme une jument. Ses oiseaux chantaient si bien qu’ils pouvaient réveiller les morts et endormir les vivants."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Rhiannon"
+    },
+    {
+        "slug": "bran-le-beni-bendigeidfran",
+        "title": "Bran le Béni (Bendigeidfran)",
+        "eyebrow": "Tradition galloise",
+        "summary": "Géant roi de Bretagne, dieu protecteur",
+        "content": [
+            "Bran était si grand qu’aucun bâtiment ne pouvait le contenir. Mortellement blessé en Irlande, il ordonna qu’on lui coupât la tête et qu’on la ramenât en Bretagne. Sa tête parla pendant quatre-vingt-sept ans, offrant compagnie et prophéties. Son nom signifie « corbeau » et les corbeaux de la Tour de Londres sont considérés comme ses messagers."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Bran le Béni (Bendigeidfran)"
+    },
+    {
+        "slug": "branwen",
+        "title": "Branwen",
+        "eyebrow": "Tradition galloise",
+        "summary": "Déesse de l’amour et de la beauté",
+        "content": [
+            "Branwen, sœur de Bran, fut donnée en mariage au roi d’Irlande Matholwch. Maltraitée par le forgeron de la cour irlandaise, elle envoya un étoile de mer à Bran pour lui demander secours. La guerre qui s’ensuivit détruisit les deux royaumes, et Branwen mourut de chagrin en voyant le carnage."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Branwen"
+    },
+    {
+        "slug": "cerridwen",
+        "title": "Cerridwen",
+        "eyebrow": "Tradition galloise",
+        "summary": "Déesse de la magie, de la sagesse et de la transformation",
+        "content": [
+            "Cerridwen prépara un chaudron de science et d’inspiration pendant un an et un jour pour son fils Afagddu. Le jeune Gwion, chargé de remuer, avala les trois gouttes sacrées. Cerridwen le poursuivit à travers de multiples transformations avant de l’avaler et de le renaître sous le nom de Taliesin, le plus grand barde du pays de Galles."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Cerridwen"
+    },
+    {
+        "slug": "taliesin",
+        "title": "Taliesin",
+        "eyebrow": "Tradition galloise",
+        "summary": "Barde suprême, dieu de la poésie et de l’inspiration",
+        "content": [
+            "Taliesin, « le front brillant », naquit de Cerridwen après qu’elle eut avalé Gwion. Il flotta sur la mer dans un sac de cuir et fut pêché par le prince Elffin. Il devint le plus grand barde gallois, connaissant l’histoire du monde depuis la création. Ses poésies sont encore étudiées aujourd’hui."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Taliesin"
+    },
+    {
+        "slug": "arianrhod",
+        "title": "Arianrhod",
+        "eyebrow": "Tradition galloise",
+        "summary": "Déesse de la lune, de la souveraineté et du destin",
+        "content": [
+            "Arianrhod, « roue d’argent », refusa de donner un nom et des armes à son fils Llew Llaw Gyffes. Gwydion trompa son interdit en déguisant Llew. Arianrhod imposa alors qu’il n’eût jamais d’épouse humaine. Gwydion et Math créèrent Blodeuwedd à partir de fleurs de chêne, de genêt et de reine-des-prés."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Arianrhod"
+    },
+    {
+        "slug": "don",
+        "title": "Don",
+        "eyebrow": "Tradition galloise",
+        "summary": "Déesse mère du panthéon gallois",
+        "content": [
+            "Don est la déesse mère de la tradition galloise, équivalente de la Dana irlandaise. Ses enfants forment la famille divine : Gwydion, Gilfaethwy, Arianrhod et Amathaon. La constellation de Cassiopée était appelée « la Cour d’Arianrhod », fille de Don."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Don"
+    },
+    {
+        "slug": "blodeuwedd",
+        "title": "Blodeuwedd",
+        "eyebrow": "Tradition galloise",
+        "summary": "Femme-fleur, déesse du printemps et de la trahison",
+        "content": [
+            "Blodeuwedd fut créée par Math et Gwydion à partir de fleurs pour être l’épouse de Llew. Elle tomba amoureuse du chasseur Gronw Pebyr et conspira pour tuer son mari. Pour sa trahison, Gwydion la transforma en hibou, oiseau de la nuit, condamnée à ne jamais paraître au jour."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Blodeuwedd"
+    },
+    {
+        "slug": "lludd-nudd",
+        "title": "Lludd (Nudd)",
+        "eyebrow": "Tradition galloise",
+        "summary": "Dieu de la guerre et de la souveraineté",
+        "content": [
+            "Lludd Llaw Eraint, « Lludd à la main d’argent », équivalent gallois de Nuada, résolut les trois fléaux de Bretagne : les Coraniaid, le cri effrayant et la disparition des vivres. Son frère Llevelys l’aida à vaincre un dragon qui détruisait son royaume en l’enivrant dans un puits de miel."
+        ],
+        "image": "images/placeholders/pantheon-gallois.png",
+        "imageAlt": "Illustration de Lludd (Nudd)"
+    },
+    {
+        "slug": "endovelicus",
+        "title": "Endovelicus",
+        "eyebrow": "Tradition celtibère et lusitanienne",
+        "summary": "Dieu suprême de la santé et de la guérison",
+        "content": [
+            "Endovelicus était le dieu le plus vénéré de Lusitanie, avec un grand sanctuaire à Alentejo. Les pèlerins y dormaient pour recevoir des rêves guérisseurs. Il était à la fois dieu de la santé et dieu suprême, témoin de l’importance de la guérison dans la religion lusitanienne."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Endovelicus"
+    },
+    {
+        "slug": "ataegina",
+        "title": "Ataegina",
+        "eyebrow": "Tradition celtibère et lusitanienne",
+        "summary": "Déesse de la renaissance, de la fertilité et de l’Autre Monde",
+        "content": [
+            "Ataegina, dont le nom signifie « renaissance » ou « renouveau », est la déesse lusitanienne de la fertilité et du cycle de la vie. Elle était associée à Proserpine par les Romains. Son culte était centré sur le retour du printemps et la régénération de la nature."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Ataegina"
+    },
+    {
+        "slug": "bandua",
+        "title": "Bandua",
+        "eyebrow": "Tradition celtibère et lusitanienne",
+        "summary": "Dieu de la guerre et protecteur des cités",
+        "content": [
+            "Bandua était un dieu guerrier vénéré en Lusitanie et en Galice, souvent associé à Mars. Plus de vingt inscriptions lui sont dédiées. Son nom pourrait être apparenté au mot celte bandua, « le lieur », suggérant un dieu qui lie les membres de la tribu."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Bandua"
+    },
+    {
+        "slug": "reue",
+        "title": "Reue",
+        "eyebrow": "Tradition celtibère et lusitanienne",
+        "summary": "Dieu des rivières et de la souveraineté",
+        "content": [
+            "Reue était vénéré dans le nord du Portugal comme dieu des eaux et de la souveraineté. Son nom est apparenté au mot celte pour « rivière ». Il était invoqué pour la protection des sources et des cours d’eau."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Reue"
+    },
+    {
+        "slug": "trebaruna",
+        "title": "Trebaruna",
+        "eyebrow": "Tradition celtibère et lusitanienne",
+        "summary": "Déesse de la maison, du foyer et de la bataille",
+        "content": [
+            "Trebaruna est une déesse lusitanienne protectrice du foyer et de la bataille, dont le nom signifie « l’épouse de la maison ». Elle combinait la protection domestique et la guerre défensive, reflétant la double préoccupation des familles lusitaniennes."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Trebaruna"
+    },
+    {
+        "slug": "nabia-navia",
+        "title": "Nabia (Navia)",
+        "eyebrow": "Tradition celtibère et lusitanienne",
+        "summary": "Déesse de l’eau et de la fertilité de la terre",
+        "content": [
+            "Nabia est une déesse des eaux vénérée en Lusitanie et en Galice. Son nom est apparenté au mot celte pour « rivière ». Plusieurs rivières de la péninsule Ibérique portent des noms dérivés du sien, témoignant de l’importance de son culte."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Nabia (Navia)"
+    },
+    {
+        "slug": "cossus-cosus",
+        "title": "Cossus (Cosus)",
+        "eyebrow": "Tradition celtibère et lusitanienne",
+        "summary": "Dieu guerrier et protecteur",
+        "content": [
+            "Cossus était un dieu guerrier vénéré par les Callaeci et les Lusitaniens, souvent associé à Mars. Son nom pourrait être apparenté au mot celte désignant le buisson ou l’épine, symbole de défense naturelle."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Cossus (Cosus)"
+    },
+    {
+        "slug": "lugus",
+        "title": "Lugus",
+        "eyebrow": "Tradition celtibère et lusitanienne",
+        "summary": "Dieu polyvalent de la lumière et des arts",
+        "content": [
+            "Lugus est la forme celtibère de Lugh, vénéré dans la péninsule Ibérique. La ville de Lugo en Galice porte son nom. Il était le dieu de la lumière, des arts et du commerce, maître de toutes les compétences comme son homologue irlandais."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Lugus"
+    },
+    {
+        "slug": "arubianus",
+        "title": "Arubianus",
+        "eyebrow": "Tradition continentale",
+        "summary": "Dieu germano-serbe de fertilité du champ labouré",
+        "content": [
+            "Arubianus est un dieu de la fertilité agricole vénéré dans les régions danubiennes. Son nom est apparenté au mot celte désignant le champ labouré."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Arubianus"
+    },
+    {
+        "slug": "latobius",
+        "title": "Latobius",
+        "eyebrow": "Tradition continentale",
+        "summary": "Dieu local de tribu serbe",
+        "content": [
+            "Latobius est un dieu montagnard vénéré dans les Balkans, protecteur des tribus locales et des hauteurs."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Latobius"
+    },
+    {
+        "slug": "nehalennia",
+        "title": "Nehalennia",
+        "eyebrow": "Tradition continentale",
+        "summary": "Déesse du peuple vivant avec la mer",
+        "content": [
+            "Nehalennia était vénérée sur les côtes de la mer du Nord par les marins et les marchands. Plus de trois cents autels lui ont été dédiés aux Pays-Bas. Elle protégeait les voyages maritimes et garantissait l’abondance du commerce."
+        ],
+        "image": "images/placeholders/pantheon-gaulois.png",
+        "imageAlt": "Illustration de Nehalennia"
+    }
+]
