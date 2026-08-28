@@ -50,7 +50,17 @@
                         <section aria-labelledby="favorites-{{ key }}">
                             <div class="flex items-center justify-between gap-3"><h3 id="favorites-{{ key }}" class="font-mythic text-sm uppercase tracking-[0.08em] text-[#526961]">{{ group.label }}</h3><a href="{{ path('app_public_sanctuary') }}#{{ key }}" class="text-[9px] text-[#8a6a18]">Voir tout</a></div>
                             <div class="mt-2 grid grid-cols-3 gap-2 sm:gap-3">
-                                {% for item in group.items|slice(0, 3) %}<article class="min-w-0 overflow-hidden rounded-xl border border-[#e4dfd2] bg-white shadow-[0_5px_14px_rgba(45,60,66,0.06)]">{% if item.image %}<img src="{{ asset(item.image) }}" alt="" class="aspect-square w-full object-cover">{% endif %}<p class="truncate px-2 py-2 text-[10px] text-[#344853]">{{ item.label }}</p></article>{% else %}<p class="col-span-3 rounded-xl border border-dashed border-[#ddd7c8] px-3 py-5 text-center text-[10px] text-slate-400">Aucun favori.</p>{% endfor %}
+                                {% for item in group.items|slice(0, 3) %}
+                                    <article class="group min-w-0 overflow-hidden rounded-xl border border-[#e4dfd2] bg-white shadow-[0_5px_14px_rgba(45,60,66,0.06)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_9px_22px_rgba(45,60,66,0.11)]">
+                                        {% set cardContent %}
+                                            {% if item.image %}<div class="aspect-[2/3] overflow-hidden bg-celestial-50"><img src="{{ asset(item.image) }}" alt="{{ item.label }}" class="h-full w-full object-contain object-center transition duration-300 group-hover:scale-[1.02]"></div>{% else %}<div class="flex aspect-[2/3] items-center justify-center bg-celestial-50 px-2 text-center text-[9px] text-slate-400">Image indisponible</div>{% endif %}
+                                            <p class="truncate px-2 py-2 text-[10px] font-semibold text-[#344853] transition group-hover:text-[#8a6a18]">{{ item.label }}</p>
+                                        {% endset %}
+                                        {% if item.route %}<a href="{{ path(item.route, {id: item.id}) }}" class="block focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-mythic-gold" aria-label="Ouvrir {{ item.label }}">{{ cardContent }}</a>{% else %}{{ cardContent }}{% endif %}
+                                    </article>
+                                {% else %}
+                                    <p class="col-span-3 rounded-xl border border-dashed border-[#ddd7c8] px-3 py-5 text-center text-[10px] text-slate-400">Aucun favori.</p>
+                                {% endfor %}
                             </div>
                         </section>
                     {% endfor %}
