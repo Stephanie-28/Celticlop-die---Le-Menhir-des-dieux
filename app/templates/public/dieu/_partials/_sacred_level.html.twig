@@ -9,15 +9,16 @@
 {% set levelLabel = levelLabels[level]|default('Notoriété non renseignée') %}
 {% set isOverlay = overlay|default(false) %}
 
-<div class="{{ isOverlay ? 'absolute left-3 top-3 z-10 max-w-[calc(100%-1.5rem)] rounded-2xl border border-white/70 bg-white/88 px-3.5 py-3 shadow-[0_5px_18px_rgba(25,45,57,0.18)] backdrop-blur-sm sm:left-5 sm:top-5 sm:max-w-xs sm:px-4' : 'mt-5' }}" aria-label="Niveau sacré : {{ level }} sur 5 — {{ levelLabel }}">
-    <p class="text-[8px] font-semibold uppercase tracking-[0.2em] text-celestial-600 sm:text-[9px]">Niveau sacré</p>
-    <div class="mt-1.5 flex items-center gap-1 sm:gap-1.5" aria-hidden="true">
+<div class="group {{ isOverlay ? 'absolute left-3 top-3 z-10 max-w-[calc(100%-1.5rem)] rounded-2xl border border-white/70 bg-white/88 px-3.5 py-3 shadow-[0_5px_18px_rgba(25,45,57,0.18)] backdrop-blur-sm sm:left-5 sm:top-5 sm:max-w-xs sm:px-4' : 'mt-5 w-fit rounded-2xl border border-celestial-100 bg-white px-3.5 py-3 shadow-sm' }} focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-mythic-gold" aria-label="Niveau sacré : {{ level }} sur 5 — {{ levelLabel }}" tabindex="0">
+    <div class="grid grid-rows-[0fr] opacity-0 transition-all duration-200 group-hover:grid-rows-[1fr] group-hover:opacity-100 group-focus:grid-rows-[1fr] group-focus:opacity-100"><p class="overflow-hidden text-[8px] font-semibold uppercase tracking-[0.2em] text-celestial-600 sm:text-[9px]">Niveau sacré</p></div>
+    <div class="flex items-center gap-1 sm:gap-1.5" aria-hidden="true">
         {% for star in 1..5 %}
             <svg viewBox="0 0 24 24" class="size-4 shrink-0 sm:size-5 {{ star <= level ? 'text-mythic-gold drop-shadow-[0_1px_1px_rgba(91,68,12,0.2)]' : 'text-[#dce8ef]' }}" xmlns="http://www.w3.org/2000/svg">
                 <path d="m12 2.9 2.72 5.51 6.08.88-4.4 4.29 1.04 6.06L12 16.78l-5.44 2.86 1.04-6.06-4.4-4.29 6.08-.88L12 2.9Z" fill="currentColor" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>
             </svg>
         {% endfor %}
     </div>
-    <p class="mt-1 text-[11px] font-medium text-celestial-800 sm:text-xs">{{ levelLabel }}</p>
-    <p class="mt-0.5 max-w-md text-[8px] leading-3 text-slate-500 sm:text-[9px] sm:leading-4">Notoriété historique et culturelle, et non puissance.</p>
+    <div class="grid grid-rows-[0fr] opacity-0 transition-all duration-200 group-hover:grid-rows-[1fr] group-hover:opacity-100 group-focus:grid-rows-[1fr] group-focus:opacity-100">
+        <div class="overflow-hidden"><p class="mt-1 text-[11px] font-medium text-celestial-800 sm:text-xs">{{ levelLabel }}</p><p class="mt-0.5 max-w-md text-[8px] leading-3 text-slate-500 sm:text-[9px] sm:leading-4">Notoriété historique et culturelle, et non puissance.</p></div>
+    </div>
 </div>
