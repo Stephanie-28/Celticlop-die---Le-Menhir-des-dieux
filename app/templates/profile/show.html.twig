@@ -44,7 +44,7 @@
             </section>
 
             <section class="px-1 sm:px-2" aria-labelledby="favorites-title">
-                <div class="flex items-end justify-between gap-4 border-b border-[#cfd6d8] pb-3"><div><p class="text-[9px] uppercase tracking-[0.24em] text-[#9a7a27]">Trésors conservés</p><h2 id="favorites-title" class="mt-1 flex items-center gap-2 font-mythic text-xl text-[#344853] sm:text-2xl"><span class="text-mythic-gold" aria-hidden="true">★</span> Mes Favoris</h2></div><a href="{{ path('app_public_sanctuary') }}" class="text-[10px] font-semibold text-[#8a6a18] underline decoration-mythic-gold/60 underline-offset-4">Voir tout</a></div>
+                <div class="flex items-end justify-between gap-4 border-b border-[#cfd6d8] pb-3"><div><p class="text-[9px] uppercase tracking-[0.24em] text-[#9a7a27]">Trésors conservés</p><h2 id="favorites-title" class="mt-1 flex items-center gap-2 font-mythic text-xl text-[#344853] sm:text-2xl"><span class="text-mythic-gold" aria-hidden="true">★</span> Mes Favoris</h2></div><a href="{{ path('app_public_sanctuary') }}" class="whitespace-nowrap text-[10px] font-semibold text-[#8a6a18] underline decoration-mythic-gold/60 underline-offset-4">Voir tous les spiritueux</a></div>
                 <div class="mt-5 space-y-6" aria-label="Aperçu des favoris">
                     {% for key, group in favoriteGroups %}
                         <section aria-labelledby="favorites-{{ key }}">
