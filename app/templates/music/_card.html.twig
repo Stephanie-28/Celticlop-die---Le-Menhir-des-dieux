@@ -1,0 +1,34 @@
+<article class="flex h-full flex-col rounded-2xl border border-[#ddd6c5] bg-white p-5 shadow-[0_8px_24px_rgba(32,67,55,0.08)]">
+    <div class="flex items-start gap-4">
+        <span class="flex size-12 shrink-0 items-center justify-center rounded-full border border-mythic-gold/50 bg-[#fff8df] text-xl text-[#8a6a18]" aria-hidden="true">♫</span>
+        <div class="min-w-0">
+            <h2 class="break-words font-mythic text-lg text-forest-900">{{ music.title }}</h2>
+            <p class="mt-1 text-sm text-slate-600">{{ music.artist }}</p>
+            {% if music.dieu %}<p class="mt-2 text-[10px] uppercase tracking-[0.16em] text-[#9a7620]">Liée à {{ music.dieu.name }}</p>{% endif %}
+        </div>
+    </div>
+
+    <audio controls preload="metadata" class="mt-5 w-full" aria-label="Écouter {{ music.title }} de {{ music.artist }}">
+        <source src="{{ music.filePath starts with 'http://' or music.filePath starts with 'https://' ? music.filePath : asset(music.filePath|trim('/')) }}" type="audio/mpeg">
+        Ton navigateur ne permet pas la lecture de ce fichier audio.
+    </audio>
+
+    <div class="mt-auto pt-5">
+        {% if app.user %}
+            {% if music.id in playlistIds|default([]) %}
+                <form method="post" action="{{ path('app_public_music_remove', {id: music.id}) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('playlist-remove-' ~ music.id) }}">
+                    {% if fromPlaylist|default(false) %}<input type="hidden" name="_from" value="playlist">{% endif %}
+                    <button type="submit" class="w-full rounded-full border border-[#9d5d62]/40 bg-[#fff8f7] px-4 py-2.5 text-xs font-semibold text-[#8a454b] transition hover:bg-[#fbeceb] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-900">Retirer de ma playlist</button>
+                </form>
+            {% else %}
+                <form method="post" action="{{ path('app_public_music_add', {id: music.id}) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('playlist-add-' ~ music.id) }}">
+                    <button type="submit" class="w-full rounded-full bg-[#1d5648] px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-[#143f35] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold">Ajouter à ma playlist</button>
+                </form>
+            {% endif %}
+        {% else %}
+            <a href="{{ path('app_login') }}" class="block w-full rounded-full border border-mythic-gold/50 px-4 py-2.5 text-center text-xs font-semibold text-[#80600f] transition hover:bg-[#fff8df]">Se connecter pour l’ajouter</a>
+        {% endif %}
+    </div>
+</article>

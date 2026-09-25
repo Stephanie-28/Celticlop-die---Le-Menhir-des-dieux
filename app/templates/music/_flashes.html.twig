@@ -1,0 +1,2 @@
+{% for message in app.flashes('playlist_success') %}<div class="mb-5 rounded-2xl border border-[#b7d4bd] bg-[#edf8ef] px-5 py-4 text-sm text-[#285c38] shadow-sm" role="status">{{ message }}</div>{% endfor %}
+{% for message in app.flashes('playlist_info') %}<div class="mb-5 rounded-2xl border border-mythic-gold/40 bg-[#fff9e8] px-5 py-4 text-sm text-[#755914] shadow-sm" role="status">{{ message }}</div>{% endfor %}

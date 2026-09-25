@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Favorite;
 use App\Entity\User;
+use App\Enum\FavoriteEntityType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -20,6 +21,26 @@ class FavoriteRepository extends ServiceEntityRepository
     public function countForUser(User $user): int
     {
         return $this->count(['user' => $user]);
+    }
+
+    public function findMusicFavorite(User $user, int $musicId): ?Favorite
+    {
+        return $this->findOneBy([
+            'user' => $user,
+            'entityType' => FavoriteEntityType::MUSIC,
+            'entityId' => $musicId,
+        ]);
+    }
+
+    /**
+     * @return Favorite[]
+     */
+    public function findMusicFavoritesForUser(User $user): array
+    {
+        return $this->findBy(
+            ['user' => $user, 'entityType' => FavoriteEntityType::MUSIC],
+            ['createdAt' => 'DESC'],
+        );
     }
 
     //    /**

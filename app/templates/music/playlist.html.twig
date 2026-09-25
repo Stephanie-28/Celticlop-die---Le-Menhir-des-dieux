@@ -1,0 +1,22 @@
+{% extends 'public/content/_layout.html.twig' %}
+{% block title %}Ma playlist — Le Menhir des Dieux{% endblock %}
+{% block content %}
+    {% include 'music/_flashes.html.twig' %}
+    <header class="text-center">
+        <p class="text-[10px] uppercase tracking-[0.3em] text-mythic-gold">Mes découvertes musicales</p>
+        <h1 class="mt-3 font-mythic text-3xl text-forest-900 sm:text-5xl">Ma playlist</h1>
+        <p class="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-600">Retrouve et écoute ici les morceaux que tu as choisi de conserver.</p>
+        <a href="{{ path('app_public_music_index') }}" class="mt-5 inline-flex text-xs font-semibold text-[#80600f] underline decoration-mythic-gold/60 underline-offset-4">Découvrir la bibliothèque musicale</a>
+    </header>
+
+    <section class="mt-10 grid gap-5 sm:grid-cols-2" aria-label="Musiques de ma playlist">
+        {% for music in musics %}
+            {% include 'music/_card.html.twig' with {music: music, playlistIds: [music.id], fromPlaylist: true} only %}
+        {% else %}
+            <div class="sm:col-span-2 rounded-2xl border border-dashed border-[#d9d3c2] bg-white/70 px-6 py-12 text-center">
+                <p class="font-mythic text-lg text-forest-900">Ta playlist est encore silencieuse</p>
+                <p class="mt-3 text-sm text-slate-500">Explore la bibliothèque pour y ajouter ton premier morceau.</p>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}
