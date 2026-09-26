@@ -1,22 +1,78 @@
 {% extends 'public/content/_layout.html.twig' %}
 {% block title %}Ma playlist — Le Menhir des Dieux{% endblock %}
+
 {% block content %}
     {% include 'music/_flashes.html.twig' %}
-    <header class="text-center">
-        <p class="text-[10px] uppercase tracking-[0.3em] text-mythic-gold">Mes découvertes musicales</p>
-        <h1 class="mt-3 font-mythic text-3xl text-forest-900 sm:text-5xl">Ma playlist</h1>
-        <p class="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-600">Retrouve et écoute ici les morceaux que tu as choisi de conserver.</p>
-        <a href="{{ path('app_public_music_index') }}" class="mt-5 inline-flex text-xs font-semibold text-[#80600f] underline decoration-mythic-gold/60 underline-offset-4">Découvrir la bibliothèque musicale</a>
+    <header class="relative overflow-hidden rounded-[1.6rem] bg-[#153f35] px-6 py-8 text-white shadow-[0_14px_35px_rgba(20,58,49,0.22)] sm:px-10 sm:py-10">
+        <img src="{{ asset('images/placeholders/pantheon-irlandais.png') }}" alt="" class="absolute inset-0 size-full object-cover opacity-30" aria-hidden="true">
+        <div class="absolute inset-0 bg-gradient-to-r from-[#102f28]/95 via-[#153f35]/80 to-[#153f35]/45" aria-hidden="true"></div>
+        <div class="relative max-w-xl"><p class="text-[9px] font-semibold uppercase tracking-[0.22em] text-[#f0cf66]">Disponible en streaming</p><h1 class="mt-2 font-mythic text-3xl leading-tight sm:text-5xl">Le Menhir des Dieux</h1><p class="mt-4 text-sm leading-6 text-white/85">Plonge dans la résonance sonore de l’Irlande antique. Laisse la harpe du Dagda te guider à travers les brumes.</p></div>
     </header>
 
-    <section class="mt-10 grid gap-5 sm:grid-cols-2" aria-label="Musiques de ma playlist">
-        {% for music in musics %}
-            {% include 'music/_card.html.twig' with {music: music, playlistIds: [music.id], fromPlaylist: true} only %}
-        {% else %}
-            <div class="sm:col-span-2 rounded-2xl border border-dashed border-[#d9d3c2] bg-white/70 px-6 py-12 text-center">
-                <p class="font-mythic text-lg text-forest-900">Ta playlist est encore silencieuse</p>
-                <p class="mt-3 text-sm text-slate-500">Explore la bibliothèque pour y ajouter ton premier morceau.</p>
-            </div>
-        {% endfor %}
+    <section class="mt-8 pb-44" aria-labelledby="playlist-title">
+        <div class="flex items-end justify-between gap-4 border-l-2 border-mythic-gold pl-3"><div><p class="text-[9px] uppercase tracking-[0.2em] text-[#9a7620]">Mes découvertes</p><h2 id="playlist-title" class="mt-1 font-mythic text-xl text-forest-900 sm:text-2xl">Hymnes des Anciens</h2></div><span class="text-xs text-slate-400">{{ musics|length }} morceau{{ musics|length > 1 ? 'x' : '' }}</span></div>
+        <div class="mt-5 space-y-3" data-playlist>
+            {% for music in musics %}
+                {% set audioUrl = music.filePath starts with 'http://' or music.filePath starts with 'https://' ? music.filePath : asset(music.filePath|trim('/')) %}
+                {% set portrait = music.dieu and music.dieu.img ? asset('uploads/dieux/' ~ music.dieu.img) : asset('images/logo-menhir-officiel.png') %}
+                <article class="group flex items-center gap-3 rounded-2xl border border-[#e5e1d7] bg-white p-3 shadow-[0_5px_16px_rgba(35,63,53,0.06)] transition hover:-translate-y-0.5 hover:border-mythic-gold/50" data-track data-src="{{ audioUrl }}" data-title="{{ music.title }}" data-artist="{{ music.artist }}" data-image="{{ portrait }}">
+                    <button type="button" class="relative size-14 shrink-0 overflow-hidden rounded-xl border border-[#d9d4c8] bg-[#e9efed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold" data-track-play aria-label="Écouter {{ music.title }}"><img src="{{ portrait }}" alt="" class="size-full object-cover" aria-hidden="true"><span class="absolute inset-0 flex items-center justify-center bg-[#102f28]/45 text-lg text-white opacity-0 transition group-hover:opacity-100" aria-hidden="true">▶</span></button>
+                    <button type="button" class="min-w-0 flex-1 text-left focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mythic-gold" data-track-play><strong class="block truncate text-sm text-forest-900">{{ music.title }}</strong><span class="mt-1 block truncate text-[9px] uppercase tracking-[0.08em] text-slate-500">{{ music.dieu ? music.dieu.name : music.artist }}</span></button>
+                    <span class="shrink-0 text-[10px] tabular-nums text-slate-400" data-track-duration>--:--</span>
+                    <form method="post" action="{{ path('app_public_music_remove', {id: music.id}) }}" class="shrink-0"><input type="hidden" name="_token" value="{{ csrf_token('playlist-remove-' ~ music.id) }}"><input type="hidden" name="_from" value="playlist"><button type="submit" class="flex size-8 items-center justify-center rounded-full text-lg text-slate-400 transition hover:bg-[#fff2f1] hover:text-[#9a4d52] focus-visible:outline-2" aria-label="Retirer {{ music.title }} de ma playlist">×</button></form>
+                </article>
+            {% else %}
+                <div class="rounded-2xl border border-dashed border-[#d9d3c2] bg-white/70 px-6 py-12 text-center"><p class="font-mythic text-lg text-forest-900">Ta playlist est encore silencieuse</p><p class="mt-3 text-sm text-slate-500">Explore la bibliothèque pour y ajouter ton premier morceau.</p></div>
+            {% endfor %}
+        </div>
+        <div class="mt-8 text-center"><a href="{{ path('app_public_music_index') }}" class="inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#9a7620]">← Retour à la bibliothèque</a></div>
     </section>
+
+    {% if musics is not empty %}
+        {% set firstMusic = musics|first %}
+        {% set firstAudioUrl = firstMusic.filePath starts with 'http://' or firstMusic.filePath starts with 'https://' ? firstMusic.filePath : asset(firstMusic.filePath|trim('/')) %}
+        {% set firstPortrait = firstMusic.dieu and firstMusic.dieu.img ? asset('uploads/dieux/' ~ firstMusic.dieu.img) : asset('images/logo-menhir-officiel.png') %}
+        <aside class="fixed inset-x-3 bottom-[76px] z-40 mx-auto max-w-xl rounded-2xl border border-[#ded8ca] bg-[#fffefa]/95 p-3 shadow-[0_10px_35px_rgba(18,48,40,0.2)] backdrop-blur-md sm:bottom-[82px]" aria-label="Lecteur musical">
+            <div class="flex items-center gap-3"><img src="{{ firstPortrait }}" alt="" class="size-12 rounded-xl border border-[#ddd6c5] object-cover" data-player-image aria-hidden="true"><div class="min-w-0 flex-1"><strong class="block truncate text-xs text-forest-900" data-player-title>{{ firstMusic.title }}</strong><span class="mt-0.5 block truncate text-[8px] uppercase tracking-[0.08em] text-slate-500" data-player-artist>{{ firstMusic.artist }}</span></div><button type="button" class="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#8a6a00] text-lg text-white shadow-md transition hover:bg-[#6f5500] focus-visible:outline-3" data-player-toggle aria-label="Lire le morceau">▶</button></div>
+            <div class="mt-2 flex items-center gap-2 text-[8px] tabular-nums text-slate-500"><span data-player-current>0:00</span><input type="range" min="0" max="100" value="0" class="h-1 flex-1 accent-[#8a6a00]" data-player-progress aria-label="Position dans le morceau"><span data-player-duration>--:--</span></div>
+            <audio preload="metadata" src="{{ firstAudioUrl }}" data-audio-player></audio>
+        </aside>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.querySelector('[data-audio-player]');
+            if (!audio) return;
+            const toggle = document.querySelector('[data-player-toggle]');
+            const progress = document.querySelector('[data-player-progress]');
+            const current = document.querySelector('[data-player-current]');
+            const duration = document.querySelector('[data-player-duration]');
+            const title = document.querySelector('[data-player-title]');
+            const artist = document.querySelector('[data-player-artist]');
+            const image = document.querySelector('[data-player-image]');
+            const formatTime = (seconds) => Number.isFinite(seconds) ? `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}` : '--:--';
+            const reflectPlayback = () => { const playing = !audio.paused; toggle.textContent = playing ? 'Ⅱ' : '▶'; toggle.setAttribute('aria-label', playing ? 'Mettre en pause' : 'Lire le morceau'); };
+            document.querySelectorAll('[data-track]').forEach((track) => {
+                const metadata = new Audio(track.dataset.src);
+                metadata.preload = 'metadata';
+                metadata.addEventListener('loadedmetadata', () => { track.querySelector('[data-track-duration]').textContent = formatTime(metadata.duration); });
+                track.querySelectorAll('[data-track-play]').forEach((button) => button.addEventListener('click', () => {
+                    const changed = audio.src !== new URL(track.dataset.src, window.location.href).href;
+                    if (changed) audio.src = track.dataset.src;
+                    title.textContent = track.dataset.title; artist.textContent = track.dataset.artist; image.src = track.dataset.image;
+                    document.querySelectorAll('[data-track]').forEach((item) => item.classList.remove('border-mythic-gold', 'bg-[#fffaf0]'));
+                    track.classList.add('border-mythic-gold', 'bg-[#fffaf0]');
+                    if (changed || audio.paused) audio.play(); else audio.pause();
+                }));
+            });
+            toggle.addEventListener('click', () => audio.paused ? audio.play() : audio.pause());
+            audio.addEventListener('play', reflectPlayback); audio.addEventListener('pause', reflectPlayback);
+            audio.addEventListener('loadedmetadata', () => { duration.textContent = formatTime(audio.duration); });
+            audio.addEventListener('timeupdate', () => { current.textContent = formatTime(audio.currentTime); progress.value = audio.duration ? String((audio.currentTime / audio.duration) * 100) : '0'; });
+            progress.addEventListener('input', () => { if (audio.duration) audio.currentTime = (Number(progress.value) / 100) * audio.duration; });
+        });
+    </script>
 {% endblock %}
